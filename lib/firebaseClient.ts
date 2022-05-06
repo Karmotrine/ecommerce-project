@@ -1,7 +1,23 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics"
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import { getAuth } from "firebase/auth";
+import { getFirestore, collection, CollectionReference } from "firebase/firestore";
+import { getStorage } from "firebase/storage"
+import { getFunctions } from "firebase/functions";
+
+import { Session, Review } from "./types"
+import {
+    productConverter,
+    customerConverter,
+    sessionConverter,
+    reviewConverter,
+    contentConverter,
+    addressConverter
+} from "./converters"
+
+/**
+ *  Integrate 'transactions' collections (Google pay payments)
+ */
 
 const clientCredentials = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,8 +28,25 @@ const clientCredentials = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 }
-const firebaseClient = initializeApp(clientCredentials)
-const clientAnalytics = getAnalytics(firebaseClient)
 
-export default firebaseClient;
+export const app = initializeApp(clientCredentials)
+export const analytics = getAnalytics(app)
+export const auth = getAuth(app)
+export const firestore = getFirestore(app)
+export const storage = getStorage(app)
+export const functions = getFunctions(app)
 
+export const collections = {
+    products: collection(firestore, 'products').withConverter(productConverter),
+    customers: collection(firestore, 'customers').withConverter(customerConverter),
+    cart: collection(firestore, 'cart'),
+    sessions: (customerId: string): CollectionReference<Session> =>
+        collection(firestore, 'customers', customerId, 'checkout_sessions').withConverter(sessionConverter),
+    payments: (customerId: string): CollectionReference => 
+        collection(firestore, 'customers', customerId, 'payments'),
+    productReviews: (productId: string ): CollectionReference<Review> =>
+        collection(firestore, 'products', productId, 'reviews').withConverter(reviewConverter),
+    content: collection(firestore, 'content').withConverter(contentConverter),
+    addresses: (customerId: string) =>
+        collection(firestore, 'customers', customerId, 'addresses').withConverter(addressConverter),
+}

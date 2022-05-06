@@ -525,6 +525,11 @@
   "resolved" "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   "version" "1.1.0"
 
+"@react-query-firebase/auth@^0.3.4":
+  "integrity" "sha512-t/NyKcGDtL5PkcMXdJPXjSzJ3ujBU5mDsxWORlZ8Cx7sSn/Os30gHmvVCh/SRYIET9kH0fSFefLY7TaL+qfaiQ=="
+  "resolved" "https://registry.npmjs.org/@react-query-firebase/auth/-/auth-0.3.4.tgz"
+  "version" "0.3.4"
+
 "@react-query-firebase/firestore@^0.4.2":
   "integrity" "sha512-7eYp905+sfBRcBTdj7W7BAc3bI3V0D0kKca4/juOTnN4gyoNyaCNOCjLPY467dTq325hGs7BX0ol7Pw3JENdHA=="
   "resolved" "https://registry.npmjs.org/@react-query-firebase/firestore/-/firestore-0.4.2.tgz"
@@ -2633,6 +2638,11 @@
   "integrity" "sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8="
   "resolved" "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   "version" "1.0.2"
+
+"uuid@^8.3.2":
+  "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
+  "version" "8.3.2"
 
 "v8-compile-cache@^2.0.3":
   "integrity" "sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA=="
