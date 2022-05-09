@@ -1,11 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Avatar from "../components/common/Avatar/Avatar"
 
 export default function Home() {
   return (
-    <p>
-      Hello World
-    </p>
+    <>
+      <p>
+        Hello World
+      </p>
+      <Avatar/>
+    </>
   )
 }

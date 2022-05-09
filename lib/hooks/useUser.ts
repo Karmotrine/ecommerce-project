@@ -5,5 +5,6 @@ import { UseQueryResult } from "react-query"
 import { auth } from "../firebaseClient"
 
 export function useUser(): UseQueryResult<User>{
-    return useAuthUser('user', auth);
+    const user = useAuthUser('user', auth);
+    return user
 }

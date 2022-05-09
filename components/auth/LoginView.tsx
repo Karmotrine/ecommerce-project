@@ -1,9 +1,9 @@
 import { FC, useEffect, useState, useCallback } from 'react'
-import { StyledFirebaseAuth } from 'react-firebaseui/';
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import firebaseClient from "../../lib/firebaseClient"
-import { useUI } from "@components/ui/context"
+import { app as firebaseClient, auth } from "../../lib/firebaseClient"
+import { useUI } from "../context"
  
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -12,18 +12,20 @@ const uiConfig = {
     // Alternatively you can provide a callbacks.signInSuccess function.
     signInSuccessUrl: "/",
     // Only Google as auth provider
-    signInOptions: [GoogleAuthProvider.PROVIDER_ID]
+    signInOptions: [GoogleAuthProvider.PROVIDER_ID],
 }
 
 const LoginView: FC = () => {
     const authInstance = getAuth(firebaseClient)
     const [ user, loading, error ] = useAuthState(authInstance)
+    
     const { setModalView, closeModal } = useUI()
 
     return (
-        <div className="w-80 flex flex-col justify-between p-3">
+        <div className="bg-stone-400 w-80 flex flex-col justify-between p-3">
             <div className="flex justify-center pb-12">
-                <Logo width="64px" height="64px" />
+                {/* <Logo  width="64px" height="64px" /> */}
+                <p>Log in to your Account.</p>
             </div>
             <div className="flex flex-col space-y-3">
                 {error && (
@@ -31,7 +33,7 @@ const LoginView: FC = () => {
                         An error occured. Please try again.
                     </div>
                 )}
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={authInstance} />
+                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
             </div>
         </div>
     )

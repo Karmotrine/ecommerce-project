@@ -30,11 +30,19 @@ const clientCredentials = {
 }
 
 export const app = initializeApp(clientCredentials)
-export const analytics = getAnalytics(app)
-export const auth = getAuth(app)
 export const firestore = getFirestore(app)
 export const storage = getStorage(app)
 export const functions = getFunctions(app)
+export const auth = getAuth(app)
+
+let analytics
+if(clientCredentials?.projectId) {
+    if (app.name && typeof window !== 'undefined') {
+        analytics = getAnalytics(app)
+    }
+}
+export { analytics }
+
 
 export const collections = {
     products: collection(firestore, 'products').withConverter(productConverter),

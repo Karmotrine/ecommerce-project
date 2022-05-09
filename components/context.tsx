@@ -125,8 +125,8 @@ function uiReducer(state: State, action: Action) {
     }
 } // function uiReducer(state: State, action: Action)
 
-export const UIProvider: FC = (props) => {
-    const [ state, dispatch] = React.useReducer(uiReducer, initialState);
+export const UIProvider: FC = (props:any) => {
+    const [ state, dispatch ] = React.useReducer(uiReducer, initialState);
     
     const openSidebar = useCallback(
         () => dispatch({type: 'OPEN_SIDEBAR'}),
@@ -204,7 +204,7 @@ export const useUI = () => {
     return context
 }
   
-export const ManagedUIContext: FC = ({ children }) => (
+export const ManagedUIContext: FC = ({children}: React.PropsWithChildren<{}>) => (
     <UIProvider>
         <ThemeProvider>{children}</ThemeProvider>
     </UIProvider>
