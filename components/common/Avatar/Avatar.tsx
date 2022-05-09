@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useUser } from "../../../lib/hooks/useUser"
 
 /**
- *  Functionality = Good
+ *  Functionality = OK (09/05/2022)
  */
 
 interface Props {
@@ -32,7 +32,9 @@ const Avatar: FC<Props> = ({}) => {
                     layout="fill"
                     className="rounded-full"
                 /> :
-                <><p>no image</p></>
+                <>
+                    <div className="bg-white h-8 w-8 rounded-full"></div>
+                </>
             }
         </div>
     )
