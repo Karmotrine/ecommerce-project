@@ -3,7 +3,6 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { app as firebaseClient, auth } from "../../lib/firebaseClient"
-import { useUI } from "../context"
  
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -19,8 +18,6 @@ const LoginView: FC = () => {
     const authInstance = getAuth(firebaseClient)
     const [ user, loading, error ] = useAuthState(authInstance)
     
-    const { setModalView, closeModal } = useUI()
-
     return (
         <div className="bg-stone-400 w-80 flex flex-col justify-between p-3">
             <div className="flex justify-center pb-12">
