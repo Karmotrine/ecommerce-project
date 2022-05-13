@@ -1,9 +1,15 @@
-import { Header, Text , Button, Anchor, ActionIcon, useMantineColorScheme } from "@mantine/core"
+import { Header, 
+    Text , Button, Anchor, 
+    ActionIcon, useMantineColorScheme, UnstyledButton,
+    Menu, Divider } from "@mantine/core"
 import UiAvatar from "../common/Avatar/UiAvatar"
-import { Sun, MoonStars } from 'tabler-icons-react'
+import { Sun, MoonStars, ChevronDown } from 'tabler-icons-react'
 import { Group } from "@mantine/core"
 import { useUser } from "../../lib/hooks/useUser"
 import Link from "next/link"
+import { auth } from "../../lib/firebaseClient"
+import { useRouter } from 'next/router'
+import { useAuthSignOut } from '@react-query-firebase/auth';
 
 const NAVLINKS = [
     {
@@ -19,7 +25,14 @@ const NAVLINKS = [
 
 export default function UiNavbar() {
     const user = useUser()
+    const router = useRouter()
     const { colorScheme, toggleColorScheme } = useMantineColorScheme()
+    const signOut = useAuthSignOut(auth, {
+        onSuccess(){
+            router.push("/")
+        },
+    })
+
     return (
         <Header
             
@@ -54,7 +67,40 @@ export default function UiNavbar() {
                 </Group>
                 <Group>
                     {!!user.data ?
-                    <UiAvatar />
+                    <UnstyledButton>
+                        <Menu
+                            withArrow
+                        control={
+                            <Group
+                                spacing={6}
+                            >
+                                <UiAvatar />
+                                <Group
+                                    spacing={2}
+                                >
+                                    <Text size="xs">{user.data.displayName}</Text>
+                                    <ChevronDown size={9} />
+                                </Group>
+                            </Group>
+                        }
+                        >
+                            <Menu.Label>
+                                <Text size="md">{user.data.displayName}</Text>
+                                <Text size="xs">{user.data.email}</Text>
+                            </Menu.Label>
+                            <Divider />
+                            <Menu.Item>Account Settings</Menu.Item>
+                            <Menu.Item>My Orders</Menu.Item>
+                            <Divider />
+                            <Menu.Item 
+                                color="red"
+                                onClick={() => signOut.mutate()}
+                                disabled={signOut.isLoading}
+                            >
+                                Sign-out
+                            </Menu.Item>
+                        </Menu>
+                    </UnstyledButton>
                     :
                     <Link href={'/login'} passHref>
                         <Button 
