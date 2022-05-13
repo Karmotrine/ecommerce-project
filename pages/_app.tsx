@@ -1,15 +1,18 @@
 import '../styles/globals.css'
+import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { ApplicationContainer } from '../components/ApplicationContainer';
 
 const client = new QueryClient()
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
-
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
   return (
     <>
       <Head>
@@ -17,21 +20,19 @@ export default function App(props: AppProps) {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <QueryClientProvider client={client}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            /** Put your mantine theme override here */
-            colorScheme: 'light',
-          }}
-        >
-          
-            <ApplicationContainer>
-              <Component {...pageProps} />
-            </ApplicationContainer>
-          
-        </MantineProvider>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{colorScheme}}
+          >
+              <ApplicationContainer>
+                <Component {...pageProps} />
+              </ApplicationContainer>
+          </MantineProvider>
+        </ColorSchemeProvider>
       </QueryClientProvider>
+      
     </>
   );
 }

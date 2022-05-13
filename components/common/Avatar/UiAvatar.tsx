@@ -16,6 +16,6 @@ export default function UiAvatar() {
     const user = useUser()
     const userAvatar = user.data?.photoURL
     return (
-        <Avatar src={userAvatar} radius="xl"/>
+        <Avatar src={userAvatar} size="sm" radius="lg"/>
     )
 }

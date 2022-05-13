@@ -3008,6 +3008,11 @@
   "resolved" "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   "version" "1.0.0"
 
+"tabler-icons-react@^1.48.0":
+  "integrity" "sha512-dlcAIGYIB7+fsU1tj8HuK5aN57g3Q5KD8GMAxpBR9E62yFhjn8fbwD2M2X18E66v5TYakUhu6tfUxM+/jvI6Kg=="
+  "resolved" "https://registry.npmjs.org/tabler-icons-react/-/tabler-icons-react-1.48.0.tgz"
+  "version" "1.48.0"
+
 "tailwindcss@^3.0.24":
   "integrity" "sha512-H3uMmZNWzG6aqmg9q07ZIRNIawoiEcNFKDfL+YzOPuPsXuDXxJxB9icqzLgdzKNwjG3SAro2h9SYav8ewXNgig=="
   "resolved" "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.0.24.tgz"

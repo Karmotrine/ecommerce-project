@@ -1,7 +1,8 @@
 import { FC } from "react"
 import { AppShell, Navbar, Footer, Group, Header, Text, Loader } from "@mantine/core"
-import { UiNavbar } from "./ui/UiNavbar"
-import UiAvatar from "./common/Avatar/Avatar"
+import UiNavbar from "./ui/UiNavbar"
+import UiFooter from "./ui/UiFooter"
+
 import { useUser } from "../lib/hooks/useUser"
 import Image from "next/image"
 
@@ -10,22 +11,22 @@ export const ApplicationContainer : FC = ({children}) => {
     return (
         <>
         { !!!user.isLoading ?
-        <AppShell
-            padding="md"
-            header={        
-                <Navbar
-                    className="sticky max-h-12 min-w-screen bg-blue-400"
-                >
-                    <div>
-                        Sample Navbar
-                    </div>
-                    <UiAvatar />
-                </Navbar>}
-        >
-            {children}
-        </AppShell>
+            <AppShell
+                header={<UiNavbar />}
+                footer={<UiFooter />}
+                styles={
+                    (theme) => ({
+                        main: {
+                        backgroundColor:
+                            theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+                        },
+                    })
+                }
+            >
+                {children}
+            </AppShell>
         :
-        <Loader />
+            <Loader />
         }
         </>
     )
