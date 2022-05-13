@@ -3,7 +3,8 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { app as firebaseClient, auth } from "../../lib/firebaseClient"
- 
+import { Modal, Group, Button } from "@mantine/core"
+
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
@@ -14,27 +15,34 @@ const uiConfig = {
     signInOptions: [GoogleAuthProvider.PROVIDER_ID],
 }
 
-const LoginView: FC = () => {
+export default function LoginView() {
     const authInstance = getAuth(firebaseClient)
     const [ user, loading, error ] = useAuthState(authInstance)
-    
+    const [ modalOpen, setModalOpen ] = useState(false);
     return (
-        <div className="bg-stone-400 w-80 flex flex-col justify-between p-3">
-            <div className="flex justify-center pb-12">
-                {/* <Logo  width="64px" height="64px" /> */}
-                <p>Log in to your Account.</p>
-            </div>
-            <div className="flex flex-col space-y-3">
+        <>
+            <Modal
+                opened={modalOpen}
+                onClose={() => setModalOpen(false)}
+                title="Log in to your Account."
+            >
                 {error && (
                     <div className="text-red border border-red p-3">
                         An error occured. Please try again.
                     </div>
                 )}
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
-            </div>
-        </div>
+            </Modal>
+
+            <Button 
+            onClick={() => setModalOpen(true)}
+            color="red"
+            variant="outline"
+            size="xs"
+            compact={true}
+            >
+                Log-in
+            </Button>
+        </>
     )
-
-} // const LoginView: React.FC = () =>
-
-export default LoginView
+}

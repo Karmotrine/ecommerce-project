@@ -1,15 +1,15 @@
 import { Header, 
     Text , Button, Anchor, 
     ActionIcon, useMantineColorScheme, UnstyledButton,
-    Menu, Divider } from "@mantine/core"
+    Menu, Divider, Group } from "@mantine/core"
 import UiAvatar from "../common/Avatar/UiAvatar"
 import { Sun, MoonStars, ChevronDown } from 'tabler-icons-react'
-import { Group } from "@mantine/core"
 import { useUser } from "../../lib/hooks/useUser"
 import Link from "next/link"
 import { auth } from "../../lib/firebaseClient"
 import { useRouter } from 'next/router'
 import { useAuthSignOut } from '@react-query-firebase/auth';
+import LoginView from "../auth/LoginView"
 
 const NAVLINKS = [
     {
@@ -89,8 +89,8 @@ export default function UiNavbar() {
                                 <Text size="xs">{user.data.email}</Text>
                             </Menu.Label>
                             <Divider />
-                            <Menu.Item>Account Settings</Menu.Item>
-                            <Menu.Item>My Orders</Menu.Item>
+                            <Menu.Item onClick={() => router.push("/account")}>Account Settings</Menu.Item>
+                            <Menu.Item onClick={() => router.push("/account/orders")}>My Orders</Menu.Item>
                             <Divider />
                             <Menu.Item 
                                 color="red"
@@ -102,16 +102,7 @@ export default function UiNavbar() {
                         </Menu>
                     </UnstyledButton>
                     :
-                    <Link href={'/login'} passHref>
-                        <Button 
-                            color="red"
-                            variant="outline"
-                            size="xs"
-                            compact={true}
-                        >
-                            Log-in
-                        </Button>
-                    </Link>
+                        <LoginView />
                     }
             <ActionIcon variant="default" onClick={() => toggleColorScheme()} size={30}>
               {colorScheme === 'dark' ? <Sun size={16} /> : <MoonStars size={16} />}
