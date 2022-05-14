@@ -89,7 +89,7 @@ export default function Home() {
           bowl dishes.
         </Text>
 
-        <Button variant="outline" color="red" size="xl" radius="xl" className={classes.control}>
+        <Button variant="gradient" gradient={{ from: 'orange', to: 'red' }} size="xl" radius="xl" className={classes.control}>
           Order Now
         </Button>
       </Container>
