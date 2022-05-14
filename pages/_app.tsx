@@ -1,10 +1,11 @@
-import '../styles/globals.css'
+//import '../styles/globals.css'
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { ApplicationContainer } from '../components/ApplicationContainer';
+
 
 const client = new QueryClient()
 
