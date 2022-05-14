@@ -24,7 +24,15 @@ export default function App(props: AppProps) {
           <MantineProvider
             withGlobalStyles
             withNormalizeCSS
-            theme={{colorScheme}}
+            theme={{colorScheme,
+              breakpoints: {
+                xs: 500,
+                sm: 800,
+                md: 1000,
+                lg: 1200,
+                xl: 1400,
+              },
+            }}
           >
               <ApplicationContainer>
                 <Component {...pageProps} />

@@ -35,7 +35,7 @@ export default function UiNavbar() {
 
     return (
         <Header
-            
+        fixed={true}
             height={48}
             px={50}
             py={12}
@@ -59,7 +59,7 @@ export default function UiNavbar() {
                         <Button
                             size="xs"
                             color="red"
-                            variant="outline"
+                            variant="filled"
                             compact={true}
                         >
                             Order Now
@@ -108,8 +108,7 @@ export default function UiNavbar() {
               {colorScheme === 'dark' ? <Sun size={16} /> : <MoonStars size={16} />}
             </ActionIcon>
                 </Group>
-            </Group>
-            
+            </Group>     
         </Header>
     )
 } // export default function UiNavbar() 
