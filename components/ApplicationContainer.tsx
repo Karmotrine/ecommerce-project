@@ -12,7 +12,7 @@ export const ApplicationContainer : FC = ({children}) => {
         <>
         { !!!user.isLoading ?
             <AppShell
-            padding={0}
+                padding={0}
                 header={<UiNavbar />}
                 footer={<UiFooter />}
                 styles={

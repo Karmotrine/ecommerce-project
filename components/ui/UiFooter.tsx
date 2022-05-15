@@ -131,7 +131,7 @@ export default function UiFooter() {
                         {
                             ABOUT_US_LINKS.map((link, index) => (
                                 <Link key={index} href={link.href} passHref>
-                                    <Anchor component="a">{link.name}</Anchor>
+                                    <Anchor component="a" size="sm" color="dimmed">{link.name}</Anchor>
                                 </Link>
                             ))
                         }

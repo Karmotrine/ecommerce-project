@@ -64,35 +64,49 @@ const useStyles = createStyles((theme) => ({
       width: '100%',
     },
   },
+
+  wrapper: {
+    marginLeft:20,
+    marginRight:20,
+  },
+  
 }));
 
 export default function Home() {
   const { classes } = useStyles();
 
   return (
-    <div className={classes.hero}>
-      <Overlay
-        gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
-        opacity={1}
-        zIndex={0}
-      />
-      <Container className={classes.container}>
-        <Title className={classes.title}>
-          Taste from {' '}
-          <Text component="span" color="red" inherit>
-            Japan
+    <div>
+      <div className={classes.hero}>
+        <Overlay
+          gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
+          opacity={1}
+          zIndex={0}
+        />
+        <Container className={classes.container}>
+          <Title className={classes.title}>
+            Taste from {' '}
+            <Text component="span" color="red" inherit>
+              Japan
+            </Text>
+          </Title>
+          <Text className={classes.description} size="xl" mt="xl">
+            Imbento is a Japanese fast food restaurant chain in the Philippines.
+            These restaurants are specialized in serving beef
+            bowl dishes.
           </Text>
-        </Title>
-        <Text className={classes.description} size="xl" mt="xl">
-          Imbento is a Japanese fast food restaurant chain in the Philippines.
-          These restaurants are specialized in serving beef
-          bowl dishes.
-        </Text>
 
-        <Button variant="gradient" gradient={{ from: 'orange', to: 'red' }} size="xl" radius="xl" className={classes.control}>
-          Order Now
-        </Button>
-      </Container>
+          <Button variant="gradient" gradient={{ from: 'orange', to: 'red' }} size="xl" radius="xl" className={classes.control}>
+            Order Now
+          </Button>
+        </Container>
+        
+      </div>
+      <div className={classes.wrapper}>
+        <Container>
+          <Text>Test</Text>
+        </Container>
+      </div>
     </div>
   );
 }

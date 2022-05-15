@@ -85,8 +85,9 @@ export default function UiNavbar() {
                         }
                         >
                             <Menu.Label>
+                                Logged in as:
                                 <Text size="md">{user.data.displayName}</Text>
-                                <Text size="xs">{user.data.email}</Text>
+                                <Text size="xs" color="dimmed">{user.data.email}</Text>
                             </Menu.Label>
                             <Divider />
                             <Menu.Item onClick={() => router.push("/account")}>Account Settings</Menu.Item>
