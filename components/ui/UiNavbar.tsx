@@ -52,7 +52,7 @@ export default function UiNavbar() {
                     {
                         NAVLINKS.map((link) => (
                             <Link key={link.href} href={link.href} passHref>
-                                <Anchor size="xs" variant="text">{link.name}</Anchor>
+                                <Anchor component="a" size="xs" variant="text">{link.name}</Anchor>
                             </Link>
                         ))
                     }

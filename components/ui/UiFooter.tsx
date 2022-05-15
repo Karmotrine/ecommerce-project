@@ -107,18 +107,19 @@ export default function UiFooter() {
                     <div className={classes.section}>
                         <Text size="xl" color="red">Socials</Text>
                         <Divider/>
+                        {/*Causes some Issues*/}
                         <div className={classes.line}>
-                            <Stack spacing={1} align="flex-start">
-                                <Anchor variant="text" href="https://twitter.com/imbentoPH" target="_blank">
+                            <Stack spacing={5} align="flex-start">
+                                <Anchor size="xs" variant="text" href="https://twitter.com/imbentoPH" target="_blank">
                                     <Group spacing={5}>
                                         <BrandTwitter />
-                                        <Anchor size="xs" color="dimmed">@imbentoPH</Anchor>
+                                        <p>@imbentoPH</p>
                                     </Group>
                                 </Anchor>
-                                <Anchor variant="text" href="https://facebook.com/imbentoPH" target="_blank">
+                                <Anchor size="xs" variant="text" href="https://facebook.com/imbentoPH" target="_blank">
                                     <Group spacing={5}>
                                         <BrandFacebook />
-                                        <Anchor size="xs" color="dimmed">imbentoPH</Anchor>
+                                        <p>imbentoPH</p>
                                     </Group>
                                 </Anchor>
                             </Stack>
