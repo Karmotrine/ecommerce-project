@@ -1,3 +1,3 @@
-export default function useProduct() {
+export function useProduct() {
     return "Test"
 }
