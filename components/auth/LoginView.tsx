@@ -31,7 +31,7 @@ export default function LoginView() {
                         An error occured. Please try again.
                     </Text>
                 )}
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+                
             </Modal>
 
             <Button 

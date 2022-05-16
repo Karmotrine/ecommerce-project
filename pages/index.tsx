@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStyles, Overlay, Container, Title, Button, Text } from "@mantine/core"
-
+import { app } from '../lib/firebaseClient';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
@@ -105,6 +105,7 @@ export default function Home() {
       <div className={classes.wrapper}>
         <Container>
           <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus dictum porttitor. Donec sagittis neque dui, maximus consectetur arcu tincidunt id. Nam auctor sollicitudin dignissim. Phasellus condimentum odio id ex mattis facilisis. In fringilla et nisl ut dignissim. Cras quis dui elementum elit fermentum tempor. Vivamus rutrum sit amet ex et lacinia. Cras sit amet massa placerat turpis rhoncus condimentum sit amet nec arcu. Sed vehicula sapien sit amet lectus tincidunt, ac accumsan quam interdum.</Text>
+          {app ? <Text>Firebase is enabled</Text> : <Text>Firebase is disabled</Text>}
         </Container>
       </div>
     </div>
