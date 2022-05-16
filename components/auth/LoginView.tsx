@@ -3,7 +3,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { app as firebaseClient, auth } from "../../lib/firebaseClient"
-import { Modal, Group, Button } from "@mantine/core"
+import { Modal, Text, Button } from "@mantine/core"
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -27,9 +27,9 @@ export default function LoginView() {
                 title="Log in to your Account."
             >
                 {error && (
-                    <div className="text-red border border-red p-3">
+                    <Text color="red">
                         An error occured. Please try again.
-                    </div>
+                    </Text>
                 )}
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
             </Modal>
