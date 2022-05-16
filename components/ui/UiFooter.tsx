@@ -4,6 +4,9 @@ import { Footer, Text, Container,
          Center, ActionIcon, Space,
          Stack, Anchor } from "@mantine/core"
 import { FileX, Phone, Mail, BrandTwitter, BrandFacebook } from "tabler-icons-react";
+import { FacebookButton } from "./socials/FacebookButton";
+import { TwitterButton } from "./socials/TwitterButton";
+
 
 const ABOUT_US_LINKS = [
     {
@@ -107,21 +110,19 @@ export default function UiFooter() {
                     <div className={classes.section}>
                         <Text size="xl" color="red">Socials</Text>
                         <Divider/>
-                        {/*Causes some Issues*/}
-                        <div className={classes.line}>
+                        <Space h="xs"/>
+                        <div className="">
                             <Stack spacing={5} align="flex-start">
-                                <Anchor size="xs" variant="text" href="https://twitter.com/imbentoPH" target="_blank">
-                                    <Group spacing={5}>
-                                        <BrandTwitter />
-                                        <p>@imbentoPH</p>
-                                    </Group>
-                                </Anchor>
-                                <Anchor size="xs" variant="text" href="https://facebook.com/imbentoPH" target="_blank">
-                                    <Group spacing={5}>
-                                        <BrandFacebook />
-                                        <p>imbentoPH</p>
-                                    </Group>
-                                </Anchor>
+                                <TwitterButton 
+                                    href="https://twitter.com/imbentoPH" 
+                                    target="_blank"
+                                >
+                                        Follow us on Twitter
+                                </TwitterButton>
+                                <FacebookButton
+                                    href="https://facebook.com/imbentoph"
+                                    target="_blank"
+                                >Like us on Facebook</FacebookButton>
                             </Stack>
                         </div>
                     </div>
