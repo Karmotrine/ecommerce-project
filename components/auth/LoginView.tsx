@@ -3,7 +3,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { app as firebaseClient, auth } from "../../lib/firebaseClient"
-import { Modal, Text, Button } from "@mantine/core"
+import { Modal, Text, Button, Loader } from "@mantine/core"
 import { useRouter } from 'next/router';
 
 export default function LoginView() {
@@ -38,15 +38,20 @@ export default function LoginView() {
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
             </Modal>
 
-            <Button 
-            onClick={() => setModalOpen(true)}
-            color="red"
-            variant="outline"
-            size="xs"
-            compact={true}
-            >
-                Log-in
-            </Button>
+            { 
+                loading ? 
+                    <Loader color="red" size="md"/> 
+                :
+                    <Button 
+                    onClick={() => setModalOpen(true)}
+                    color="red"
+                    variant="outline"
+                    size="xs"
+                    compact={true}
+                    >
+                        Log-in
+                    </Button>
+            }
         </>
     )
 }
