@@ -10,6 +10,8 @@ import { auth } from "../../lib/firebaseClient"
 import { useRouter } from 'next/router'
 import { useAuthSignOut } from '@react-query-firebase/auth';
 import LoginView from "../auth/LoginView"
+import { showNotification } from '@mantine/notifications';
+import { Check } from 'tabler-icons-react';
 
 const NAVLINKS = [
     {
@@ -22,6 +24,13 @@ const NAVLINKS = [
     },
 ]
 
+const LOGOUT_NOTIFICATION = {
+    title: 'User logged out.',
+    message: 'You have successfully logged out.',
+    color: 'red',
+    icon: <Check size="md" />,
+}
+
 
 export default function UiNavbar() {
     const user = useUser()
@@ -30,6 +39,7 @@ export default function UiNavbar() {
     const signOut = useAuthSignOut(auth, {
         onSuccess(){
             router.push("/")
+            showNotification(LOGOUT_NOTIFICATION)
         },
     })
 
