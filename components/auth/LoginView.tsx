@@ -40,7 +40,7 @@ export default function LoginView() {
 
             { 
                 loading ? 
-                    <Loader color="red" size="md"/> 
+                    <Loader color="red" size="sm"/> 
                 :
                     <Button 
                     onClick={() => setModalOpen(true)}
