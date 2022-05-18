@@ -7,7 +7,7 @@ import { GetServerSidePropsContext } from 'next';
 import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { ApplicationContainer } from '../components/ApplicationContainer';
 import { getCookie, setCookies } from 'cookies-next';
-
+import NextNProgress from "nextjs-progressbar";
 const client = new QueryClient()
 
 export default function App(props: AppProps & { colorScheme: ColorScheme}) {
@@ -41,6 +41,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme}) {
             }}
           >
               <ApplicationContainer>
+              <NextNProgress color="red"/>
                 <Component {...pageProps} />
               </ApplicationContainer>
           </MantineProvider>
