@@ -12,6 +12,7 @@ import { useAuthSignOut } from '@react-query-firebase/auth';
 import LoginView from "../auth/LoginView"
 import { showNotification } from '@mantine/notifications';
 import { Check } from 'tabler-icons-react';
+import CartButton from "../cart/CartButton"
 
 const NAVLINKS = [
     {
@@ -76,6 +77,7 @@ export default function UiNavbar() {
                         </Button>
                 </Group>
                 <Group>
+                    <CartButton />
                     {!!user.data ?
                     <UnstyledButton>
                         <Menu
