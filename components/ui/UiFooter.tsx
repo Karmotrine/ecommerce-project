@@ -18,8 +18,8 @@ const ABOUT_US_LINKS = [
         href: "/aboutus/devs"
     },
     {
-        name: "Terms of use",
-        href: "/tos"
+        name: "Terms and Conditions",
+        href: "/terms"
     },
     {
         name: "Privacy Policy",

@@ -1,16 +1,23 @@
-import React from "react"
-import { Container, createStyles, Text } from "@mantine/core"
+import { Container, Text, Divider, createStyles, Center } from "@mantine/core";
+
+const useStyles = createStyles((theme) => ({
+    headerFont: {
+        fontSize: 60,
+        fontWeight: 400,
+    },
+}))
 
 export default function Menu() {
-    const useStyles = createStyles((theme) => ({
-    }))
-    const { classes } = useStyles();
-
+    const { classes } = useStyles()
     return(
-        <div>
-            <Container>
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus dictum porttitor. Donec sagittis neque dui, maximus consectetur arcu tincidunt id. Nam auctor sollicitudin dignissim. Phasellus condimentum odio id ex mattis facilisis. In fringilla et nisl ut dignissim. Cras quis dui elementum elit fermentum tempor. Vivamus rutrum sit amet ex et lacinia. Cras sit amet massa placerat turpis rhoncus condimentum sit amet nec arcu. Sed vehicula sapien sit amet lectus tincidunt, ac accumsan quam interdum.</Text>
-            </Container>
-        </div>
+        <>
+            <Container py={48}>
+                <Center>
+                    <Text className={classes.headerFont}>Menu</Text>
+                </Center>
+                <Divider />
+                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras bibendum facilisis sodales. Maecenas eu luctus nulla. Nunc id purus ac tellus gravida semper at ut mauris. Curabitur non lacus mattis, dapibus ex blandit, pulvinar lacus. Duis tempor nisl luctus nisi lobortis lobortis. Cras blandit feugiat tellus, et luctus lectus pharetra vel. Ut dui eros, tincidunt at massa ac, feugiat convallis ipsum. Proin interdum arcu nibh, sit amet gravida ipsum viverra in. Nunc elementum rutrum sem, a interdum lacus aliquet quis. Curabitur nibh enim, pharetra ac urna ut, auctor tincidunt orci. Donec a aliquam ligula.</Text>
+            </Container> 
+        </>
     )
 }
