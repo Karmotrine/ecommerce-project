@@ -25,7 +25,7 @@ export function useProductMutation(
 
         return useMutation<string, Error> (
             async(product) => {
-                if(!user.data && (user.data.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
+                if(!user.data && (user.data.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID)) {
                     throw new Error('This mutation requires administrator authorization')
                 }
                 const documentRef = doc(collections.products)
