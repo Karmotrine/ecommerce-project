@@ -1,5 +1,5 @@
 export default function OrdersPanel(){
     return (
-        <p>Sample Account Setting Page</p>
+        <p>Sample Order Panel Page</p>
     )
 }

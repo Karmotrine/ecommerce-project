@@ -102,13 +102,15 @@ export default function UiNavbar() {
                                 <Text size="md">{user.data.displayName}</Text>
                                 <Text size="xs" color="dimmed">{user.data.email}</Text>
                             </Menu.Label>
-                            {user.data.uid === process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID && (
-                                <Divider>
-                                    <Menu.Label>Admin Panel</Menu.Label>
-                                    <Menu.Item onClick={() => router.push("/admin/products")}>Manage Products</Menu.Item>
-                                    <Menu.Item onClick={() => router.push("/admin/orders")}>Manage Orders</Menu.Item>
-                                    <Menu.Item onClick={() => router.push("/admin/articles")}>Manage Articles</Menu.Item>
-                                </Divider>
+                            {(user.data.uid === process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) && (
+                                <>
+                                    <Divider />
+                                        <Menu.Label>Admin Panel</Menu.Label>
+                                        <Menu.Item onClick={() => router.push("/admin/products")}>Manage Products</Menu.Item>
+                                        <Menu.Item onClick={() => router.push("/admin/orders")}>Manage Orders</Menu.Item>
+                                        <Menu.Item onClick={() => router.push("/admin/articles")}>Manage Articles</Menu.Item>
+                                    <Divider />
+                                </>
                             )}
                             <Divider />
                                 <Menu.Item onClick={() => router.push("/account")}>Account Settings</Menu.Item>

@@ -1,5 +1,5 @@
 export default function ProductsPanel(){
     return (
-        <p>Sample Account Setting Page</p>
+        <p>Sample Products Panel Page</p>
     )
 }

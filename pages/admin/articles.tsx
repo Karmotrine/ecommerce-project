@@ -1,5 +1,5 @@
 export default function ArticlesPanel(){
     return (
-        <p>Sample Account Setting Page</p>
+        <p>Sample Articles Panel Page</p>
     )
 }
