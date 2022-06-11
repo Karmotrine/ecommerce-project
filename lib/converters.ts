@@ -12,14 +12,27 @@ export const productConverter: FirestoreDataConverter<Product> = {
             active: !!data.active,
             description: data.description || '',
             images: data.images || [],
+            discount: data.discount,
             metadata: {
                 type: data.metadata?.type ?? '',
                 price: data.metadata?.price ?? '',
-            }   
+            }
         }
     },
-    toFirestore() {
-        throw new Error('Client does not support updating products.')
+    toFirestore(product: Product) {
+       return {
+            id: product.id,
+            name: product.name,
+            role: product.role,
+            active: product.active,
+            description: product.description || '',
+            images: product.images || [],
+            discount: product.discount,
+            metadata: {
+                type: product.metadata.type ?? '',
+                price: product.metadata.type ?? '',
+            }
+       }
     }
 } // export const productConverter: FirestoreDataConverter<Product> 
 

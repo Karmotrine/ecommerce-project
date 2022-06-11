@@ -8,11 +8,12 @@ export type ProductType = 'dish' | 'sidedish' | 'extra' | 'beverage'
 
 type ProductRecord = {
     id: string
+    name: string
+    role: null
     active: boolean
     description: string
     images: string[]
-    name: string
-    role: null
+    discount: number
 }
 
 type ProductRecordMetadata = {

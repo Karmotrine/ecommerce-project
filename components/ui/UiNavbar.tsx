@@ -1,7 +1,7 @@
 import { Header, 
     Text , Button, Anchor, 
     ActionIcon, useMantineColorScheme, UnstyledButton,
-    Menu, Divider, Group } from "@mantine/core"
+    Menu, Divider, Group, Container } from "@mantine/core"
 import UiAvatar from "../common/Avatar/UiAvatar"
 import { Sun, MoonStars, ChevronDown } from 'tabler-icons-react'
 import { useUser } from "../../lib/hooks/useUser"
@@ -13,6 +13,7 @@ import LoginView from "../auth/LoginView"
 import { showNotification } from '@mantine/notifications';
 import { Check } from 'tabler-icons-react';
 import CartButton from "../cart/CartButton"
+import Image from "next/image"
 
 const NAVLINKS = [
     {
@@ -49,7 +50,7 @@ export default function UiNavbar() {
         fixed={true}
             height={48}
             px={50}
-            py={12}
+            py={6}
         >
             <Group
                 position="apart"
@@ -57,7 +58,7 @@ export default function UiNavbar() {
                 <Group >
                     <Link href="/" passHref>
                         <Anchor>
-                            <Text>Imbento</Text>
+                            <Image src="/logo.png" alt="logo" width="60px "height="35px" />
                         </Anchor>
                     </Link>
                     {
