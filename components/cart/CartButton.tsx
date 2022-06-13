@@ -3,7 +3,8 @@ import { useRouter } from 'next/router'
 import { useUser } from "../../lib/hooks/useUser"
 import { useCart } from "../../lib/hooks/useCart"
 import { ShoppingCart } from "tabler-icons-react"
-import { createStyles } from "@mantine/core"
+import { createStyles, Anchor } from "@mantine/core"
+import Link from "next/link"
 
 const useStyles = createStyles((theme) => ({
     indicator:{
@@ -44,14 +45,18 @@ const CartButton: FC = () => {
     const href = !!user.data ? '/checkout' : '/signin?redirect=/checkout'
     
     return (
-        <div className={classes.group}>
-            <ShoppingCart size={50} />
-            {cart.length > 0 && (
-                <div className={classes.indicator}>
-                    {cart.length}
+        <Link href="/checkout" passHref>
+            <Anchor>
+                <div className={classes.group}>
+                    <ShoppingCart size={50} />
+                    {cart.length > 0 && (
+                        <div className={classes.indicator}>
+                            {cart.length}
+                        </div>
+                    )}
                 </div>
-            )}
-        </div>
+            </Anchor>
+        </Link>
     )
 }
 

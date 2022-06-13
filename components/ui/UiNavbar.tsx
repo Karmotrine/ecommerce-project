@@ -109,10 +109,10 @@ export default function UiNavbar() {
                                         <Menu.Item onClick={() => router.push("/admin/products")}>Manage Products</Menu.Item>
                                         <Menu.Item onClick={() => router.push("/admin/orders")}>Manage Orders</Menu.Item>
                                         <Menu.Item onClick={() => router.push("/admin/articles")}>Manage Articles</Menu.Item>
-                                    <Divider />
                                 </>
                             )}
                             <Divider />
+                                <Menu.Label>Account Panel</Menu.Label>
                                 <Menu.Item onClick={() => router.push("/account")}>Account Settings</Menu.Item>
                                 <Menu.Item onClick={() => router.push("/account/orders")}>My Orders</Menu.Item>
                             <Divider />
