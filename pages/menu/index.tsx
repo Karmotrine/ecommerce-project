@@ -68,10 +68,11 @@ export default function Menu() {
                     </List.Item>
                     
                     
+                    </Box>   
                     <Divider /> 
                     <Text weight={700}>BENTO</Text>
                 
-                <Boxsx={(theme) => ({
+                <Box sx={(theme) => ({
                  backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
                  textAlign: 'right',
                  padding: theme.spacing.xl,
@@ -132,10 +133,11 @@ export default function Menu() {
                     </List.Item>
                     
                     
+                    </Box>
                     <Divider /> 
                     <Text weight={700}>EXTRA AND DRINKS</Text>
                 
-                <Boxsx={(theme) => ({
+                <Box sx={(theme) => ({
                  backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
                  textAlign: 'center',
                  padding: theme.spacing.xl,
@@ -230,7 +232,7 @@ export default function Menu() {
                         <Text weight={500}> Miso Soup </Text>
                         <Text> ₱250.00 </Text>
                     </List.Item>
-                    
+                    </Box> 
             </Container> 
         </>
     )
