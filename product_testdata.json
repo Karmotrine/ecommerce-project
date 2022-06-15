@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Maruzen Ramen Kit",
+        "desc":"Each Maruzen Ramen Kit contains: \n 300g Ramen Noodles Pasta \n 150g Ramen Paste \n Nori Sheets",
+        "price": 320.00,
+        "img":"https://doxo.com.ph/wp-content/uploads/2021/03/Maruzen-Ramen-R.png"
+    },
+    {
+        "name": "Fukuoka Strong Taste Ramen Kit",
+        "desc": "Each Fukuoka Strong Taste Ramen Kit contains:\nNori Sheets \nRamen Noodles \nIt is good for 6 to 8 servings too! \nAdd exciting toppings like chasu, egg, chili, etc!",
+        "price": 320.00,
+        "img":"https://doxo.com.ph/wp-content/uploads/2021/03/Fukouka-R.png"
+    },
+    {
+        "name":"Tonkotsu Ramen Kit",
+        "desc":"Each Tonkotsu Ramen Kit contains:\n150g Ramen Paste\n300g Ramen Noodles\nNori Sheets",
+        "price":320.00,
+        "img":"https://cdn11.bigcommerce.com/s-u7fvaz2rcv/images/stencil/500x659/products/112/547/Ramen_Kit_Front_View__44381.1654800649.jpg?c=1"
+    }
+]
