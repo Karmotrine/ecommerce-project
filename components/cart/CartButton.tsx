@@ -46,7 +46,7 @@ const CartButton: FC = () => {
     
     return (
         <Link href="/checkout" passHref>
-            <Anchor>
+            <Anchor component="a">
                 <div className={classes.group}>
                     <ShoppingCart size={50} />
                     {cart.length > 0 && (
@@ -54,7 +54,7 @@ const CartButton: FC = () => {
                             {cart.length}
                         </div>
                     )}
-                </div>
+                </div>  
             </Anchor>
         </Link>
     )

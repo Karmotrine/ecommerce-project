@@ -26,6 +26,9 @@ export default function App(props: AppProps & { colorScheme: ColorScheme}) {
         <title>Imbento</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
+      <Head>
+      <meta name="google-site-verification" content="nLJ6QZVyl-8o5oYiY6GUslM2xBZyzrmk2KrQeySyOaA" />
+      </Head>
       <QueryClientProvider client={client}>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
           <MantineProvider
