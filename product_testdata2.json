@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Sakana Fry Kit",
+        "desc":"",
+        "price": 295.00,
+        "img":"https://cdn.shopify.com/s/files/1/0425/6812/2520/products/bentomeal1_503x.jpg?v=1594638975"
+    },
+    {
+        "name": "Yaki Tori Kit",
+        "desc": "",
+        "price": 380.00,
+        "img":"https://cdn.shopify.com/s/files/1/0425/6812/2520/products/bentomeal4_503x.jpg?v=1594639136"
+    },
+    {
+        "name":"Tonkatsu",
+        "desc":"",
+        "price":315.00,
+        "img":"https://cdn.shopify.com/s/files/1/0425/6812/2520/products/bentomeal3_503x.jpg?v=1594639115"
+    },
+    {
+        "name":"Chicken Teriyaki",
+        "desc":"",
+        "price":380.00,
+        "img":"https://cdn.shopify.com/s/files/1/0425/6812/2520/products/bentomeal5_503x.jpg?v=1594639215"
+    },
+    {
+        "name":"Ebi Tempura",
+        "desc":"",
+        "price":400.00,
+        "img":"https://cdn.shopify.com/s/files/1/0425/6812/2520/products/bentomeal8_503x.jpg?v=1596505544"
+    },
+    {
+        "name": "Gyu Hirenku",
+        "desc":"",
+        "price": 610.00,
+        "img":"https://cdn.shopify.com/s/files/1/0425/6812/2520/products/bentomeal9_503x.jpg?v=1594956859"
+    }
+]
