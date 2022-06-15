@@ -24,7 +24,7 @@ export default function Menu() {
                  padding: theme.spacing.xl,
                  borderRadius: theme.radius.md,
                  cursor: 'pointer','&:hover': {
-                 backgroundColor: theme.colorScheme === 'light' ? theme.colors.white[2] : theme.colors.gray[5],
+                 backgroundColor: theme.colorScheme === 'light' ? theme.colors.dark[2] : theme.colors.gray[5],
                 },
                  })}>
                 
@@ -77,7 +77,7 @@ export default function Menu() {
                  borderRadius: theme.radius.md,
                  cursor: 'pointer','&:hover': {
                  backgroundColor:
-            theme.colorScheme === 'light' ? theme.colors.white[2] : theme.colors.gray[5],
+            theme.colorScheme === 'light' ? theme.colors.dark[2] : theme.colors.gray[5],
         },
       })}>
                 
@@ -141,7 +141,7 @@ export default function Menu() {
                  borderRadius: theme.radius.md,
                  cursor: 'pointer','&:hover': {
                  backgroundColor:
-            theme.colorScheme === 'light' ? theme.colors.white[2] : theme.colors.gray[5],
+            theme.colorScheme === 'light' ? theme.colors.dark[2] : theme.colors.gray[5],
         },
       })}>
                 
