@@ -46,7 +46,7 @@ export default function OrderModalForm() {
         <Stepper.Step label="First step" description="Account Log-in" allowStepSelect={active > 0}>
          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
         </Stepper.Step>
-        <Stepper.Step label="Second step" description="Select Order type" allowStepSelect={active > 1}>
+        <Stepper.Step label="Second step" description="Select Order type">
           <Button onClick={() => {setOrderType(2); setActive((current) => (current < 3 ? current + 1 : current))}}>
             Pick-up
             </Button>
@@ -105,7 +105,7 @@ export default function OrderModalForm() {
       </Stepper>
 
       <Group position="center" mt="xl">
-        {(active <  2 && active != 3) &&<Button variant="default" onClick={prevStep}>Back</Button> }
+        {(active > 1 && active == 3) &&<Button variant="default" onClick={prevStep}>Back</Button> }
         {(active != 1 && active != 3) && <Button onClick={nextStep}>Next step</Button>}
         {active == 3 && <Button onClick={() => {router.push("/menu"); setOrderActive(isActive); setActive(0);}}>Proceed to menu</Button>}
       </Group>
