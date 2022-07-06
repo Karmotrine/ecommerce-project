@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Stepper, Button, Group , Box,
          TextInput, Select } from '@mantine/core';
 import { TimeInput, DatePicker } from '@mantine/dates';
@@ -17,8 +17,11 @@ import { useUser } from '../lib/hooks/useUser';
 
 export default function OrderModalForm() {
   const user = useUser();
+  useEffect(() => {
+    setActive(user.data ? 1 : 0)
+  }, [user]);
   const now = new Date();
-  const [active, setActive] = useState(user.data ? 1 : 0);
+  const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
   const [orderType, setOrderType] = useState(0);
