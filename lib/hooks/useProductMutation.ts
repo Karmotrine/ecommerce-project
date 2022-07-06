@@ -33,7 +33,6 @@ export function useProductMutation(
                     setDoc(documentRef, {
                         id: productId,
                         name: productName,
-                        role: null,
                         active: true,
                         description: productDesc,
                         images: productImage,
