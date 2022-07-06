@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStyles, Overlay, Container, Title, Button, Text } from "@mantine/core"
 import { app } from '../lib/firebaseClient';
+import useOrderModal from '../components/hooks/useOrderModal';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
@@ -74,7 +75,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function Home() {
   const { classes } = useStyles();
-
+  const { isActive, setOrderActive } = useOrderModal((state) => state);
   return (
     <div>
       <div className={classes.hero}>
@@ -96,7 +97,11 @@ export default function Home() {
             bowl dishes.
           </Text>
 
-          <Button variant="gradient" gradient={{ from: 'orange', to: 'red' }} size="xl" radius="xl" className={classes.control}>
+          <Button 
+            variant="gradient" gradient={{ from: 'orange', to: 'red' }}
+            size="xl" radius="xl" className={classes.control}
+            onClick={() => setOrderActive(isActive)}
+          >
             Order Now
           </Button>
         </Container>

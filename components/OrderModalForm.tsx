@@ -12,8 +12,9 @@ import next from 'next';
 import { useRouter } from 'next/router'
 var isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(isBetween)
+import useOrderModal from './hooks/useOrderModal';
 
-export default function OrderModalForm(orderModal, setOrderModal) {
+export default function OrderModalForm() {
   const now = new Date();
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
@@ -23,17 +24,13 @@ export default function OrderModalForm(orderModal, setOrderModal) {
   const router = useRouter()
 
   const uiConfig = {
-    // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
-    // Redirect to /signedIn after sign in is successful.
-    // Alternatively you can provide a callbacks.signInSuccess function.
-    //signInSuccessUrl: asPath,
-    // Only Google as auth provider
     signInOptions: [GoogleAuthProvider.PROVIDER_ID],
     signInSuccess: () => {
       nextStep;
     }
   }
+  const { isActive, setOrderActive } = useOrderModal((state) => state);
 
   return (
     <>
@@ -102,7 +99,7 @@ export default function OrderModalForm(orderModal, setOrderModal) {
       <Group position="center" mt="xl">
         {(active != 0 && active != 3) &&<Button variant="default" onClick={prevStep}>Back</Button> }
         {(active != 1 && active != 3) && <Button onClick={nextStep}>Next step</Button>}
-        {active == 3 && <Button onClick={() => {router.push("/menu"); setOrderModal(false); setActive(0);}}>Proceed to menu</Button>}
+        {active == 3 && <Button onClick={() => {router.push("/menu"); setOrderActive(isActive); setActive(0);}}>Proceed to menu</Button>}
       </Group>
     </>
   );
