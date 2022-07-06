@@ -13,10 +13,12 @@ import { useRouter } from 'next/router'
 var isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(isBetween)
 import useOrderModal from './hooks/useOrderModal';
+import { useUser } from '../lib/hooks/useUser';
 
 export default function OrderModalForm() {
+  const user = useUser();
   const now = new Date();
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(user.data ? 1 : 0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
   const [orderType, setOrderType] = useState(0);
@@ -100,7 +102,7 @@ export default function OrderModalForm() {
       </Stepper>
 
       <Group position="center" mt="xl">
-        {(active != 0 && active != 3) &&<Button variant="default" onClick={prevStep}>Back</Button> }
+        {(active <  2 && active != 3) &&<Button variant="default" onClick={prevStep}>Back</Button> }
         {(active != 1 && active != 3) && <Button onClick={nextStep}>Next step</Button>}
         {active == 3 && <Button onClick={() => {router.push("/menu"); setOrderActive(isActive); setActive(0);}}>Proceed to menu</Button>}
       </Group>

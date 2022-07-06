@@ -96,19 +96,19 @@ export default function UiNavbar() {
                     <UnstyledButton>
                         <Menu
                             withArrow
-                        control={
-                            <Group
-                                spacing={6}
-                            >
-                                <UiAvatar />
+                            control={
                                 <Group
-                                    spacing={2}
+                                    spacing={6}
                                 >
-                                    <Text size="xs">{user.data.displayName}</Text>
-                                    <ChevronDown size={9} />
+                                    <UiAvatar />
+                                    <Group
+                                        spacing={2}
+                                    >
+                                        <Text size="xs">{user.data.displayName}</Text>
+                                        <ChevronDown size={9} />
+                                    </Group>
                                 </Group>
-                            </Group>
-                        }
+                            }
                         >
                             <Menu.Label>
                                 Logged in as:
