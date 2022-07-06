@@ -8,7 +8,6 @@ export const productConverter: FirestoreDataConverter<Product> = {
         return {
             id: snapshot.id,
             name: data.name || '',
-            role: data.role,
             active: !!data.active,
             description: data.description || '',
             images: data.images || [],
@@ -23,7 +22,6 @@ export const productConverter: FirestoreDataConverter<Product> = {
        return {
             id: product.id,
             name: product.name,
-            role: product.role,
             active: product.active,
             description: product.description || '',
             images: product.images || [],
