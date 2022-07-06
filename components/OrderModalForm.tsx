@@ -19,7 +19,7 @@ export default function OrderModalForm() {
   const user = useUser();
   useEffect(() => {
     setActive(user.data ? 1 : 0)
-  }, [user.data]);
+  }, []);
   const now = new Date();
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
