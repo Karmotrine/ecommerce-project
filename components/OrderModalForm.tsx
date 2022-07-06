@@ -26,9 +26,12 @@ export default function OrderModalForm() {
   const uiConfig = {
     signInFlow: 'popup',
     signInOptions: [GoogleAuthProvider.PROVIDER_ID],
-    signInSuccess: () => {
-      nextStep;
-    }
+    callbacks: {
+      signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+          nextStep;
+          return false;
+      },
+    },
   }
   const { isActive, setOrderActive } = useOrderModal((state) => state);
 
