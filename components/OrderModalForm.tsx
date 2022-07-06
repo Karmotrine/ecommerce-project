@@ -105,7 +105,7 @@ export default function OrderModalForm() {
       </Stepper>
 
       <Group position="center" mt="xl">
-        {(active >= 1) &&<Button variant="default" onClick={prevStep}>Back</Button> }
+        {(active >= 2) &&<Button variant="default" onClick={prevStep}>Back</Button> }
         {(active == 2) && <Button onClick={nextStep}>Next step</Button>}
         {active == 3 && <Button onClick={() => {router.push("/menu"); setOrderActive(isActive); setActive(0);}}>Proceed to menu</Button>}
       </Group>
