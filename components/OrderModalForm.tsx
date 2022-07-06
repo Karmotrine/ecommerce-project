@@ -17,9 +17,6 @@ import { useUser } from '../lib/hooks/useUser';
 
 export default function OrderModalForm() {
   const user = useUser();
-  useEffect(() => {
-    setActive(user.data ? 1 : 0)
-  }, []);
   const now = new Date();
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
@@ -27,6 +24,10 @@ export default function OrderModalForm() {
   const [orderType, setOrderType] = useState(0);
   const [timeValue, setTimeValue] = useState(new Date())
   const router = useRouter()
+  
+  useEffect(() => {
+    setActive(user.data ? 1 : active)
+  }, []);
 
   const uiConfig = {
     signInFlow: 'popup',
