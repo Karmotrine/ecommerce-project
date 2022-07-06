@@ -4,12 +4,11 @@ import { Timestamp } from "@firebase/firestore"
  *  Think of what products do we have?
  *  (Dish, Add-ons)?
  */
-export type ProductType = 'dish' | 'sidedish' | 'extra' | 'beverage'
+export type ProductType = 'ramen' | 'bento' | 'extra' | 'beverage'
 
 type ProductRecord = {
     id: string
     name: string
-    role: null
     active: boolean
     description: string
     images: string[]
@@ -25,15 +24,15 @@ type ProductRecordMetadata = {
  *  Elaborate metadata for Dish Products
  */
 
-export type ProductDish = {
+export type ProductRamen = {
     metadata: {
-        type: "dish"
+        type: "ramen"
     } & ProductRecordMetadata
 } & ProductRecord
 
-export type ProductSidedish = {
+export type ProductBento = {
     metadata: {
-        type: "sidedish"
+        type: "bento"
     } & ProductRecordMetadata
 } & ProductRecord
 
@@ -50,13 +49,13 @@ export type ProductBeverage = {
 } & ProductRecord
 
 
-export type Product = ProductDish | ProductSidedish | ProductExtra | ProductBeverage
+export type Product = ProductRamen | ProductBento | ProductExtra | ProductBeverage
 
-export function isProductDish(product: Product): product is ProductDish {
-    return product.metadata.type === 'dish'
+export function isProductDish(product: Product): product is ProductRamen {
+    return product.metadata.type === 'ramen'
 }
-export function isProductSidedish(product: Product): product is ProductSidedish {
-    return product.metadata.type === 'sidedish'
+export function isProductSidedish(product: Product): product is ProductBento {
+    return product.metadata.type === 'bento'
 }
 export function isProductExtra(product: Product): product is ProductExtra {
     return product.metadata.type === 'extra'

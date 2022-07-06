@@ -1,7 +1,7 @@
 import { Header, 
     Text , Button, Anchor, 
     ActionIcon, useMantineColorScheme, UnstyledButton,
-    Menu, Divider, Group, Container } from "@mantine/core"
+    Menu, Divider, Group, Container, Modal } from "@mantine/core"
 import UiAvatar from "../common/Avatar/UiAvatar"
 import { Sun, MoonStars, ChevronDown } from 'tabler-icons-react'
 import { useUser } from "../../lib/hooks/useUser"
@@ -14,6 +14,8 @@ import { showNotification } from '@mantine/notifications';
 import { Check } from 'tabler-icons-react';
 import CartButton from "../cart/CartButton"
 import Image from "next/image"
+import { useState } from "react"
+import OrderModalForm from "../OrderModalForm"
 
 const NAVLINKS = [
     {
@@ -44,6 +46,7 @@ export default function UiNavbar() {
             showNotification(LOGOUT_NOTIFICATION)
         },
     })
+    const [ orderModal, setOrderModal ] = useState(false);
 
     return (
         <Header
@@ -68,14 +71,23 @@ export default function UiNavbar() {
                             </Link>
                         ))
                     }
-                        <Button
-                            size="xs"
-                            color="red"
-                            variant="filled"
-                            compact={true}
-                        >
-                            Order Now
-                        </Button>
+                    <Modal
+                        opened={orderModal}
+                        onClose={()=> setOrderModal(false)}
+                        title="Order Now"
+                        size="lg"
+                    >
+                        {OrderModalForm(orderModal, setOrderModal)}
+                    </Modal>
+                    <Button
+                        size="xs"
+                        color="red"
+                        variant="filled"
+                        compact={true}
+                        onClick={() => setOrderModal(true)}
+                    >
+                        Order Now
+                    </Button>
                 </Group>
                 <Group>
                     <CartButton />
