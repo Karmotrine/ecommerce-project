@@ -10,6 +10,11 @@ export default function Orders() {
         <Container py={48}>
             {productTest.isLoading && "Loading product"}
             {(productTest.isError || productTest.data == undefined) && "something went wrong loading" }
+            { 1 || productTest.data.name}
+            { 1 || productTest.data.id}
+            { 1 || productTest.data.description}
+            { 1 || productTest.data.metadata.price}
+            { 1 || productTest.data.metadata.type}
         </Container> 
     )
 }
