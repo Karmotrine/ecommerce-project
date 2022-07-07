@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Stepper, Button, Group , Box,
-         TextInput, Select } from '@mantine/core';
+         TextInput, Select, Center, Text, Stack } from '@mantine/core';
 import { TimeInput, DatePicker } from '@mantine/dates';
 import dayjs from 'dayjs';
-import { Clock } from 'tabler-icons-react';
+import { Clock, BuildingStore, Motorbike } from 'tabler-icons-react';
 import LoginView from './auth/LoginView';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { auth } from '../lib/firebaseClient';
@@ -44,16 +44,36 @@ export default function OrderModalForm() {
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+      <Stepper active={active} onStepClick={setActive} breakpoint="sm" color="red">
         <Stepper.Step label="First step" description="Account Log-in" allowStepSelect={user.data == null}>
          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
         </Stepper.Step>
         <Stepper.Step label="Second step" description="Select Order type"allowStepSelect={active > 1}>
-          <Button onClick={() => {setOrderType(2); setActive((current) => (current < 3 ? current + 1 : current))}}>
-            Pick-up
+          <Group
+            position={"center"}
+            spacing={"md"}
+          >
+            <Button
+              onClick={() => {setOrderType(2); setActive((current) => (current < 3 ? current + 1 : current))}}
+              size={"xl"}
+              color="red"
+            >
+              <Stack spacing={0}>
+                <Center><BuildingStore size={32} color="white"/></Center>
+                <Center><Text>Pick-up</Text></Center>
+              </Stack>
             </Button>
-          <Button onClick={() => {setOrderType(1); setActive((current) => (current < 3 ? current + 1 : current))}}>
-            Delivery</Button>
+            <Button 
+              onClick={() => {setOrderType(1); setActive((current) => (current < 3 ? current + 1 : current))}}
+              color="red"
+              size={"xl"}
+            >
+              <Stack spacing={0}>
+                <Center><Motorbike size={32} color="white"/></Center>
+                <Center><Text>Delivery</Text></Center>
+              </Stack>
+            </Button>
+          </Group>
         </Stepper.Step>
         <Stepper.Step label="Final step" description="Set order details" allowStepSelect={active > 2}>
           {(orderType != 0 && orderType == 1) ? 
@@ -108,8 +128,13 @@ export default function OrderModalForm() {
 
       <Group position="center" mt="xl">
         {(active >= 2) &&<Button variant="default" onClick={prevStep}>Back</Button> }
-        {(active == 2) && <Button onClick={nextStep}>Next step</Button>}
-        {active == 3 && <Button onClick={() => {router.push("/menu"); setOrderActive(isActive); setActive(0);}}>Proceed to menu</Button>}
+        {(active == 2) && <Button onClick={nextStep} color="red">Next step</Button>}
+        {active == 3 && 
+        <Button 
+          onClick={() => {router.push("/menu"); setOrderActive(isActive); setActive(0);}}
+          color="red"
+        >Proceed to menu
+        </Button>}
       </Group>
     </>
   );
