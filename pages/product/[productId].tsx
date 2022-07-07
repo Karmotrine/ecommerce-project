@@ -8,10 +8,10 @@ export default function Orders() {
     const productTest = useProduct(slugId.toString())
     const { name, id, description } = productTest.data
     const { price, type } = productTest.data.metadata
+    console.log(`${name} ${id} ${description}`)
+    console.log(`${price} ${type}`)
     return (
         <Container py={48}>
-            {productTest.isLoading && "Loading product"}
-            {(productTest.isError || productTest.data == undefined) && "something went wrong loading" }
             { 1 && <>{name}</>}
             { 1 && <>{id}</>}
             { 1 && <>{description}</>}
