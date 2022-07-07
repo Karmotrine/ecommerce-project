@@ -18,6 +18,7 @@ type ProductRecord = {
 type ProductRecordMetadata = {
     type: ProductType
     price: string
+    stockLeft: number
 }
 
 /**
