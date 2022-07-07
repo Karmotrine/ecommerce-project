@@ -11,8 +11,8 @@ export const productConverter: FirestoreDataConverter<Product> = {
             active: !!data.active,
             description: data.description || '',
             images: data.images || [],
-            discount: data.discount,
             metadata: {
+                discount: data.metadata.discount ?? '',
                 type: data.metadata?.type ?? '',
                 price: data.metadata?.price ?? '',
                 stockLeft: data.metadata?.price ?? ''
@@ -26,10 +26,11 @@ export const productConverter: FirestoreDataConverter<Product> = {
             active: product.active,
             description: product.description || '',
             images: product.images || [],
-            discount: product.discount,
             metadata: {
+                discount: product.metadata.discount,
                 type: product.metadata.type ?? '',
                 price: product.metadata.type ?? '',
+                stockLeft: product.metadata?.price ?? ''
             }
        }
     }

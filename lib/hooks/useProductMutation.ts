@@ -18,7 +18,7 @@ export function useProductMutation(
     productImage: string[],
     productType: any,
     productPrice: string,
-    productDiscount: number,
+    productDiscount: string,
     productStockLeft: number
     ) {
         const client = useQueryClient()
@@ -37,8 +37,8 @@ export function useProductMutation(
                         active: true,
                         description: productDesc,
                         images: productImage,
-                        discount: productDiscount,
                         metadata: {
+                            discount: productDiscount,
                             type: productType,
                             price: productPrice,
                             stockLeft: productStockLeft

@@ -12,10 +12,10 @@ type ProductRecord = {
     active: boolean
     description: string
     images: string[]
-    discount: number
 }
 
 type ProductRecordMetadata = {
+    discount: string
     type: ProductType
     price: string
     stockLeft: number
