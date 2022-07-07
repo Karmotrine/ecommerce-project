@@ -15,6 +15,7 @@ export const productConverter: FirestoreDataConverter<Product> = {
             metadata: {
                 type: data.metadata?.type ?? '',
                 price: data.metadata?.price ?? '',
+                stockLeft: data.metadata?.price ?? ''
             }
         }
     },
