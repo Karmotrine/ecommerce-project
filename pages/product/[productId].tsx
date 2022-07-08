@@ -1,4 +1,4 @@
-import { Container, Grid, Image, Stack, Text, Center, Loader, Group, Badge, Space } from "@mantine/core";
+import { Container, Grid, Image, Stack, Text, Center, Loader, Group, Badge, LoadingOverlay} from "@mantine/core";
 import QuantityIncrementer from "../../components/QuantityIncrementer";
 import ReviewContainer from "../../components/ReviewContainer";
 import { useRouter } from "next/router"
@@ -15,15 +15,15 @@ export default function Orders() {
 
     if (product.isLoading) {
         return (
-            <Center>
-                <Space h={(width/2)-60}/>
-                    <Loader color="red" size="xl"/>
-                <Space h={width/2}/>
-            </Center>
+            <LoadingOverlay visible={product.isLoading} radius="xl" color="red"/>
         )
     }
     if (product.isError || !product) {
-        return(<>Something went wrong on getting product information.</>)
+        return(
+        <Container>
+            <Text>Something went wrong on getting product information.</Text>
+        </Container>
+        )
     }
     if (product.data == undefined) {
         return (<NotFoundTitle />)
