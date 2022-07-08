@@ -11,7 +11,7 @@ type ProductRecord = {
     name: string
     active: boolean
     description: string
-    images: string[]
+    img: string[]
 }
 
 type ProductRecordMetadata = {

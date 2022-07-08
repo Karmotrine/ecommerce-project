@@ -31,9 +31,9 @@ export default function Orders() {
                     <Image
                         radius="xl"
                         alt="product image"
-                        src={`${product.data.images[0].toString()}`}
+                        src={`${product.data.img[0].toString()}`}
                     />
-                    {<>{product.data.images[0]}</>}
+                    {<>{product.data.img[0]}</>}
                 </Grid.Col>
                 <Grid.Col span={15}>
                     <Stack justify="flex-start">

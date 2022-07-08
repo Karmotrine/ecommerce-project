@@ -10,7 +10,7 @@ export const productConverter: FirestoreDataConverter<Product> = {
             name: data.name || '',
             active: !!data.active,
             description: data.description || '',
-            images: data.images || [],
+            img: data.img || [],
             metadata: {
                 discount: data.metadata.discount ?? '',
                 type: data.metadata?.type ?? '',
@@ -25,7 +25,7 @@ export const productConverter: FirestoreDataConverter<Product> = {
             name: product.name,
             active: product.active,
             description: product.description || '',
-            images: product.images || [],
+            images: product.img || [],
             metadata: {
                 discount: product.metadata.discount,
                 type: product.metadata.type ?? '',
