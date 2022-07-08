@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import { useProduct } from "../../lib/hooks/useProduct"
 import NotFoundTitle from "../404"
 import { useViewportSize } from '@mantine/hooks';
+import ProductSkeleton from "../../components/ProductSkeleton";
 
 export default function Orders() {
     const { height, width } = useViewportSize();
@@ -15,7 +16,15 @@ export default function Orders() {
 
     if (product.isLoading) {
         return (
-            <LoadingOverlay visible={product.isLoading} radius="xl" color="red"/>
+            <>
+                <ProductSkeleton/>
+                <LoadingOverlay 
+                visible={product.isLoading} 
+                radius="xl" 
+                loader={<Loader color="red" size="xl"/>}
+                transitionDuration={1500}
+                />
+            </>
         )
     }
     if (product.isError || !product) {
