@@ -28,22 +28,20 @@ export default function Orders() {
                     <Image
                         radius="xl"
                         alt="product image"
-                        src={product.data.images[0]}
+                        src={"https://cdn.shopify.com/s/files/1/0425/6812/2520/products/bentomeal1_503x.jpg?v=1594638975ample"}
                     />
                 </Grid.Col>
                 <Grid.Col span={15}>
                     <Stack justify="flex-start">
-                        <Text>{product.data.name}</Text>
-                        <Text size="xs">{product.data.metadata.type}</Text>
-                        <Text size="xs">{product.data.metadata.stockLeft} Stocks Left</Text>
-                        <Text size="lg">₱{product.data.metadata.price}</Text>
-                        <Text>{product.data.description}</Text>
-                        <QuantityIncrementer stockLeft={product.data.metadata.stockLeft}/>
+                        <Text>Maruzen Ramen Kit</Text>
+                        <Text>Ramen</Text>
+                        <Text>Each Maruzen Ramen Kit contains: 300g Ramen Noodles Pasta, 150g Ramen Paste, Nori Sheets</Text>
+                        <QuantityIncrementer stockLeft={9999}/>
                     </Stack>
                 </Grid.Col>
             </Grid>
             <Center>
-                <Text size="xl">Reviews</Text>
+                <Text>Reviews</Text>
             </Center>
             <ReviewContainer productId={product.data.id}/>            
         </Container>
