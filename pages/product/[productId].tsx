@@ -7,14 +7,15 @@ import NotFoundTitle from "../404"
 import { useViewportSize } from '@mantine/hooks';
 import ProductSkeleton from "../../components/ProductSkeleton";
 import { useUser } from "../../lib/hooks/useUser";
+import { useCart } from "../../lib/hooks/useCart";
 
 export default function Orders() {
     const user = useUser();
     const { height, width } = useViewportSize();
     const router = useRouter();
     const slugId = router.query.productId as string
-    //const [name, setName] = useState("empty")
     const product = useProduct(slugId!)
+    const { addToCart, removeFromCart, getItem, setQuantity } = useCart();
 
     if (product.isLoading) {
         return (
@@ -39,6 +40,9 @@ export default function Orders() {
     if (product.data == undefined) {
         return (<NotFoundTitle />)
     }
+
+    const cartItem = getItem(product.data)
+
     const price = parseInt(product.data.metadata.price)
     const discountFactor = parseInt(product.data.metadata.discount) / 100
     const discountedPrice = price - (price * discountFactor)
