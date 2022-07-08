@@ -1,4 +1,4 @@
-import { Container, Grid, Image, Stack, Text, Center, Loader } from "@mantine/core";
+import { Container, Grid, Image, Stack, Text, Center, Loader, Group } from "@mantine/core";
 import QuantityIncrementer from "../../components/QuantityIncrementer";
 import ReviewContainer from "../../components/ReviewContainer";
 import { useRouter } from "next/router"
@@ -31,8 +31,9 @@ export default function Orders() {
                     <Image
                         radius="xl"
                         alt="product image"
-                        src={`${product.data.images[0]}`}
+                        src={`${product.data.images[0].toString()}`}
                     />
+                    {<>{product.data.images[0]}</>}
                 </Grid.Col>
                 <Grid.Col span={15}>
                     <Stack justify="flex-start">
@@ -43,13 +44,13 @@ export default function Orders() {
                             <Text size="lg">
                                 ₱{product.data.metadata.price}
                             </Text> :
-                            <>
+                            <Group>
                                 <Text size="lg" color="red">
                                     ₱<s>{product.data.metadata.price} </s>
                                 </Text>
-                                <Text size="lg" weight={500}>{discountedPrice}</Text>
+                                <Text size="lg" weight={500} color="green">₱{discountedPrice}</Text>
                                 <Text size="sm">{product.data.metadata.discount}% off</Text>
-                            </>
+                            </Group>
                             }
                         {
                         product.data.description ? 
