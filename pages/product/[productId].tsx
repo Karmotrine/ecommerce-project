@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { useProduct } from "../../lib/hooks/useProduct"
 import { doc, getDoc } from "firebase/firestore"
 import { firestore } from "../../lib/firebaseClient"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Orders() {
     const router = useRouter();
@@ -18,6 +18,7 @@ export default function Orders() {
             alert("Document does not exists.")
         }
     }
+    useEffect(() => productTest, [])
 
     return (
         <Container py={48}>
