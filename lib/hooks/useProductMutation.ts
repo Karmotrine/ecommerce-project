@@ -36,7 +36,7 @@ export function useProductMutation(
                         name: productName,
                         active: true,
                         description: productDesc,
-                        images: productImage,
+                        img: productImage,
                         metadata: {
                             discount: productDiscount,
                             type: productType,
