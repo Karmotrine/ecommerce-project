@@ -4,6 +4,7 @@ import { useProduct } from "../../lib/hooks/useProduct"
 import { doc, getDoc } from "firebase/firestore"
 import { firestore } from "../../lib/firebaseClient"
 import { useState, useEffect } from "react"
+import NotFoundTitle from "../404"
 
 export default function Orders() {
     const router = useRouter();
@@ -16,6 +17,9 @@ export default function Orders() {
     }
     if (product.isError || !product) {
         return(<>Something went wrong on getting product information.</>)
+    }
+    if (product.data == undefined) {
+        return (<NotFoundTitle />)
     }
     /*
     const productTest = async () => {
