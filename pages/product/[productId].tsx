@@ -23,7 +23,7 @@ export default function Orders() {
     }
     const price = parseInt(product.data.metadata.price)
     const discountFactor = parseInt(product.data.metadata.discount) / 100
-    const discountedPrice = price * discountFactor
+    const discountedPrice = price - (price * discountFactor)
     return(
         <Container py={48}>
             <Grid columns={35}>
@@ -31,7 +31,7 @@ export default function Orders() {
                     <Image
                         radius="xl"
                         alt="product image"
-                        src={product.data.images[0] as string}
+                        src={`${product.data.images[0]}`}
                     />
                 </Grid.Col>
                 <Grid.Col span={15}>
