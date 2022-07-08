@@ -31,11 +31,14 @@ export default function ReviewForm(ReviewFormProps) {
         <Center>
             <Container py={15}>
                 <Textarea
-                    style={{width: 800}}
+                    style={{width: 600}}
                     value={reviewDesc}
                     placeholder="Write your own review"
                     label="Your review"
                     onChange={(event) => setReviewDesc(event.currentTarget.value)}
+                    autosize
+                    minRows={3}
+                    maxRows={6}
                 />
                 <Text size="xs">Your Rating:</Text>
                 {[1, 2, 3, 4, 5].map((value) => (

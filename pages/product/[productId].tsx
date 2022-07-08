@@ -1,19 +1,26 @@
-import { Container, Grid, Image, Stack, Text, Center, Loader, Group, Badge } from "@mantine/core";
+import { Container, Grid, Image, Stack, Text, Center, Loader, Group, Badge, Space } from "@mantine/core";
 import QuantityIncrementer from "../../components/QuantityIncrementer";
 import ReviewContainer from "../../components/ReviewContainer";
 import { useRouter } from "next/router"
 import { useProduct } from "../../lib/hooks/useProduct"
 import NotFoundTitle from "../404"
-
+import { useViewportSize } from '@mantine/hooks';
 
 export default function Orders() {
+    const { height, width } = useViewportSize();
     const router = useRouter();
     const slugId = router.query.productId as string
     //const [name, setName] = useState("empty")
     const product = useProduct(slugId!)
 
     if (product.isLoading) {
-        return (<Center><Loader color="red" size="xl"/></Center>)
+        return (
+            <Center>
+                <Space h={(width/2)-60}/>
+                    <Loader color="red" size="xl"/>
+                <Space h={width/2}/>
+            </Center>
+        )
     }
     if (product.isError || !product) {
         return(<>Something went wrong on getting product information.</>)
