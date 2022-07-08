@@ -18,7 +18,7 @@ export default function Orders() {
             alert("Document does not exists.")
         }
     }
-    useEffect(() => productTest, [])
+    useEffect(() => {productTest()}, [])
 
     return (
         <Container py={48}>
