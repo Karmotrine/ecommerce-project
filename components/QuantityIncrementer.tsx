@@ -7,7 +7,7 @@ interface QTYIncrementerProps {
 }
 
 export default function QuantityIncrementer(QTYIncrementerProps) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
   const handlers = useRef<NumberInputHandlers>();
 
   return (

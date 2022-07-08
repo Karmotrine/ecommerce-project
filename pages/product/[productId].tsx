@@ -6,8 +6,10 @@ import { useProduct } from "../../lib/hooks/useProduct"
 import NotFoundTitle from "../404"
 import { useViewportSize } from '@mantine/hooks';
 import ProductSkeleton from "../../components/ProductSkeleton";
+import { useUser } from "../../lib/hooks/useUser";
 
 export default function Orders() {
+    const user = useUser();
     const { height, width } = useViewportSize();
     const router = useRouter();
     const slugId = router.query.productId as string
@@ -90,7 +92,13 @@ export default function Orders() {
             <Center>
                 <Text size="xl">Reviews</Text>
             </Center>
-            <ReviewContainer productId={product.data.id}/>            
+            {
+                user.data ? 
+                <ReviewContainer productId={product.data.id}/> : 
+                <Container py={15}>
+                    Please Sign-in to write a review.
+                </Container>
+            }       
         </Container>
     )
 }

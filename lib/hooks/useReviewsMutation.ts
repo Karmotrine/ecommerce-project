@@ -22,22 +22,6 @@ export function useReviewMutation(productId: string): UseMutationResult<string, 
             const userData = user.data
             const documentRef = doc(collections.productReviews(productId), userData.uid)
 
-            type UploadTask = () => Promise<void>;
-            const uploads: UploadTask[] = [];
-
-            review.files?.forEach((file) => {
-                uploads.push(async () => {
-                    const storageRef = ref(storage, `${userData.uid}/reviews/${productId}/${uuid()}`)
-                    await uploadBytes(storageRef, file, {
-                        contentType: file.type,
-                        customMetadata: {
-                            uuid: userData.uid,
-                            name: file.name,
-                        },
-                    })
-                })
-            })
-            
             await Promise.all([
                 setDoc(documentRef, {
                     id: documentRef.id,
@@ -52,7 +36,6 @@ export function useReviewMutation(productId: string): UseMutationResult<string, 
                     },
 
                 }),
-                ...uploads.map((task) => task()),
             ])
             return documentRef.id;
         },
