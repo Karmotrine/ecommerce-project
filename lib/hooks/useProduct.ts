@@ -7,11 +7,5 @@ export function useProduct(id: string) {
     const collection = collections.products;
     const ref = doc(collection, id)
 
-    return useFirestoreDocumentData<Product>(
-        ['products', id],
-        ref,
-        {
-            subscribe: true
-        }
-    )
+    return useFirestoreDocumentData<Product>(['products', id],ref,{subscribe: true})
 }

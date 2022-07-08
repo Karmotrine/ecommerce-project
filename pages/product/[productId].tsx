@@ -8,7 +8,16 @@ import { useState, useEffect } from "react"
 export default function Orders() {
     const router = useRouter();
     const slugId = router.query.productId as string
-    const [name, setName] = useState("empty")
+    //const [name, setName] = useState("empty")
+    const product = useProduct(slugId!)
+
+    if (product.isLoading) {
+        return (<>Loading</>)
+    }
+    if (product.isError || !product) {
+        return(<>Something went wrong on getting product information.</>)
+    }
+    /*
     const productTest = async () => {
         const docRef = doc(firestore, "products", slugId)
         const docSnap = await getDoc(docRef);
@@ -19,10 +28,11 @@ export default function Orders() {
         }
     }
     useEffect(() => {productTest()}, [])
+    */
 
     return (
         <Container py={48}>
-            Test : {name}
+            Test : {product.data.name}
         </Container> 
     )
 }
