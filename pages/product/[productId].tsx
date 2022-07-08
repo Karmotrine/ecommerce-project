@@ -13,7 +13,7 @@ export default function Orders() {
         const docRef = doc(firestore, "products", slugId)
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            setName(docSnap.data.name)
+            setName(docSnap.data().name)
         } else {
             alert("Document does not exists.")
         }
