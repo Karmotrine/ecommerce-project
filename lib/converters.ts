@@ -15,7 +15,7 @@ export const productConverter: FirestoreDataConverter<Product> = {
                 discount: data.metadata.discount ?? '',
                 type: data.metadata?.type ?? '',
                 price: data.metadata?.price ?? '',
-                stockLeft: data.metadata?.price ?? ''
+                stockLeft: data.metadata?.stockLeft ?? ''
             }
         }
     },
@@ -25,12 +25,12 @@ export const productConverter: FirestoreDataConverter<Product> = {
             name: product.name,
             active: product.active,
             description: product.description || '',
-            images: product.img || [],
+            img: product.img || [],
             metadata: {
                 discount: product.metadata.discount,
                 type: product.metadata.type ?? '',
-                price: product.metadata.type ?? '',
-                stockLeft: product.metadata?.price ?? ''
+                price: product.metadata.price ?? '',
+                stockLeft: product.metadata?.stockLeft ?? ''
             }
        }
     }
