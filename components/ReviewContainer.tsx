@@ -13,7 +13,7 @@ interface ReviewContainerProps {
 export default function ReviewContainer(ReviewContainerProps) {
     const user = useUser()
     const [edit, setEdit] = useState(false)
-    const userReview = useProductReview(ReviewContainerProps.productId!, user.data?.uid)
+    const userReview = useProductReview(ReviewContainerProps.productId!, user?.data.uid)
     const userReviewData = userReview.data
     
     return (
