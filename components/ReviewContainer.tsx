@@ -19,17 +19,19 @@ export default function ReviewContainer(ReviewContainerProps) {
     return (
         <>
             <>
-                {!edit && userReview.status === 'success' && !!userReview && (
-                        <>
-                            <ReviewCard {...userReviewData} />
+                {!edit && userReview.status === 'success' && !!userReviewData && (
+                    <>
+                        <ReviewCard {...userReviewData} />
+                        <Container py={15}>
                             <Button 
                                 fullWidth={true}
                                 color="red"
-                                onClick={() => setEdit(true)}
+                                onClick={() => {setEdit(true)}}
                             >
                                 Edit Review
                             </Button>
-                        </>
+                        </Container>
+                    </>
                 )}
                 {userReview.status === "success" && !userReviewData && (
                     <ReviewForm productId={ReviewContainerProps.productId}/>
@@ -40,6 +42,7 @@ export default function ReviewContainer(ReviewContainerProps) {
                             productId={ReviewContainerProps.productId}
                             initialMessage={userReviewData.message}
                             initialRating={userReviewData.rating}
+                            setEditState={setEdit(false)}
                         />
                     </>
                 )}

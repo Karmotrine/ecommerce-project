@@ -14,6 +14,7 @@ interface ReviewFormProps {
     productId: string
     initialMessage?: string
     initialRating?: number
+    setEditState?: Function
 }
 
 export function StarComponent(StarComponentProps) {
@@ -76,6 +77,7 @@ export default function ReviewForm(ReviewFormProps) {
                             rating: rating,
                             message: reviewDesc,
                         });
+                        ReviewFormProps?.setEditState;
                     }}
                 >
                     Submit Review
