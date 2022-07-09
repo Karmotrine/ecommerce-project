@@ -76,18 +76,22 @@ export default function QuantityIncrementer(Product:ProductType) {
             </Group>
         }
         <Group>
-            <Button 
-                color="red" 
-                radius="xl"
-                leftIcon={<ShoppingCartPlus />}
-                onClick={userLogged.data ? 
-                         () => addToCart(Product) : 
-                         () => setLoginModal(true)}
-            >
-                Add to cart
-            </Button>
-            {!!cartItem && !!userLogged &&
+            {!cartItem &&
                 <Button 
+                    fullWidth
+                    color="red" 
+                    radius="xl"
+                    leftIcon={<ShoppingCartPlus />}
+                    onClick={userLogged.data ? 
+                            () => addToCart(Product) : 
+                            () => setLoginModal(true)}
+                >
+                    Add to cart
+                </Button>
+            }
+            {!!cartItem && !!userLogged &&
+                <Button
+                    fullWidth
                     variant="outline"
                     radius="xl"
                     color="red"
