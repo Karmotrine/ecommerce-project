@@ -101,7 +101,13 @@ export default function Orders() {
             <Center py={12}>
                 <Text size="xl" weight={700}>Reviews</Text>
             </Center>
-            <ReviewContainer productId={product.data.id}/>
+            {!user.data ? (
+                <Container py={15}>
+                    <Center>Please Log-in to write a review.</Center>
+                </Container>
+                ):
+                <ReviewContainer productId={product.data.id}/>
+            }
             {reviews.status === "loading" && <ReviewSkeleton />}
             {reviews.status === 'success' && 
                 <>
