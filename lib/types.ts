@@ -74,7 +74,7 @@ export type Review = {
     user: {
         id: string,
         display_name: string
-        photo_url: string
+        photo_url?: string
     }
     //Add attribute scores for profanity filter?
 }

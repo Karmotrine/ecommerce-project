@@ -43,12 +43,12 @@ export const reviewConverter: FirestoreDataConverter<Review> = {
             id: data.id,
             created_at: (data.created_at as Timestamp).toDate(),
             product_id: data.product_id,
-            rating: data.rating,
-            message: data.message,
+            rating: data.rating ?? 0,
+            message: data.message ?? '',
             user: {
                 id: data.user.id,
                 display_name: data.user.display_name,
-                photo_url: data.user.photo_url,
+                photo_url: data.user.photo_url ?? '',
             },
         }
     },
@@ -61,7 +61,7 @@ export const reviewConverter: FirestoreDataConverter<Review> = {
             user: {
                 id: review.user.id,
                 display_name: review.user.display_name,
-                photo_url: review.user.photo_url,
+                photo_url: review.user.photo_url ?? '',
             }
         }
     }
