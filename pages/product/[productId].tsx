@@ -98,7 +98,7 @@ export default function Orders() {
                     </Stack>
                 </Grid.Col>
             </Grid>
-            <Center>
+            <Center py={12}>
                 <Text size="xl" weight={700}>Reviews</Text>
             </Center>
             {
@@ -113,9 +113,11 @@ export default function Orders() {
                 <>
                     {(reviews.data.length === 0 &&
                         <Container py={30}>
-                            <Text>
-                                There are no reviews for this product. Order now and be the first to write one!
-                            </Text>
+                            <Center>
+                                <Text>
+                                    There are no reviews for this product. Order now and be the first to write one!
+                                </Text>
+                            </Center>
                         </Container> 
                     )
                     }

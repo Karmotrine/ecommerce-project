@@ -34,7 +34,7 @@ export function useProductReviews(productId: string): UseQueryResult<Review[]> {
     )
 } // export function useProductReviews(productId: string): UseQueryResult<Review[]>
 
-export function useProductReview(productId: string, reviewId: string): UseQueryResult<string[]> {
+export function useProductReview(productId: string, reviewId: string): UseQueryResult<Review> {
     const collection = collections.productReviews(productId)
 
     return useFirestoreDocumentData(

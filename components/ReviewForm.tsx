@@ -1,5 +1,5 @@
 import { Center, Container, Textarea, Button, ThemeIcon, Text, Space } from "@mantine/core";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Star } from "tabler-icons-react"
 import { useReviewMutation } from "../lib/hooks/useReviewsMutation";
 import { useUser } from "../lib/hooks/useUser";
@@ -12,6 +12,8 @@ interface StarComponentProps {
 }
 interface ReviewFormProps {
     productId: string
+    initialMessage?: string
+    initialRating?: number
 }
 
 export function StarComponent(StarComponentProps) {
@@ -32,6 +34,15 @@ export default function ReviewForm(ReviewFormProps) {
     const [ rating, setRating ] = useState(0)
     const [ filled, setFilled ] = useState(0)
     const [ reviewDesc, setReviewDesc ] = useState("")
+
+    useEffect(() => {
+        if (ReviewFormProps.initialMessage != null &&
+            ReviewFormProps.initialRating != null) {
+                setFilled(ReviewFormProps.initialRating)
+                setRating(ReviewFormProps.initialRating)
+                setReviewDesc(ReviewFormProps.initialMessage)
+            }
+    }, [])
     return (
         <Center>
             <Container py={15}>
