@@ -7,7 +7,6 @@ import NotFoundTitle from "../404"
 import { useViewportSize } from '@mantine/hooks';
 import ProductSkeleton from "../../components/ProductSkeleton";
 import { useUser } from "../../lib/hooks/useUser";
-import { useCart } from "../../lib/hooks/useCart";
 import { useProductReviews } from "../../lib/hooks/useReviews";
 import ReviewCard from "../../components/ReviewCard";
 import ReviewSkeleton from "../../components/ReviewSkeleton";
@@ -19,7 +18,6 @@ export default function Orders() {
     const router = useRouter();
     const slugId = router.query.productId as string
     const product = useProduct(slugId!)
-    const { addToCart, removeFromCart, getItem, setQuantity } = useCart();
     const reviews = useProductReviews(slugId!)
 
     if (product.isLoading) {
@@ -46,7 +44,7 @@ export default function Orders() {
         return (<NotFoundTitle />)
     }
 
-    const cartItem = getItem(product.data)
+
 
     const price = parseInt(product.data.metadata.price)
     const discountFactor = parseInt(product.data.metadata.discount) / 100
@@ -94,7 +92,7 @@ export default function Orders() {
                         <Text>{product.data.description}</Text> : 
                         <Text color="grey">No description</Text>
                         }
-                        <QuantityIncrementer stockLeft={product.data.metadata.stockLeft}/>
+                        <QuantityIncrementer {...product.data}/>
                     </Stack>
                 </Grid.Col>
             </Grid>
