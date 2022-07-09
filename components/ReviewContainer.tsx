@@ -5,6 +5,7 @@ import { useProductReview } from "../lib/hooks/useReviews";
 import { useUser } from "../lib/hooks/useUser";
 import ReviewForm from "./ReviewForm";
 import ReviewCard from "./ReviewCard"
+import useReviewEditState from "./hooks/useReviewEditState";
 
 interface ReviewContainerProps {
     productId: string
@@ -12,7 +13,7 @@ interface ReviewContainerProps {
 
 export default function ReviewContainer(ReviewContainerProps) {
     const user = useUser()
-    const [edit, setEdit] = useState(false)
+    const { edit, setEdit } = useReviewEditState((state) => state)
     const userReview = useProductReview(ReviewContainerProps.productId, user!.data.uid)
     const userReviewData = userReview.data
     
@@ -26,7 +27,7 @@ export default function ReviewContainer(ReviewContainerProps) {
                             <Container py={15}>
                                 <Button 
                                     color="red"
-                                    onClick={() => {setEdit(true)}}
+                                    onClick={() => {setEdit(edit)}}
                                 >
                                     Edit Review
                                 </Button>
@@ -43,7 +44,6 @@ export default function ReviewContainer(ReviewContainerProps) {
                             productId={ReviewContainerProps.productId}
                             initialMessage={userReviewData.message}
                             initialRating={userReviewData.rating}
-                            setEditState={() => setEdit(false)}
                         />
                     </>
                 )}

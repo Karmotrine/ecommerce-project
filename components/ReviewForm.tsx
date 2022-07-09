@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Star } from "tabler-icons-react"
 import { useReviewMutation } from "../lib/hooks/useReviewsMutation";
 import { useUser } from "../lib/hooks/useUser";
+import useReviewEditState from "./hooks/useReviewEditState";
 
 interface StarComponentProps {
     filled: boolean
@@ -14,7 +15,6 @@ interface ReviewFormProps {
     productId: string
     initialMessage?: string
     initialRating?: number
-    setEditState?: Function
 }
 
 export function StarComponent(StarComponentProps) {
@@ -35,6 +35,7 @@ export default function ReviewForm(ReviewFormProps) {
     const [ rating, setRating ] = useState(0)
     const [ filled, setFilled ] = useState(0)
     const [ reviewDesc, setReviewDesc ] = useState("")
+    const { edit, setEdit } = useReviewEditState((state) => state)
 
     useEffect(() => {
         if (ReviewFormProps.initialMessage != null &&
@@ -77,7 +78,7 @@ export default function ReviewForm(ReviewFormProps) {
                             rating: rating,
                             message: reviewDesc,
                         });
-                        ReviewFormProps?.setEditState;
+                        setEdit(edit);
                     }}
                 >
                     Submit Review
