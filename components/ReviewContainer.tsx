@@ -1,5 +1,5 @@
 
-import { Button } from "@mantine/core";
+import { Button, Container, Center } from "@mantine/core";
 import { useState } from "react";
 import { useProductReview } from "../lib/hooks/useReviews";
 import { useUser } from "../lib/hooks/useUser";
@@ -12,9 +12,17 @@ interface ReviewContainerProps {
 
 export default function ReviewContainer(ReviewContainerProps) {
     const user = useUser()
-    const userReview = useProductReview(ReviewContainerProps.productId!, user?.data!.uid)
+    const userReview = useProductReview(ReviewContainerProps.productId!, user.data!.uid)
     const [edit, setEdit] = useState(false)
     const userReviewData = userReview.data
+
+    if (!user.data) {
+        return (
+        <Container py={15}>
+            <Center>Please Log-in to write a review.</Center>
+        </Container>
+        )
+    }
 
     return (
         <>

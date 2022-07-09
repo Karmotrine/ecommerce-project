@@ -7,7 +7,7 @@ export default function ReviewCard(Review:ReviewType) {
     return (
         <Container key={Review.id} py={30} px={160}>
             <Group>
-                <Avatar size="lg" radius="xl"src={Review.user.photo_url} alt={Review.user.display_name}/>
+                <Avatar size="lg" radius="xl"src={Review.user?.photo_url} alt={Review.user.display_name}/>
                 <Stack align="flex-start" justify="flex-start" spacing={0}>
                     <Text size="xl" weight={600}>{Review.user.display_name}</Text>
                     <Tooltip
