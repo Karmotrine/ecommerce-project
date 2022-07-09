@@ -10,6 +10,7 @@ import { useUser } from "../../lib/hooks/useUser";
 import { useCart } from "../../lib/hooks/useCart";
 import { useProductReviews } from "../../lib/hooks/useReviews";
 import ReviewCard from "../../components/ReviewCard";
+import ReviewSkeleton from "../../components/ReviewSkeleton";
 
 
 export default function Orders() {
@@ -98,18 +99,30 @@ export default function Orders() {
                 </Grid.Col>
             </Grid>
             <Center>
-                <Text size="xl">Reviews</Text>
+                <Text size="xl" weight={700}>Reviews</Text>
             </Center>
             {
-                !user.data ? 
+                user.data ? 
                 <ReviewContainer productId={product.data.id}/> : 
                 <Container py={15}>
-                    Please Sign-in to write a review.
+                    <Center>Please Log-in to write a review.</Center>
                 </Container>
             }
+            {reviews.status === "loading" && <ReviewSkeleton />}
             {reviews.status === 'success' && 
-                (reviews.data.map((review) => <ReviewCard key={review.id} {...review}/>))
+                <>
+                    {(reviews.data.length === 0 &&
+                        <Container py={30}>
+                            <Text>
+                                There are no reviews for this product. Order now and be the first to write one!
+                            </Text>
+                        </Container> 
+                    )
+                    }
+                    {(reviews.data.map((review) => <ReviewCard key={review.id} {...review}/>))}
+                </>
             }
+            
         </Container>
     )
 }
