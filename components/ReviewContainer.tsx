@@ -22,7 +22,7 @@ export default function ReviewContainer(ReviewContainerProps) {
                 {!edit && userReview.status === 'success' && !!userReviewData && (
                     <>
                         <ReviewCard {...userReviewData} />
-                        <Container py={15}>
+                        <Container py={15} px={600}>
                             <Button 
                                 fullWidth={true}
                                 color="red"
