@@ -22,16 +22,16 @@ export default function ReviewContainer(ReviewContainerProps) {
                 {!edit && userReview.status === 'success' && !!userReviewData && (
                     <>
                         <ReviewCard {...userReviewData} />
-                        <Container py={15}>
-                            <Center>
+                        <Center>
+                            <Container py={15}>
                                 <Button 
                                     color="red"
                                     onClick={() => {setEdit(true)}}
                                 >
                                     Edit Review
                                 </Button>
-                            </Center>
-                        </Container>
+                            </Container>
+                        </Center>
                     </>
                 )}
                 {userReview.status === "success" && !userReviewData && (
