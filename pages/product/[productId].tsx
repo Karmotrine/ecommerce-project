@@ -8,6 +8,9 @@ import { useViewportSize } from '@mantine/hooks';
 import ProductSkeleton from "../../components/ProductSkeleton";
 import { useUser } from "../../lib/hooks/useUser";
 import { useCart } from "../../lib/hooks/useCart";
+import { useProductReviews } from "../../lib/hooks/useReviews";
+import ReviewCard from "../../components/ReviewCard";
+
 
 export default function Orders() {
     const user = useUser();
@@ -16,6 +19,7 @@ export default function Orders() {
     const slugId = router.query.productId as string
     const product = useProduct(slugId!)
     const { addToCart, removeFromCart, getItem, setQuantity } = useCart();
+    const reviews = useProductReviews(slugId!)
 
     if (product.isLoading) {
         return (
@@ -97,12 +101,15 @@ export default function Orders() {
                 <Text size="xl">Reviews</Text>
             </Center>
             {
-                user.data ? 
+                !user.data ? 
                 <ReviewContainer productId={product.data.id}/> : 
                 <Container py={15}>
                     Please Sign-in to write a review.
                 </Container>
-            }       
+            }
+            {reviews.status === 'success' && 
+                (reviews.data.map((review) => <ReviewCard key={review.id} {...review}/>))
+            }
         </Container>
     )
 }

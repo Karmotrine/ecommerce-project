@@ -41,7 +41,7 @@ export const reviewConverter: FirestoreDataConverter<Review> = {
         const data = snapshot.data()
         return {
             id: data.id,
-            created_at: data.created_at,
+            created_at: (data.created_at as Timestamp).toDate(),
             product_id: data.product_id,
             rating: data.rating,
             message: data.message,

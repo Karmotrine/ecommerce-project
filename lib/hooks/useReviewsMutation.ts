@@ -8,7 +8,7 @@ import { useUser } from "./useUser"
 import { Review } from "../types"
 import { reviewConverter } from '../converters'
 
-type ReviewMutation = Pick<Review, 'rating' | 'message' | 'files'>
+type ReviewMutation = Pick<Review, 'rating' | 'message' >
 
 export function useReviewMutation(productId: string): UseMutationResult<string, Error, ReviewMutation> {
     const client = useQueryClient()

@@ -71,7 +71,6 @@ export type Review = {
     product_id: string
     rating: number
     message: string
-    files?: File[];
     user: {
         id: string,
         display_name: string
