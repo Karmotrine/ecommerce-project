@@ -3,10 +3,7 @@ import { useState } from "react";
 import { useCart } from "../lib/hooks/useCart";
 
 export default function OrderSummary() {
-    const { cart } = useCart()
-    const [ totalCost, setTotalCost ] = useState<number>(0)
-    cart.map((item) => 
-        () => setTotalCost((prevState) => (prevState + (item.quantity*parseFloat(item.metadata.price)))))
+    const { cart, total } = useCart()
     return (
         <Box sx={(theme) => ({
             backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
@@ -16,7 +13,6 @@ export default function OrderSummary() {
             <Text size="xl" weight={600}>Order Summary</Text>
             <Space py={18}/>
             <Stack>
-                {/* 
                 {cart.map((item) => {
                     return (
                     <Box key={`${item.id}orderSumList`}>
@@ -27,7 +23,6 @@ export default function OrderSummary() {
                         <Divider/>
                     </Box>
                 )})}
-                */}
                 <>
                     <Grid justify="space-between" align="center">
                         <Text weight={400} size="sm">Shipping</Text>
@@ -37,7 +32,7 @@ export default function OrderSummary() {
                 </>
                 <Grid justify="space-between" align="center">
                     <Text weight={700} size="lg">Total</Text>
-                    <Text weight={700} size="lg">₱{totalCost}</Text>
+                    <Text weight={700} size="lg">₱{total}</Text>
                 </Grid>
                 <Space py={3} />
                 <Button 
