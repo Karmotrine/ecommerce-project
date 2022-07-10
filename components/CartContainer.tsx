@@ -1,6 +1,7 @@
 import { Button, Container, Divider, Group, 
-         NumberInput, Space, Stack, Text, Image } from "@mantine/core";
-import { Badge, X } from "tabler-icons-react";
+         NumberInput, Space, Stack, Text, 
+         Image, Badge } from "@mantine/core";
+import { X } from "tabler-icons-react";
 import { useCart } from "../lib/hooks/useCart";
 
 export default function CartContainer() {
