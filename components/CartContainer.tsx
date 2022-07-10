@@ -6,6 +6,7 @@ import { useCart } from "../lib/hooks/useCart";
 
 export default function CartContainer() {
     const { cart, setQuantity, removeFromCart} = useCart()
+    
     return (
         <>
             {cart.map((item) =>(
@@ -21,7 +22,16 @@ export default function CartContainer() {
                     <Stack spacing={0} align="flex-start">
                         <Space py={5}/>
                         <Text size="lg" weight={600}>{item.name}</Text>
-                        <Text size="sm" weight={600}>{item.metadata.price}</Text>
+                        {parseInt(item.metadata.discount) == 0 ?
+                        <Text size="sm" weight={600}>₱{item.metadata.price}</Text> :
+                        <Group>
+                            <Text size="sm" weight={600}><s>₱{item.metadata.price}</s></Text>
+                            <Space py={2}/>
+                            <Text color="green" size="md" weight={600} sx={{ lineHeight: 1 }}>
+                                ₱{parseFloat(item.metadata.price) - (parseFloat(item.metadata.price) * (parseInt(item.metadata.discount)/100))}
+                            </Text>
+                        </Group>
+                        }
                         <Space py={5} />
                         <Badge color="red" size="sm">{item.metadata.type}</Badge>
                         <Space py={5} />

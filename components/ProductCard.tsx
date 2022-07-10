@@ -89,7 +89,7 @@ export default function ProductCard(item:Product) {
         </div>
         {item.metadata.discount != "0" &&
             <Badge 
-                style={{ flex: 0 }}
+                style={{ flex: 1 }}
                 variant="gradient"
                 gradient={{ from: 'teal', to: 'lime', deg: 105 } }
                 size="md"
