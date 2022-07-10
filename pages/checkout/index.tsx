@@ -1,11 +1,8 @@
 import { Container, Center, Divider, Text, 
-         createStyles, Grid, Box, Space, Stack, 
-         Button, Image, Group, Badge, NumberInput } from "@mantine/core"
-import { X } from "tabler-icons-react"
+         createStyles, Grid, Box } from "@mantine/core"
 import CartContainer from "../../components/CartContainer"
 import OrderSummary from "../../components/OrderSummary"
 import { useCart } from "../../lib/hooks/useCart"
-import { useProduct } from "../../lib/hooks/useProduct"
 
 const useStyles = createStyles((theme) => ({
     headerFont: {
@@ -40,7 +37,7 @@ export default function Checkout() {
                         <CartContainer />
                     </Grid.Col>
                     <Grid.Col span={13}>
-                        <OrderSummary />
+                        {/*<OrderSummary />*/}
                     </Grid.Col>
                 </Grid>
                 )}
