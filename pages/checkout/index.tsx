@@ -37,7 +37,7 @@ export default function Checkout() {
                         <CartContainer />
                     </Grid.Col>
                     <Grid.Col span={13}>
-                        {/*<OrderSummary />*/}
+                        <OrderSummary />
                     </Grid.Col>
                 </Grid>
                 )}
