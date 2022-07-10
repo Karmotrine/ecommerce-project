@@ -24,7 +24,7 @@ export default function CartContainer() {
                         <Text size="lg" weight={600}>{item.name}</Text>
                         {parseInt(item.metadata.discount) == 0 ?
                         <Text size="sm" weight={600}>₱{item.metadata.price}</Text> :
-                        <Group>
+                        <Group spacing={1}>
                             <Text size="sm" weight={600}><s>₱{item.metadata.price}</s></Text>
                             <Space py={2}/>
                             <Text color="green" size="md" weight={600} sx={{ lineHeight: 1 }}>

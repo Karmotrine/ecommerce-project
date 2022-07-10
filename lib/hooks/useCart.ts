@@ -46,7 +46,9 @@ export function useCart(): UseCart {
     return {
         cart: cartItems,
         total: cartItems.reduce((total, item) => {
-            const price = parseInt(item.metadata.price);
+            const price = parseInt(item.metadata.discount) == 0 
+                          ? parseFloat(item.metadata.price) :
+                          parseFloat(item.metadata.price) - (parseFloat(item.metadata.price)*(parseInt(item.metadata.discount)/100));
             return total + price * item.quantity
         }, 0),
         addToCart(product, quantity = 1) {

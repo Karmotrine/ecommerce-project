@@ -19,17 +19,17 @@ export default function OrderSummary() {
                     <React.Fragment key={`${item.id}orderSumList`}>
                         <Grid justify="space-between" align="center">
                             <Text weight={400} size="sm">{item.quantity}x {item.name}</Text>
-                            <Text weight={400} size="sm">
+                            {parseInt(item.metadata.discount) == 0 ?
+                            <Text size="sm" weight={400}>
                                 ₱{item.quantity * parseInt(item.metadata.price)}
+                            </Text> :
+                            <Text size="sm" weight={400}>
+                                ₱{item.quantity*
+                                    (parseFloat(item.metadata.price) - 
+                                        (parseFloat(item.metadata.price) * (parseInt(item.metadata.discount)/100)))
+                                 }
                             </Text>
-                        {parseInt(item.metadata.discount) == 0 ?
-                        <Text size="sm" weight={400}>
-                            ₱{item.quantity * parseInt(item.metadata.price)}
-                        </Text> :
-                        <Text size="sm" weight={400}>
-                            ₱{parseFloat(item.metadata.price) - (parseFloat(item.metadata.price) * (parseInt(item.metadata.discount)/100))}
-                        </Text>
-                        }
+                            }
                         </Grid>
                         <Divider/>
                     </React.Fragment>
