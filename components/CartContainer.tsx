@@ -33,7 +33,18 @@ export default function CartContainer() {
                         </Group>
                         }
                         <Space py={5} />
-                        <Badge color="red" size="sm">{item.metadata.type}</Badge>
+                        <Group spacing={1}>
+                            <Badge color="red" size="sm">{item.metadata.type}</Badge>
+                            {parseInt(item.metadata.discount) != 0 && (
+                            <Badge
+                                variant="gradient"
+                                gradient={{ from: 'teal', to: 'lime', deg: 105 } }
+                                size="md"
+                            >
+                                {item.metadata.discount}% off
+                            </Badge>
+                            )}
+                        </Group>
                         <Space py={5} />
                         <Group> 
                             <NumberInput
