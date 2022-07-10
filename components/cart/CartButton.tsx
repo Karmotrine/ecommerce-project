@@ -52,7 +52,7 @@ const CartButton: FC = () => {
                     <ShoppingCart size={50} />
                     {cart.length > 0 && (
                         <div className={classes.indicator}>
-                            {0}
+                            {cart.length}
                         </div>
                     )}
                 </div>  
