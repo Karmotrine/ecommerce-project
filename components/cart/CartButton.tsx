@@ -42,11 +42,11 @@ const CartButton: FC = () => {
     const { cart } = useCart()
     const { classes } = useStyles()
     // Decide if to use modal log-in.
-    const href = !!user.data ? '/checkout' : '/signin?redirect=/checkout'
+    const href = !!user.data ? '/checkout' : '/login'
     
     return (
-        <Link href="/checkout" passHref>
-            <Anchor component="a">
+        <Link href={href} passHref>
+            <Anchor style={{ color: "inherit" }} component="a">
                 <div className={classes.group}>
                     <ShoppingCart size={50} />
                     {cart.length > 0 && (
