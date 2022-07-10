@@ -1,4 +1,9 @@
-import { Container, Center, Divider, Text, createStyles, Grid } from "@mantine/core"
+import { Container, Center, Divider, Text, 
+         createStyles, Grid, Box, Space, Stack, 
+         Button, Image, Group, Badge, NumberInput } from "@mantine/core"
+import { X } from "tabler-icons-react"
+import CartContainer from "../../components/CartContainer"
+import { useCart } from "../../lib/hooks/useCart"
 import { useProduct } from "../../lib/hooks/useProduct"
 
 const useStyles = createStyles((theme) => ({
@@ -8,21 +13,75 @@ const useStyles = createStyles((theme) => ({
     },
 }))
 
-export default function Orders() {
+export default function Checkout() {
     const { classes } = useStyles()
-    const productTest = useProduct("Zv5fjo6Bdd2fgx99Q9dj")
+    const { cart } = useCart()
+
     return (
         <>
             <Container py={48}>
                 <Text className={classes.headerFont}>Checkout</Text>
-                <Divider />
+                <Divider py={5}/>
                 <Grid columns={35}>
-                    <Grid.Col span={25}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras bibendum facilisis sodales. Maecenas eu luctus nulla. Nunc id purus ac tellus gravida semper at ut mauris. Curabitur non lacus mattis, dapibus ex blandit, pulvinar lacus. Duis tempor nisl luctus nisi lobortis lobortis. Cras blandit feugiat tellus, et luctus lectus pharetra vel. Ut dui eros, tincidunt at massa ac, feugiat convallis ipsum. Proin interdum arcu nibh, sit amet gravida ipsum viverra in. Nunc elementum rutrum sem, a interdum lacus aliquet quis. Curabitur nibh enim, pharetra ac urna ut, auctor tincidunt orci. Donec a aliquam ligula.
-                        </Grid.Col>
-                    <Grid.Col span={10}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras bibendum facilisis sodales. Maecenas eu luctus nulla. Nunc id purus ac tellus gravida semper at ut mauris. Curabitur non lacus mattis, dapibus ex blandit, pulvinar lacus. Duis tempor nisl luctus nisi lobortis lobortis. Cras blandit feugiat tellus, et luctus lectus pharetra vel. Ut dui eros, tincidunt at massa ac, feugiat convallis ipsum. Proin interdum arcu nibh, sit amet gravida ipsum viverra in. Nunc elementum rutrum sem, a interdum lacus aliquet quis. Curabitur nibh enim, pharetra ac urna ut, auctor tincidunt orci. Donec a aliquam ligula.
-                        </Grid.Col>
+                    <Grid.Col span={22}>
+                        {cart.length === 0 && (
+                            <Box sx={(theme) => ({
+                                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
+                                padding: 30,
+                                borderRadius: theme.radius.md
+                            })}>
+                                <Center>
+                                    <Text weight={300} size="xl">Your cart is currently empty.</Text>
+                                </Center>
+                            </Box>
+                        )}
+                        {cart.length > 0 && (
+                            <CartContainer />
+                        )}
+                    </Grid.Col>
+                    <Grid.Col span={13}>
+                        <Box sx={(theme) => ({
+                            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
+                            padding: 30,
+                            borderRadius: theme.radius.md
+                        })}>
+                            <Text size="xl" weight={600}>Order Summary</Text>
+                            <Space py={18}/>
+                            <Stack>
+                                <>
+                                    <Grid justify="space-between" align="center">
+                                        <Text weight={400} size="sm">1x Chipinga</Text>
+                                        <Text weight={400} size="sm">$1</Text>
+                                    </Grid>
+                                    <Divider/>
+                                </>
+                                <>
+                                    <Grid justify="space-between" align="center">
+                                        <Text weight={400} size="sm">VAT (12%)</Text>
+                                        <Text weight={400} size="sm">$1</Text>
+                                    </Grid>
+                                    <Divider/>
+                                </>
+                                <>
+                                    <Grid justify="space-between" align="center">
+                                        <Text weight={400} size="sm">Shipping</Text>
+                                        <Text weight={400} size="sm">$1</Text>
+                                    </Grid>
+                                    <Divider/>
+                                </>
+                                <Grid justify="space-between" align="center">
+                                    <Text weight={700} size="lg">Total</Text>
+                                    <Text weight={700} size="lg">$1</Text>
+                                </Grid>
+                                <Space py={3} />
+                                <Button 
+                                    variant="gradient" gradient={{ from: 'orange', to: 'red' }}
+                                    radius="xl"
+                                >Checkout
+                                </Button>
+                            </Stack>
+                        </Box>
+                    </Grid.Col>
                 </Grid>
             </Container> 
         </>
