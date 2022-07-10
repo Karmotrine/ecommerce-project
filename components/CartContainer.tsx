@@ -39,7 +39,7 @@ export default function CartContainer() {
                             <Badge
                                 variant="gradient"
                                 gradient={{ from: 'teal', to: 'lime', deg: 105 } }
-                                size="md"
+                                size="sm"
                             >
                                 {item.metadata.discount}% off
                             </Badge>
