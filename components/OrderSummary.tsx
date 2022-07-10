@@ -1,7 +1,10 @@
 import { Box, Button, Divider, Grid, Space, Stack, Text } from "@mantine/core";
 import React from "react";
-import { useState } from "react";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { PayPalScriptOptions } from "@paypal/paypal-js/types/script-options";
+import { PayPalButtonsComponentProps } from "@paypal/react-paypal-js"
 import { useCart } from "../lib/hooks/useCart";
+import { paypalScriptOptions, PaypalButtons } from "./PaypalContainer";
 
 export default function OrderSummary() {
     const { cart, total } = useCart()
@@ -46,11 +49,14 @@ export default function OrderSummary() {
                     <Text weight={700} size="lg">₱{total}</Text>
                 </Grid>
                 <Space py={3} />
-                <Button 
+                {/*<Button 
                     variant="gradient" gradient={{ from: 'orange', to: 'red' }}
                     radius="xl"
                 >Checkout
-                </Button>
+                </Button>*/}
+                <PayPalScriptProvider options={paypalScriptOptions}>
+                    <PaypalButtons total={total} />
+                </PayPalScriptProvider>
             </Stack>
         </Box>
     )

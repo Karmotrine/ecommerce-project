@@ -17,6 +17,7 @@
     "@mantine/modals": "^4.2.4",
     "@mantine/next": "^4.2.4",
     "@mantine/notifications": "^4.2.4",
+    "@paypal/react-paypal-js": "^7.8.1",
     "@react-query-firebase/auth": "^0.3.4",
     "@react-query-firebase/firestore": "^0.4.2",
     "@types/node": "^17.0.24",
