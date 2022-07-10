@@ -2,6 +2,8 @@ import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { PayPalScriptOptions } from "@paypal/paypal-js/types/script-options";
 import { PayPalButtonsComponentProps } from "@paypal/react-paypal-js"
 import { Loader } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
+import { AlertTriangle, X } from "tabler-icons-react";
     
 export const paypalScriptOptions: PayPalScriptOptions = {
     "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -22,7 +24,7 @@ export function PaypalButtons(PaypalButtonsProps:PaypalButtonsPropsType) {
     const [{ isPending }] = usePayPalScriptReducer();
     const paypalButtonTransactionProps: PayPalButtonsComponentProps = {
         style: { layout: "vertical", shape: "pill" },
-        createOrder(data, actions) {
+        createOrder: (data, actions) => {
             return actions.order.create({
             purchase_units: [
                 {
@@ -33,7 +35,7 @@ export function PaypalButtons(PaypalButtonsProps:PaypalButtonsPropsType) {
             ]
             });
         },
-        onApprove(data, actions) {
+        onApprove: async (data, actions) => {
         /**
          * data: {
          *   orderID: string;
@@ -42,21 +44,40 @@ export function PaypalButtons(PaypalButtonsProps:PaypalButtonsPropsType) {
          *   billingToken: string | null;
          *   facilitatorAccesstoken: string;
          * }
+         * await function for firebase writing
          */
-        return actions.order.capture().then((details) => {
-        alert(
-            "Transaction completed by" +
-            (details?.payer.name.given_name ?? "No details")
-        );
+        return actions.order.capture()
+                .then((details) => {
+                    alert(
+                        "Transaction completed by" +
+                        (details?.payer.name.given_name ?? "No details")
+                    );
 
-        alert("Data details: " + JSON.stringify(data, null, 2));
-            });
+                    alert("Data details: " + JSON.stringify(data, null, 2));
+                    }
+                );
+        },
+        onCancel: async (data, actions) => {
+            showNotification({
+                title: 'Paypal Payment cancelled',
+                message: 'You have cancelled your payment prompt.',
+                color: 'orange',
+                icon: <X />
+              })
+        },
+        onError: (err) => {
+            showNotification({
+                title: 'Paypal Payment Error',
+                message: `Something wrong happened. Error: ${err}`,
+                color: 'orange',
+                icon: <AlertTriangle />
+            })
         }
     };
     return (
         <>
             {isPending ? <Loader/> : null}
-            <PayPalButtons />
+            <PayPalButtons {...paypalButtonTransactionProps}/>
         </>
     );
 }
