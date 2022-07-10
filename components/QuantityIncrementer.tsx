@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { NumberInput, Group, ActionIcon, 
          NumberInputHandlers, Button, Modal, 
-         LoadingOverlay, Text } from '@mantine/core';
+         Text } from '@mantine/core';
 import { ShoppingCartPlus, X } from "tabler-icons-react"
 import { useUser } from '../lib/hooks/useUser';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
@@ -11,6 +11,7 @@ import { app as firebaseClient, auth } from "../lib/firebaseClient"
 import { useRouter } from 'next/router';
 import { useCart } from '../lib/hooks/useCart';
 import { Product as ProductType } from '../lib/types';
+import useLoginModal from './hooks/useLoginModal';
 
 export default function QuantityIncrementer(Product:ProductType) {
     const { asPath } = useRouter();
@@ -24,11 +25,10 @@ export default function QuantityIncrementer(Product:ProductType) {
         signInOptions: [GoogleAuthProvider.PROVIDER_ID],
     }
     const authInstance = getAuth(firebaseClient)
-    const [ user, loading, error ] = useAuthState(authInstance)
+    const [ loading, error ] = useAuthState(authInstance)
 
-    const [value, setValue] = useState(1);
     const handlers = useRef<NumberInputHandlers>();
-    const [ loginModal, setLoginModal ] = useState(false)
+    const { loginModal, setLoginModal } = useLoginModal((state) => state);
     const userLogged = useUser()
     
     const { addToCart, removeFromCart, getItem, setQuantity } = useCart();
@@ -38,10 +38,9 @@ export default function QuantityIncrementer(Product:ProductType) {
     <Group>
         <Modal
             opened={loginModal}
-            onClose={() => setLoginModal(false)}
+            onClose={() => setLoginModal(loginModal)}
             title="Please log-in to continue."
         >
-             <LoadingOverlay visible={loading} />
              <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
              {error && <Text size="xs" color="red">Error logging-in, please try again.</Text>}
         </Modal>
@@ -84,7 +83,7 @@ export default function QuantityIncrementer(Product:ProductType) {
                     leftIcon={<ShoppingCartPlus />}
                     onClick={userLogged.data ? 
                             () => addToCart(Product) : 
-                            () => setLoginModal(true)}
+                            () => setLoginModal(loginModal)}
                 >
                     Add to cart
                 </Button>
@@ -97,7 +96,7 @@ export default function QuantityIncrementer(Product:ProductType) {
                     color="red"
                     onClick={userLogged.data && !! cartItem ? 
                             () => removeFromCart(Product) : 
-                            () => setLoginModal(true)}
+                            () => setLoginModal(loginModal)}
                 >
                     <X />
                 </Button>

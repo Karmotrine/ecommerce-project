@@ -27,6 +27,7 @@ export default function CartContainer() {
                         <Space py={5} />
                         <Group> 
                             <NumberInput
+                                style={{ flex: 1 }}
                                 placeholder="Quantity"
                                 label="Quantity"
                                 defaultValue={item.quantity}

@@ -1,5 +1,5 @@
 import { Container, Center, Divider, Text, 
-         createStyles, Grid, Box } from "@mantine/core"
+         createStyles, Grid, Box, Loader, LoadingOverlay } from "@mantine/core"
 import CartContainer from "../../components/CartContainer"
 import OrderSummary from "../../components/OrderSummary"
 import { useCart } from "../../lib/hooks/useCart"
@@ -20,6 +20,14 @@ export default function Checkout() {
             <Container py={48}>
                 <Text className={classes.headerFont}>Checkout</Text>
                 <Divider py={5}/>
+                {cart === undefined && 
+                <LoadingOverlay
+                    visible={cart === undefined} 
+                    radius="xl" 
+                    loader={<Loader color="red" size="xl"/>}
+                    transitionDuration={1500}
+                />
+                }
                 {cart.length === 0 && (
                     <Box sx={(theme) => ({
                         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
