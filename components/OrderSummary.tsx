@@ -5,6 +5,8 @@ import { useCart } from "../lib/hooks/useCart";
 export default function OrderSummary() {
     const { cart } = useCart()
     const [ totalCost, setTotalCost ] = useState<number>(0)
+    cart.map((item) => 
+        setTotalCost((prevState) => (prevState + (item.quantity*parseFloat(item.metadata.price)))))
     return (
         <Box sx={(theme) => ({
             backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
@@ -15,15 +17,14 @@ export default function OrderSummary() {
             <Space py={18}/>
             <Stack>
                 {cart.map((item) => {
-                    setTotalCost((prevState) => (prevState + (item.quantity*parseFloat(item.metadata.price))));
                     return (
-                    <>
+                    <Box key={`${item.id}orderSumList`}>
                         <Grid justify="space-between" align="center">
                             <Text weight={400} size="sm">{item.quantity}x {item.name}</Text>
                             <Text weight={400} size="sm">${item.quantity * parseInt(item.metadata.price)}</Text>
                         </Grid>
                         <Divider/>
-                    </>
+                    </Box>
                 )})}
                 <>
                     <Grid justify="space-between" align="center">
