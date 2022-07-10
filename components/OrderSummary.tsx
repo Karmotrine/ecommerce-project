@@ -6,7 +6,7 @@ export default function OrderSummary() {
     const { cart } = useCart()
     const [ totalCost, setTotalCost ] = useState<number>(0)
     cart.map((item) => 
-        setTotalCost((prevState) => (prevState + (item.quantity*parseFloat(item.metadata.price)))))
+        () => setTotalCost((prevState) => (prevState + (item.quantity*parseFloat(item.metadata.price)))))
     return (
         <Box sx={(theme) => ({
             backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
