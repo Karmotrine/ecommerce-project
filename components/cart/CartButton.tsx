@@ -16,13 +16,14 @@ const useStyles = createStyles((theme) => ({
         fontSize: theme.fontSizes.xs - (theme.fontSizes.xs * 0.40),
         lineHeight: theme.fontSizes.xs - (theme.fontSizes.xs * 0.40),
         fontWeight: 600,
+        fontColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[4],
         justifyContent: "center",
         alignItems: "center",
         width: theme.fontSizes.xs - (theme.fontSizes.xs * 0.0625),
         height: theme.fontSizes.xs - (theme.fontSizes.xs * 0.0625), 
         borderRadius: 500, 
         borderWidth: 20,
-        borderColor: "black", 
+        borderColor: theme.colors.dark[6], 
         outline:"groove",
         outlineWidth:0.25,
     },
@@ -51,7 +52,7 @@ const CartButton: FC = () => {
                     <ShoppingCart size={50} />
                     {cart.length > 0 && (
                         <div className={classes.indicator}>
-                            {cart.length}
+                            {0}
                         </div>
                     )}
                 </div>  
