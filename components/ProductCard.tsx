@@ -132,7 +132,6 @@ export default function ProductCard(item:Product) {
             }
             {!!cartItem && !!userLogged &&
                 <Button
-                    fullWidth
                     variant="outline"
                     radius="xl"
                     color="red"
