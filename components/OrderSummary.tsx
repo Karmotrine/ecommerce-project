@@ -1,4 +1,5 @@
 import { Box, Button, Divider, Grid, Space, Stack, Text } from "@mantine/core";
+import React from "react";
 import { useState } from "react";
 import { useCart } from "../lib/hooks/useCart";
 
@@ -15,13 +16,13 @@ export default function OrderSummary() {
             <Stack>
                 {cart.map((item) => {
                     return (
-                    <Box key={`${item.id}orderSumList`}>
+                    <React.Fragment key={`${item.id}orderSumList`}>
                         <Grid justify="space-between" align="center">
                             <Text weight={400} size="sm">{item.quantity}x {item.name}</Text>
                             <Text weight={400} size="sm">${item.quantity * parseInt(item.metadata.price)}</Text>
                         </Grid>
                         <Divider/>
-                    </Box>
+                    </React.Fragment>
                 )})}
                 <>
                     <Grid justify="space-between" align="center">
