@@ -32,6 +32,7 @@ export default function CartContainer() {
                                 defaultValue={item.quantity}
                                 max={item.metadata.stockLeft}
                                 min={1}
+                                value={item.quantity}
                                 onChange={(e) => {
                                     let quantity = e
                                     if (isNaN(quantity) || quantity < 1)
