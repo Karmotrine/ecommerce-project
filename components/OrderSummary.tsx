@@ -55,7 +55,7 @@ export default function OrderSummary() {
                 >Checkout
                 </Button>
                 <PayPalScriptProvider options={paypalScriptOptions}>
-                    <PaypalButtons total={total} />
+                    <PaypalButtons Total={total} />
                 </PayPalScriptProvider>
             </Stack>
         </Box>

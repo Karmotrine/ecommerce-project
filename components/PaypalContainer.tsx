@@ -8,11 +8,11 @@ export const paypalScriptOptions: PayPalScriptOptions = {
     currency: "PHP"
 };
 
-interface PaypalButtonsProps {
+interface PaypalButtonsPropsType {
     Total: number
 }
 
-export function PaypalButtons(PaypalButtonsProps) {
+export function PaypalButtons(PaypalButtonsProps:PaypalButtonsPropsType) {
     /**
      * usePayPalScriptReducer use within PayPalScriptProvider
      * isPending: not finished loading(default state)
@@ -20,7 +20,7 @@ export function PaypalButtons(PaypalButtonsProps) {
      * isRejected: failed to load
      */
     const [{ isPending }] = usePayPalScriptReducer();
-    const paypalbuttonTransactionProps: PayPalButtonsComponentProps = {
+    const paypalButtonTransactionProps: PayPalButtonsComponentProps = {
         style: { layout: "vertical", shape: "pill" },
         createOrder(data, actions) {
             return actions.order.create({
@@ -56,7 +56,7 @@ export function PaypalButtons(PaypalButtonsProps) {
     return (
         <>
             {isPending ? <Loader/> : null}
-            <PayPalButtons {...paypalbuttonTransactionProps} />
+            <PayPalButtons />
         </>
     );
 }
