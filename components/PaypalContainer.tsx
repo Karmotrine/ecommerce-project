@@ -1,6 +1,7 @@
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { PayPalScriptOptions } from "@paypal/paypal-js/types/script-options";
 import { PayPalButtonsComponentProps } from "@paypal/react-paypal-js"
+import { Loader } from "@mantine/core";
     
 export const paypalScriptOptions: PayPalScriptOptions = {
     "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -26,7 +27,7 @@ export function PaypalButtons(PaypalButtonsProps) {
             purchase_units: [
                 {
                 amount: {
-                    value: PaypalButtonsProps.Total.toString()
+                    value: `${PaypalButtonsProps.Total}`
                 }
                 }
             ]
@@ -54,7 +55,7 @@ export function PaypalButtons(PaypalButtonsProps) {
     };
     return (
         <>
-            {isPending ? <h2>Load Smart Payment Button...</h2> : null}
+            {isPending ? <Loader/> : null}
             <PayPalButtons {...paypalbuttonTransactionProps} />
         </>
     );

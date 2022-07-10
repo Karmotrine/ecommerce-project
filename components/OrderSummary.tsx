@@ -49,11 +49,11 @@ export default function OrderSummary() {
                     <Text weight={700} size="lg">₱{total}</Text>
                 </Grid>
                 <Space py={3} />
-                {/*<Button 
+                <Button 
                     variant="gradient" gradient={{ from: 'orange', to: 'red' }}
                     radius="xl"
                 >Checkout
-                </Button>*/}
+                </Button>
                 <PayPalScriptProvider options={paypalScriptOptions}>
                     <PaypalButtons total={total} />
                 </PayPalScriptProvider>
