@@ -16,6 +16,7 @@ export default function OrderSummary() {
             <Text size="xl" weight={600}>Order Summary</Text>
             <Space py={18}/>
             <Stack>
+                {/* 
                 {cart.map((item) => {
                     return (
                     <Box key={`${item.id}orderSumList`}>
@@ -26,6 +27,7 @@ export default function OrderSummary() {
                         <Divider/>
                     </Box>
                 )})}
+                */}
                 <>
                     <Grid justify="space-between" align="center">
                         <Text weight={400} size="sm">Shipping</Text>
