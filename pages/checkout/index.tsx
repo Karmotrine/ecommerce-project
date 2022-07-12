@@ -18,7 +18,7 @@ export default function Checkout() {
     return (
         <>
             <Container py={48}>
-                <Text className={classes.headerFont}>Checkout</Text>
+                <Text className={classes.headerFont}>Cart</Text>
                 <Divider py={5}/>
                 {cart === undefined && 
                 <LoadingOverlay

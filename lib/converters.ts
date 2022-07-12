@@ -1,5 +1,5 @@
 import { DocumentData, Firestore, FirestoreDataConverter, Timestamp } from "firebase/firestore"
-import { Product, Customer, Session, Review, Content, Address } from "./types"
+import { Product, Transaction, Review, Content, Address } from "./types"
 
 
 export const productConverter: FirestoreDataConverter<Product> = {
@@ -67,20 +67,6 @@ export const reviewConverter: FirestoreDataConverter<Review> = {
     }
 } // export const reviewConverter: FirestoreDataConverter<Review>
 
-export const customerConverter: FirestoreDataConverter<Customer> = {
-    fromFirestore(snapshot): Customer {
-        const data = snapshot.data();
-
-        return {
-            id: data.id,
-            gpay_id: data.gpay_id,
-        }
-    },
-    toFirestore(): Customer {
-        throw new Error('Client does not support updating customers.')
-    }
-} // export const customerConverter: FirestoreDataConverter<Customer>
-
 export const contentConverter: FirestoreDataConverter<Content> = {
     fromFirestore(snapshot): Content {
         const data = snapshot.data();
@@ -94,8 +80,15 @@ export const contentConverter: FirestoreDataConverter<Content> = {
             content: data.content
         }
     },
-    toFirestore() {
-        throw new Error('Client does not support updating content')
+    toFirestore(article:Content) {
+        return {
+            id: article.id,
+            title: article.title,
+            hero: article.hero,
+            excerpt: article.excerpt, 
+            created_at: article.created_at,
+            content: article.content
+        }
     }
 } // export const contentConverter: FirestoreDataConverter<Content> = {
 
@@ -105,48 +98,78 @@ export const addressConverter: FirestoreDataConverter<Address> = {
         const data = snapshot.data();
 
         return {
-            id: data.id,
-            address: data.address
+            uid: data.uid,
+            recipientName: data.recipientName,
+            metadata: {
+                region: data.region,
+                province: data.province,
+                cityMun: data.cityMun,
+                addressLine: data.addressLine,
+                postalCode: data.postalCode,
+            }
         }
     },
-    toFirestore(data): DocumentData {
-        return data
+    toFirestore(address:Address): DocumentData {
+        return {
+            uid: address.uid,
+            recipientName: address.recipientName,
+            address: {
+                region: address.metadata.region,
+                province: address.metadata.province,
+                cityMun: address.metadata.cityMun,
+                addressLine: address.metadata.addressLine,
+                postalCode: address.metadata.postalCode,
+            }
+        }
     }
 } // export const addressConverter: FirestoreDataConverter<Address>
 
 
-export const sessionConverter: FirestoreDataConverter<Session> = {
-    fromFirestore(snapshot): Session {
+export const transactionConverter: FirestoreDataConverter<Transaction> = {
+    fromFirestore(snapshot): Transaction {
         const data = snapshot.data();
 
         return {
-            mode: data.mode,
-            success_url: data.success_url,
-            cancel_url: data.cancel_url,
-            customer: data.customer,
-            price: data.price,
-            line_items: data.line_items || [],
-            shipping: data.shipping || {},
-            url: data.url,
-            error: data.error,
-            isPaid: data.isPaid,
-            isShipped: data.isShipped
-        }
-    },
-    toFirestore(session: Session) {
-        // Base session object
-        let data: DocumentData = {
-            mode: session.mode,
-            success_url: session.success_url,
-            cancel_url: session.cancel_url,
-            customer: session.customer,
-            price: session.price,
-            line_items: session.line_items || [],
-            shipping: session.shipping || {},
-            metadata:{
-                mode: session.mode
+            paymentDetails: {
+                /* is the document id on 'transactions' collection*/
+                orderId: data.orderId,
+                orderType: data.orderType,
+                branch: data.branch,
+                /*if ('paypal/cc')*/
+                    payerId: data.payerId,
+                    paymentId: data.paymentId,
+                    billingToken: data.paymentId,
+                    facilitatorAccesstoken: data.facilitatorAccesstoken,
+                isPaid: data.isPaid
+            },
+            cart: data.cart,
+            metadata: {
+                address: data.address,
+                paymentMethod: data.paymentMethod,
+                currentStatus: data.currentStatus
             }
         }
-        return data
+    },
+    toFirestore(transaction: Transaction) {
+        return {
+            paymentDetails: {
+                /* is the document id on 'transactions' collection*/
+                orderId: transaction.paymentDetails.orderId,
+                orderType: transaction.paymentDetails.orderType,
+                branch: transaction.paymentDetails.branch,
+                /*if ('paypal/cc')*/
+                    payerId: transaction.paymentDetails.payerId,
+                    paymentId: transaction.paymentDetails.paymentId,
+                    billingToken: transaction.paymentDetails.paymentId,
+                    facilitatorAccesstoken: transaction.paymentDetails.facilitatorAccesstoken,
+                isPaid: transaction.paymentDetails.isPaid
+            },
+            cart: transaction.cart,
+            metadata: {
+                address: transaction.metadata.address,
+                paymentMethod: transaction.metadata.paymentMethod,
+                currentStatus: transaction.metadata.currentStatus
+            }
+        }
     }
 } // export const sessionConverter: FirestoreDataConverter<Session>

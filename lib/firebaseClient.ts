@@ -5,11 +5,10 @@ import { getFirestore, collection, CollectionReference } from "firebase/firestor
 import { getStorage } from "firebase/storage"
 import { getFunctions } from "firebase/functions";
 
-import { Session, Review } from "./types"
+import { Transaction, Review } from "./types"
 import {
     productConverter,
-    customerConverter,
-    sessionConverter,
+    transactionConverter,
     reviewConverter,
     contentConverter,
     addressConverter
@@ -47,12 +46,9 @@ export { analytics }
 
 export const collections = {
     products: collection(firestore, 'products').withConverter(productConverter),
-    customers: collection(firestore, 'customers').withConverter(customerConverter),
     cart: collection(firestore, 'cart'),
-    sessions: (customerId: string): CollectionReference<Session> =>
-        collection(firestore, 'customers', customerId, 'checkout_sessions').withConverter(sessionConverter),
-    payments: (customerId: string): CollectionReference => 
-        collection(firestore, 'customers', customerId, 'payments'),
+    transactions: (): CollectionReference<Transaction> => 
+        collection(firestore, 'transaction').withConverter(transactionConverter),
     productReviews: (productId: string ): CollectionReference<Review> =>
         collection(firestore, 'products', productId, 'reviews').withConverter(reviewConverter),
     content: collection(firestore, 'content').withConverter(contentConverter),

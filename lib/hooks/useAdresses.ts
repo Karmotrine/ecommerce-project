@@ -17,10 +17,6 @@ export function useAddresses() {
     if (!user.data) {
         throw new Error("Addresses can be only fetched for authenticated users.")
     }
-
-    /**
-     *  What is subscribe?
-     */
     const collection = collections.addresses(user.data.uid)
     return useFirestoreQueryData(
         'addresses',

@@ -1,5 +1,5 @@
 import { Timestamp } from "@firebase/firestore"
-
+import { CartItem } from "./hooks/useCart"
 /**
  *  Think of what products do we have?
  *  (Dish, Add-ons)?
@@ -79,11 +79,6 @@ export type Review = {
     //Add attribute scores for profanity filter?
 }
 
-export interface Customer {
-    id: string
-    gpay_id: string
-}
-
 export interface Content {
     id: string
     title: string
@@ -93,55 +88,43 @@ export interface Content {
     content: string
 }
 
-export interface Session {
-    mode: 'payment'
-    success_url: string
-    cancel_url: string
-    customer: string    //gpay customer id
-    line_items?: (
-        |   {
-                price: string
-                quantity: number
-            }
-        |   {
-                price_data: {
-                    currency: string
-                    unit_amount_decimal: number
-                    product_data: {
-                        name: string
-                        description?: string
-                    }
-                }
-                quantity: number
-            }
-    )[]
-    price?:string
-    shipping: {
-        name: string
-        address: {
-            addressLine1: string
-            addressLine2: string
-            region: string
-            city: string
-            postalCode: string
-        }
+export interface Transaction {
+	paymentDetails: {
+        /* is the document id on 'transactions' collection*/
+		orderId: string 
+		orderType: 'pick-up' | 'delivery'
+		branch: string
+		/*if ('paypal/cc')*/
+			payerId: string
+			paymentId: string | null;
+			billingToken: string | null;
+			facilitatorAccesstoken: string
+		/*if ('cod')*/
+		isPaid: boolean
+	}
+    cart: CartItem[]
+    metadata: {
+        address: Address
+        paymentMethod: 'cod' | 'cc' | 'paypal'  /*paymentSource on paypalbuttons*/
+        currentStatus: orderStatus
     }
-    url?: string
-    error?: {
-        message:string
-    }
-    isShipped: boolean
-    isPaid: boolean
+}
 
+export interface orderStatus {
+    isPlaced: boolean
+    isShipped: boolean
+    isReceived: boolean
+    isCancelled: boolean
 }
 
 export interface Address {
-    id: string
-    address: {
-        addressLine1: string
-        addressLine2: string
+    uid: string
+    recipientName: string
+    metadata: {
         region: string
-        city: string
+        province: string
+        cityMun: string
+        addressLine: string
         postalCode: string
     }
 }
