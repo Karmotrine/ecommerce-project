@@ -4,7 +4,7 @@ import { doc, getDoc, onSnapshot, setDoc } from "firebase/firestore"
 
 import { collections } from "../firebaseClient"
 import { useUser } from "./useUser"
-import { Session } from "../types"
+import { Transaction } from "../types"
 /*
 export function useCheckout(): {
     
