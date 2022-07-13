@@ -12,8 +12,15 @@ import { useUser } from "./useUser"
  *  useAddAddress    - Adds a new address to user's list of address
  *  useDeleteAddress - Deletes an 'address' document from user's collection of addresses
  */
+type UseAddresses = {
+    addresses : Address[]
+    addAddress: (address:Address) => void
+    removeAddress: (address:Address) => void
+    clearAddressList: () => void
+    getAddress: (address:Address) => Address | undefined
+}
 
-export function useAddresses() {
+export function useAddresses() : UseAddresses {
     const client = useQueryClient()
     const user = useUser()
     const ref = doc(collections.addresses, user.data?.uid ?? '-');
@@ -33,8 +40,8 @@ export function useAddresses() {
     }
     return {
         addresses: addressItems,
-        addAddress(address:Address) {
-            mutate([...addressItems, address])
+        addAddress: (address:Address) => {
+            mutate(!!addressItems ? [...addressItems, address] : [address])
         },
         removeAddress(address:Address) {
             mutate(addressItems.filter((toRemoveAddress:Address) => toRemoveAddress !== address))

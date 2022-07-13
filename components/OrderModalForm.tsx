@@ -42,7 +42,7 @@ export default function OrderModalForm() {
     addressline:"",
     postalcode:""
   })
-
+  
   useEffect(() => {
     setActive(user.data ? 1 : 0)
   }, [user.data, isActive]);
@@ -188,7 +188,7 @@ export default function OrderModalForm() {
                         color="red" 
                         style={{width:200}}
                         onClick={() => {
-                          const payload: Address = {
+                          addAddress({
                             uid: user.data.uid,
                             recipientName: otherAddressInfo.recipient,
                             nameId: otherAddressInfo.nickname,
@@ -199,8 +199,7 @@ export default function OrderModalForm() {
                                 addressLine: otherAddressInfo.addressline,
                                 postalCode: otherAddressInfo.postalcode
                             }
-                          }
-                          addAddress(payload);
+                          });
                           setAddressForm(false);
                         }}
                       >
