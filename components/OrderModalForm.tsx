@@ -103,7 +103,7 @@ export default function OrderModalForm() {
                   data={!!addresses ? addresses.map((item:Address) => 
                                     ({value: `${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode}`, 
                                     label: item.nameId})
-                        ) : [value: ""]
+                        ) : [{value: ""}]
                       }   //load useAddress()
                 />
                 <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
