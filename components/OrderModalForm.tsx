@@ -118,20 +118,29 @@ export default function OrderModalForm() {
                     <TextInput
                       label="Address Nickname"
                       value={otherAddressInfo.nickname}
-                      onChange={(event)=>
-                        setOtherAddressInfo(prevState =>({...prevState, nickname:event.currentTarget.value}))}
+                      onChange={(event)=>{
+                          const { target } = event;
+                          setOtherAddressInfo(prevState =>({...prevState, nickname:target.value}))
+                        }
+                      }
                     />
                     <TextInput
                       label="Recipient Name"
                       value={otherAddressInfo.recipient}
-                      onChange={(event) => 
-                        setOtherAddressInfo(prevState =>({...prevState, recipient:event.currentTarget.value}))}
+                      onChange={(event) => {
+                          const {target} = event;
+                          setOtherAddressInfo(prevState =>({...prevState, recipient:target.value}))
+                        }
+                      }
                     />
                     <TextInput
                       label="Address Line 1"
                       value={otherAddressInfo.addressline}
-                      onChange={(event) =>
-                        setOtherAddressInfo(prevState =>({...prevState, addressline:event.currentTarget.value}))}
+                      onChange={(event) => {
+                          const {target} = event;
+                          setOtherAddressInfo(prevState =>({...prevState, addressline:target.value}))
+                        }
+                      }
                     />
                     <Select
                       label="Region"
@@ -168,8 +177,10 @@ export default function OrderModalForm() {
                     <TextInput
                       label="Postal Code"
                       value= {otherAddressInfo.postalcode}
-                      onChange={(event) => 
-                        setOtherAddressInfo(prevState => ({...prevState, postalcode: event.currentTarget.value}))}
+                      onChange={(event) => {
+                        const {target} = event;
+                        setOtherAddressInfo(prevState => ({...prevState, postalcode: event.target.value}))}
+                      }
                     />
                     <Space py={8} />
                     <Center>
@@ -177,7 +188,7 @@ export default function OrderModalForm() {
                         color="red" 
                         style={{width:200}}
                         onClick={() => {
-                          addAddress({
+                          const payload: Address = {
                             uid: user.data.uid,
                             recipientName: otherAddressInfo.recipient,
                             nameId: otherAddressInfo.nickname,
@@ -188,8 +199,9 @@ export default function OrderModalForm() {
                                 addressLine: otherAddressInfo.addressline,
                                 postalCode: otherAddressInfo.postalcode
                             }
-                          });
-                          setAddressForm((state) => !state);
+                          }
+                          addAddress(payload);
+                          setAddressForm((state) => false);
                         }}
                       >
                         <CirclePlus/>
