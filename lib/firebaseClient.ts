@@ -43,15 +43,21 @@ if(clientCredentials?.projectId) {
 }
 export { analytics }
 
+/**
+ *     transactions: (): CollectionReference<Transaction> => 
+        collection(firestore, 'transaction').withConverter(transactionConverter),
+ */
 
+/**
+ *      addresses: (customerId: string) =>
+        collection(firestore, 'addresses', customerId).withConverter(addressConverter)
+ */
 export const collections = {
     products: collection(firestore, 'products').withConverter(productConverter),
     cart: collection(firestore, 'cart'),
-    transactions: (): CollectionReference<Transaction> => 
-        collection(firestore, 'transaction').withConverter(transactionConverter),
+    transactions: collection(firestore, 'transaction'),
     productReviews: (productId: string ): CollectionReference<Review> =>
         collection(firestore, 'products', productId, 'reviews').withConverter(reviewConverter),
     content: collection(firestore, 'content').withConverter(contentConverter),
-    addresses: (customerId: string) =>
-        collection(firestore, 'customers', customerId, 'addresses').withConverter(addressConverter),
+    addresses: collection(firestore, 'addresses'),
 }
