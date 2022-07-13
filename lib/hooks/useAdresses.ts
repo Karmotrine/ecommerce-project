@@ -23,7 +23,7 @@ export function useAddresses() {
     const mutation = useFirestoreDocumentMutation(
         ref, {merge: true}, {
             onMutate(data) {
-                client.setQueryData('addresses', ref)
+                client.setQueryData('addresses', data)
             },
         },
     )

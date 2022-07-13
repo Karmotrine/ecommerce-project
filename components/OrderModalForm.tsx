@@ -201,7 +201,7 @@ export default function OrderModalForm() {
                             }
                           }
                           addAddress(payload);
-                          setAddressForm((state) => false);
+                          setAddressForm(false);
                         }}
                       >
                         <CirclePlus/>
