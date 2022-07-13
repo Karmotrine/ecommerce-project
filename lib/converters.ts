@@ -99,6 +99,7 @@ export const addressConverter: FirestoreDataConverter<Address> = {
 
         return {
             uid: data.uid,
+            nameId: data.nameId,
             recipientName: data.recipientName,
             metadata: {
                 region: data.region,
@@ -112,6 +113,7 @@ export const addressConverter: FirestoreDataConverter<Address> = {
     toFirestore(address:Address): DocumentData {
         return {
             uid: address.uid,
+            nameId: address.nameId,
             recipientName: address.recipientName,
             address: {
                 region: address.metadata.region,

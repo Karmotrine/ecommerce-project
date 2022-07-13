@@ -120,6 +120,7 @@ export interface orderStatus {
 export interface Address {
     uid: string
     recipientName: string
+    nameId: string
     metadata: {
         region: string
         province: string

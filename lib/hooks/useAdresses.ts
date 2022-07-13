@@ -16,9 +16,6 @@ import { useUser } from "./useUser"
 export function useAddresses() {
     const client = useQueryClient()
     const user = useUser()
-    if (!user.data) {
-        throw new Error("Addresses can be only fetched for authenticated users.")
-    }
     const ref = doc(collections.addresses, user.data?.uid ?? '-');
     const addresses = useFirestoreDocumentData('addresses', ref)
     const addressItems = (!user ? [] : addresses.data?.list)
@@ -45,8 +42,8 @@ export function useAddresses() {
         clearAddressList() {
             mutate([])
         },
-        getItem(address:Address) {
-            return addressItems.find((toFindAddress) => toFindAddress === address)
+        getAddress(address:Address) {
+            return addressItems.find((toFindAddress:Address) => toFindAddress === address)
         }
     }
 } // export function useAddresses()

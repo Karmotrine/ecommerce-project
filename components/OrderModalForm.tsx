@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Stepper, Button, Group , Box,
-         TextInput, Select, Center, Text, Stack } from '@mantine/core';
+         TextInput, Select, Center, Text, Stack, Anchor, Collapse, Divider, Space } from '@mantine/core';
 import { TimeInput, DatePicker } from '@mantine/dates';
 import dayjs from 'dayjs';
-import { Clock, BuildingStore, Motorbike } from 'tabler-icons-react';
+import { Clock, BuildingStore, Motorbike, CirclePlus } from 'tabler-icons-react';
 import LoginView from './auth/LoginView';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { auth } from '../lib/firebaseClient';
@@ -14,6 +14,9 @@ var isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(isBetween)
 import useOrderModal from './hooks/useOrderModal';
 import { useUser } from '../lib/hooks/useUser';
+import { useAddresses } from '../lib/hooks/useAdresses';
+import { regions, provinces, 
+         citiesMunicipalities, usePHAddressForms } from '../lib/usePHAddressForms';
 
 export default function OrderModalForm() {
   const user = useUser();
@@ -26,6 +29,19 @@ export default function OrderModalForm() {
   const [timeValue, setTimeValue] = useState(new Date())
   const router = useRouter()
 
+  const { addAddress, addresses } = useAddresses()
+  const [addAddressForm, setAddressForm] = useState(false)
+  const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
+  const [ regionValue, setRegionValue ] = useState("")
+  const [ provinceValue, setProvinceValue ] = useState("")
+  const [ cityValue, setCityValue ] = useState("")
+  const [ otherAddressInfo, setOtherAddressInfo ] = useState({
+    nickname:"",
+    recipient:"",
+    addressline:"",
+    postalcode:""
+  })
+
   useEffect(() => {
     setActive(user.data ? 1 : 0)
   }, [user.data, isActive]);
@@ -34,7 +50,7 @@ export default function OrderModalForm() {
     signInFlow: 'popup',
     signInOptions: [GoogleAuthProvider.PROVIDER_ID],
     callbacks: {
-      signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+      signInSuccessWithAuthResult: function () {
           nextStep;
           return false;
       },
@@ -83,8 +99,99 @@ export default function OrderModalForm() {
                 <Select
                   label="Delivery Location"
                   placeholder="Choose address"
-                  data={[{value:"Address #1", label:"Address #1"}]}
+                  data={[{value:"Address #1", label:"Address #1"}]}   //load useAddress()
                 />
+                <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
+                  <Text size="xs" style={{color: "red",  display:"flex", justifyContent: "flex-end"}}>
+                    Add address
+                  </Text>
+                </Anchor>
+                <Collapse in={addAddressForm}>
+                  <Space py={6}/>
+                  <Divider />
+                  <Space py={3}/>
+                    <TextInput
+                      label="Address Nickname"
+                    />
+                    <TextInput
+                      label="Recipient Name"
+                      value={otherAddressInfo.recipient}
+                      onChange={(event) => 
+                        setOtherAddressInfo(prevState =>({...prevState, recipient:event.currentTarget.value}))}
+                    />
+                    <TextInput
+                      label="Address Line 1"
+                      value={otherAddressInfo.addressline}
+                      onChange={(event) =>
+                        setOtherAddressInfo(prevState =>({...prevState, addressline:event.currentTarget.value}))}
+                    />
+                    <Select
+                      label="Region"
+                      placeholder="Region"
+                      searchable
+                      data={regions.map((region) => region.name)}
+                      maxDropdownHeight={250}
+                      value={regionValue}
+                      onChange={setRegionValue}
+                    />
+                    <Select
+                      label="Province"
+                      placeholder="Province"
+                      searchable
+                      disabled={regionValue === ""}
+                      data={
+                        regionValue === "" ? [""] :
+                        getProvincesByRegion(regionValue).map((province) => province.name)
+                      }
+                      maxDropdownHeight={250}
+                      value={provinceValue}
+                      onChange={setProvinceValue}
+                    />
+                    <Select
+                      label="City/Municipality"
+                      placeholder="City/Municipality"
+                      disabled={provinceValue === ""}
+                      data={provinceValue === "" ? [""] :
+                            getCityMunByProvince(provinceValue).map((city) => city.name)}
+                      maxDropdownHeight={250}
+                      value={cityValue}
+                      onChange={setCityValue}
+                    />
+                    <TextInput
+                      label="Postal Code"
+                      value= {otherAddressInfo.postalcode}
+                      onChange={(event) => 
+                        setOtherAddressInfo(prevState => ({...prevState, postalcode: event.currentTarget.value}))}
+                    />
+                    <Space py={8} />
+                    <Center>
+                      <Button 
+                        color="red" 
+                        style={{width:200}}
+                        onClick={() => {
+                          addAddress({
+                            uid: user.data.uid,
+                            recipientName: otherAddressInfo.recipient,
+                            nameId: otherAddressInfo.nickname,
+                            metadata: {
+                                region: regionValue,
+                                province: provinceValue,
+                                cityMun: cityValue,
+                                addressLine: otherAddressInfo.addressline,
+                                postalCode: otherAddressInfo.postalcode
+                            }
+                          });
+                          setAddressForm((state) => !state);
+                        }}
+                      >
+                        <CirclePlus/>
+                      </Button>
+                    </Center>
+                    <Space py={3}/>
+                    
+                  <Space py={6}/>
+                  <Divider/>
+                </Collapse>
                     <DatePicker
                       placeholder="Delivery date"
                       label="Delivery date"
