@@ -25,7 +25,7 @@ export function useAddresses() : UseAddresses {
     const user = useUser()
     const ref = doc(collections.addresses, user.data?.uid ?? '-');
     const addresses = useFirestoreDocumentData('addresses', ref)
-    const addressItems = (!user ? [] : addresses.data?.list)
+    const addressItems = (!user ? [] : addresses.data?.list) as Address[]
 
     const mutation = useFirestoreDocumentMutation(
         ref, {merge: true}, {
