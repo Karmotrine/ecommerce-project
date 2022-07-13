@@ -100,10 +100,10 @@ export default function OrderModalForm() {
                 <Select
                   label="Delivery Location"
                   placeholder="Choose address"
-                  data={addresses.map((item:Address) => 
+                  data={!!addresses ? addresses.map((item:Address) => 
                                     ({value: `${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode}`, 
                                     label: item.nameId})
-                        )
+                        ) : [value: ""]
                       }   //load useAddress()
                 />
                 <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
