@@ -34,7 +34,7 @@ export function useAddresses() {
     return {
         addresses: addressItems,
         addAddress(address:Address) {
-            mutate([...addressItems, {...address}])
+            mutate([...addressItems, address])
         },
         removeAddress(address:Address) {
             mutate(addressItems.filter((toRemoveAddress:Address) => toRemoveAddress !== address))
