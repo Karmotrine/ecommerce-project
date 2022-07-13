@@ -32,7 +32,7 @@ export function useAddresses() {
         return mutation.mutate({addresses})
     }
     return {
-        addresses: addresses,
+        addresses: addressItems,
         addAddress(address:Address) {
             mutate([...addressItems, {...address}])
         },

@@ -17,6 +17,7 @@ import { useUser } from '../lib/hooks/useUser';
 import { useAddresses } from '../lib/hooks/useAdresses';
 import { regions, provinces, 
          citiesMunicipalities, usePHAddressForms } from '../lib/usePHAddressForms';
+import { Address } from '../lib/types';
 
 export default function OrderModalForm() {
   const user = useUser();
@@ -99,7 +100,11 @@ export default function OrderModalForm() {
                 <Select
                   label="Delivery Location"
                   placeholder="Choose address"
-                  data={[{value:"Address #1", label:"Address #1"}]}   //load useAddress()
+                  data={addresses.map((item:Address) => 
+                                    ({value: `${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode}`, 
+                                    label: item.nameId})
+                        )
+                      }   //load useAddress()
                 />
                 <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
                   <Text size="xs" style={{color: "red",  display:"flex", justifyContent: "flex-end"}}>
@@ -112,6 +117,9 @@ export default function OrderModalForm() {
                   <Space py={3}/>
                     <TextInput
                       label="Address Nickname"
+                      value={otherAddressInfo.nickname}
+                      onChange={(event)=>
+                        setOtherAddressInfo(prevState =>({...prevState, nickname:event.currentTarget.value}))}
                     />
                     <TextInput
                       label="Recipient Name"

@@ -12,7 +12,7 @@ export function useOrders(): UseQueryResult<DocumentData> {
         throw new Error("Orders can be only be fetched for authenticated users")
     }
 
-    const collection = collections.transactions()
+    const collection = collections.transactions
     const constraints: QueryConstraint[] = []
     constraints.push(orderBy('created', 'desc'));
 

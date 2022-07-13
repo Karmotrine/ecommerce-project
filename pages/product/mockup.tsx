@@ -11,6 +11,7 @@ export default function Orders() {
     const address:Address = {
         uid: "test",
         recipientName:"test",
+        nameId: "test",
         metadata:{
             region:"test",
             province:"test",
