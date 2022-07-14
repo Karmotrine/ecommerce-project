@@ -39,9 +39,9 @@ export default function OrderModalForm() {
   const [active, setActive] = useState(0);
   const nextStep = () => {
     const thisAddressObject = getAddress(JSON.parse(selectedId));
-    const parsedDate = dayjs(dateValue).format("MMMM D, YYYY")
-    const parsedTime = dayjs(timeValue).format("h:mm A")
-    const deliDateTime = dayjs(`${parsedDate} ${parsedTime}`, "MMMM D, YYYY h:mm A")
+    const deliDateTime = dateValue
+    deliDateTime.setHours(timeValue.getHours())
+    deliDateTime.setMinutes(timeValue.getMinutes())
     setBranchCode("STAMESA")
     setDetails({
       savedAddress:thisAddressObject,
