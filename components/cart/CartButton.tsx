@@ -43,7 +43,7 @@ const CartButton: FC = () => {
     const { cart } = useCart()
     const { classes } = useStyles()
     // Decide if to use modal log-in.
-    const href = !!user.data ? '/checkout' : '/login'
+    const href = '/checkout'
     
     return (
         <Link href={href} passHref>

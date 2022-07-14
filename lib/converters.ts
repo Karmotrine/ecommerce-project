@@ -148,7 +148,9 @@ export const transactionConverter: FirestoreDataConverter<Transaction> = {
             metadata: {
                 address: data.address,
                 paymentMethod: data.paymentMethod,
-                currentStatus: data.currentStatus
+                currentStatus: data.currentStatus,
+                DeliDate: data.DeliDate,
+                Notes: data.Notes
             }
         }
     },
@@ -170,7 +172,9 @@ export const transactionConverter: FirestoreDataConverter<Transaction> = {
             metadata: {
                 address: transaction.metadata.address,
                 paymentMethod: transaction.metadata.paymentMethod,
-                currentStatus: transaction.metadata.currentStatus
+                currentStatus: transaction.metadata.currentStatus,
+                DeliDate: transaction.metadata.DeliDate,
+                Notes: transaction.metadata.Notes
             }
         }
     }

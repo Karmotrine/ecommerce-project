@@ -8,22 +8,19 @@ export default function Test() {
             key: "orderExDetails",
             defaultValue: {
                 savedAddress: null,
-                savedDeliDate: null,
-                savedDeliTime: null,
+                savedDeliDateTime: null,
                 savedNotes: null
             }, serialize: superjson.stringify,
         deserialize: (str) => (str === undefined ?
             {
                 savedAddress: null,
-                savedDeliDate: null,
-                savedDeliTime: null,
+                savedDeliDateTime: null,
                 savedNotes: null
             } : superjson.parse(str)),
         }
     )
     console.log(details.savedAddress)
-    console.log(details.savedDeliDate)
-    console.log(details.savedDeliTime)
+    console.log(details.savedDeliDateTime)
     console.log(details.savedNotes)
     return(
         <>

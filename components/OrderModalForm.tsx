@@ -38,19 +38,23 @@ export default function OrderModalForm() {
   const { isActive, setOrderActive } = useOrderModal((state) => state);
   const [active, setActive] = useState(0);
   const nextStep = () => {
-    console.log(selectedId)
     const thisAddressObject = getAddress(JSON.parse(selectedId));
-    console.log(thisAddressObject)
+    const parsedDate = dayjs(dateValue).format("MMMM D, YYYY")
+    const parsedTime = dayjs(timeValue).format("h:mm A")
+    const deliDateTime = dayjs(`${parsedDate} ${parsedTime}`)
     setDetails({
       savedAddress:thisAddressObject,
-      savedDeliDate:dateValue,
-      savedDeliTime:timeValue,
-      savedNotes:notesValue});
+      savedDeliDateTime: deliDateTime,
+      savedNotes:notesValue,
+      savedOrderType: orderType,
+      savedBranch: branchCode,
+    });
+
     setActive((current) => (current < 3 ? current + 1 : current));
   };
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-  const [orderType, setOrderType] = useState(0);
+  const [orderType, setOrderType] = useState("0"); // 1 - pick-up, 2 - delivery
   const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
   const [addAddressForm, setAddressForm] = useState(false)
   const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
@@ -67,6 +71,7 @@ export default function OrderModalForm() {
   const [timeValue, setTimeValue] = useState(new Date())
   const [notesValue, setNotesValue] = useState("")
   const [selectedId, setSelectedId] = useState<string>("")
+  const [branchCode, setBranchCode] = useState("")
 
   
   useEffect(() => {
@@ -88,17 +93,19 @@ export default function OrderModalForm() {
     key: "orderExDetails",
     defaultValue: {
         savedAddress: null,
-        savedDeliDate: null,
-        savedDeliTime: null,
-        savedNotes: null
+        savedDeliDateTime: null,
+        savedNotes: null,
+        savedOrderType: null,
+        savedBranch: null,
     },
     serialize: superjson.stringify,
     deserialize: (str) => (str === undefined ?
         {
             savedAddress: null,
-            savedDeliDate: null,
-            savedDeliTime: null,
-            savedNotes: null
+            savedDeliDateTime: null,
+            savedNotes: null,
+            savedOrderType: null,
+            savedBranch: null,
         } : superjson.parse(str)),
     })
   
@@ -115,7 +122,7 @@ export default function OrderModalForm() {
             spacing={"md"}
           >
             <Button
-              onClick={() => {setOrderType(2); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
               size={"xl"}
               color="red"
             >
@@ -125,7 +132,7 @@ export default function OrderModalForm() {
               </Stack>
             </Button>
             <Button 
-              onClick={() => {setOrderType(1); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setOrderType("1"); setActive((current) => (current < 3 ? current + 1 : current))}}
               color="red"
               size={"xl"}
             >
@@ -137,7 +144,7 @@ export default function OrderModalForm() {
           </Group>
         </Stepper.Step>
         <Stepper.Step label="Final step" description="Set order details" allowStepSelect={active > 2}>
-          {(orderType != 0 && orderType == 1) ? 
+          {(orderType !== "0" && orderType === "1") ? 
             <>
             <Box>
               <form>
@@ -320,8 +327,10 @@ export default function OrderModalForm() {
               <Select
                   label="Pick-up Location"
                   placeholder="Select Branch to pick-up"
-                  data={[{value:"MainBranch", label:"Sta. Mesa Branch"}]}
-                />
+                  data={[{value:"STAMESA", label:"Sta. Mesa Branch"}]}
+                  value={branchCode}
+                  onChange={setBranchCode}
+              />
             </Box>
             </>
           }
