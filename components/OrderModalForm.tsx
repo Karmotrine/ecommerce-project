@@ -55,7 +55,7 @@ export default function OrderModalForm() {
   };
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-  const [orderType, setOrderType] = useState("0"); // 2 - pick-up, 1 - delivery
+  const [orderType, setOrderType] = useState("0"); // 1 - pick-up, 2 - delivery
   const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
   const [addAddressForm, setAddressForm] = useState(false)
   const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
@@ -145,7 +145,7 @@ export default function OrderModalForm() {
           </Group>
         </Stepper.Step>
         <Stepper.Step label="Final step" description="Set order details" allowStepSelect={active > 2}>
-          {(orderType !== "0" && orderType === "1") ? 
+          {(orderType !== "0" && orderType === "2") ? 
             <>
             <Box>
               <form>

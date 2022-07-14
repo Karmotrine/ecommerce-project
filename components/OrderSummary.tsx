@@ -108,7 +108,7 @@ export default function OrderSummary() {
                     <Select
                         label="Delivery Method"
                         placeholder="Select method"
-                        data={[{value:"2", label:"Pick-up"}, {value:"1",label:"Delivery"}]}
+                        data={[{label:"Pick-up", value:"1", }, {label:"Delivery", value:"2"}]}
                         value={orderType}
                         onChange={setOrderType}
                     />
