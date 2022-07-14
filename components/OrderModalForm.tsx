@@ -55,7 +55,7 @@ export default function OrderModalForm() {
   };
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-  const [orderType, setOrderType] = useState("0"); // 1 - pick-up, 2 - delivery
+  const [orderType, setOrderType] = useState("0"); // 2 - pick-up, 1 - delivery
   const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
   const [addAddressForm, setAddressForm] = useState(false)
   const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
@@ -123,7 +123,7 @@ export default function OrderModalForm() {
             spacing={"md"}
           >
             <Button
-              onClick={() => {setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setOrderType("1"); setActive((current) => (current < 3 ? current + 1 : current))}}
               size={"xl"}
               color="red"
             >
@@ -133,7 +133,7 @@ export default function OrderModalForm() {
               </Stack>
             </Button>
             <Button 
-              onClick={() => {setOrderType("1"); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
               color="red"
               size={"xl"}
             >
