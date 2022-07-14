@@ -270,7 +270,8 @@ export default function OrderModalForm() {
         {(active == 2) && 
               <Button 
                 onClick={() => {
-                  setOrderFormDetail(getAddress(selectedId),dateValue,timeValue,notesValue)
+                  const thisAddressObject = getAddress(selectedId);
+                  setOrderFormDetail(thisAddressObject,dateValue,timeValue,notesValue);
                   nextStep;
                 }
                 } 
