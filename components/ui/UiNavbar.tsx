@@ -43,6 +43,7 @@ export default function UiNavbar() {
     const { colorScheme, toggleColorScheme } = useMantineColorScheme()
     const signOut = useAuthSignOut(auth, {
         onSuccess(){
+            localStorage.clear()
             router.push("/")
             showNotification(LOGOUT_NOTIFICATION)
         },

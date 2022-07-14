@@ -16,15 +16,38 @@ import { useAddresses } from '../lib/hooks/useAdresses';
 import { regions, provinces, 
          citiesMunicipalities, usePHAddressForms } from '../lib/usePHAddressForms';
 import { Address } from '../lib/types';
-import { useOrderFormDetail } from "./hooks/useOrderFormDetail"
 import {v4 as uuidgen} from "uuid"
+import { useLocalStorage } from "@mantine/hooks"
+import superjson from 'superjson';
+
+function isJSON (jsonString:string) {
+  try {
+    const parsed = JSON.parse(jsonString);
+    if (parsed && typeof(parsed) === "object") {
+      return true
+    }
+  } catch (err) {
+      return false
+  }
+  return false
+}
 
 export default function OrderModalForm() {
   const user = useUser();
   const router = useRouter()
   const { isActive, setOrderActive } = useOrderModal((state) => state);
   const [active, setActive] = useState(0);
-  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
+  const nextStep = () => {
+    console.log(selectedId)
+    const thisAddressObject = getAddress(JSON.parse(selectedId));
+    console.log(thisAddressObject)
+    setDetails({
+      savedAddress:thisAddressObject,
+      savedDeliDate:dateValue,
+      savedDeliTime:timeValue,
+      savedNotes:notesValue});
+    setActive((current) => (current < 3 ? current + 1 : current));
+  };
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   const [orderType, setOrderType] = useState(0);
@@ -43,8 +66,8 @@ export default function OrderModalForm() {
   const [dateValue, setDateValue] = useState<Date | null>(new Date())
   const [timeValue, setTimeValue] = useState(new Date())
   const [notesValue, setNotesValue] = useState("")
-  const [selectedId, setSelectedId] = useState("")
-  const { setOrderFormDetail } = useOrderFormDetail()
+  const [selectedId, setSelectedId] = useState<string>("")
+
   
   useEffect(() => {
     setActive(user.data ? 1 : 0)
@@ -60,6 +83,24 @@ export default function OrderModalForm() {
       },
     },
   }
+
+  const [details, setDetails] = useLocalStorage({
+    key: "orderExDetails",
+    defaultValue: {
+        savedAddress: null,
+        savedDeliDate: null,
+        savedDeliTime: null,
+        savedNotes: null
+    },
+    serialize: superjson.stringify,
+    deserialize: (str) => (str === undefined ?
+        {
+            savedAddress: null,
+            savedDeliDate: null,
+            savedDeliTime: null,
+            savedNotes: null
+        } : superjson.parse(str)),
+    })
   
 
   return (
@@ -111,6 +152,8 @@ export default function OrderModalForm() {
                     disabled={isEmpty}
                     value={selectedId}
                     onChange={setSelectedId}
+                    required
+                    error={selectedId === ""}
                   />
                 <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
                   <Text size="xs" style={{color: "red",  display:"flex", justifyContent: "flex-end"}}>
@@ -118,6 +161,7 @@ export default function OrderModalForm() {
                   </Text>
                 </Anchor>
                 <Collapse in={addAddressForm}>
+                  <form>
                   <Space py={6}/>
                   <Divider />
                   <Space py={3}/>
@@ -129,6 +173,8 @@ export default function OrderModalForm() {
                           setOtherAddressInfo(prevState =>({...prevState, nickname:target.value}))
                         }
                       }
+                      required
+                      error={otherAddressInfo.nickname === ""}
                     />
                     <TextInput
                       label="Recipient Name"
@@ -138,6 +184,8 @@ export default function OrderModalForm() {
                           setOtherAddressInfo(prevState =>({...prevState, recipient:target.value}))
                         }
                       }
+                      required
+                      error={otherAddressInfo.recipient === ""}
                     />
                     <TextInput
                       label="Address Line 1"
@@ -147,6 +195,8 @@ export default function OrderModalForm() {
                           setOtherAddressInfo(prevState =>({...prevState, addressline:target.value}))
                         }
                       }
+                      required
+                      error={otherAddressInfo.addressline === ""}
                     />
                     <Select
                       label="Region"
@@ -156,6 +206,8 @@ export default function OrderModalForm() {
                       maxDropdownHeight={250}
                       value={regionValue}
                       onChange={setRegionValue}
+                      required
+                      error={regionValue === ""}
                     />
                     <Select
                       label="Province"
@@ -169,6 +221,8 @@ export default function OrderModalForm() {
                       maxDropdownHeight={250}
                       value={provinceValue}
                       onChange={setProvinceValue}
+                      required
+                      error={regionValue === ""}
                     />
                     <Select
                       label="City/Municipality"
@@ -180,6 +234,8 @@ export default function OrderModalForm() {
                       maxDropdownHeight={250}
                       value={cityValue}
                       onChange={setCityValue}
+                      required
+                      error={regionValue === ""}
                     />
                     <TextInput
                       label="Postal Code"
@@ -188,12 +244,19 @@ export default function OrderModalForm() {
                         const {target} = event;
                         setOtherAddressInfo(prevState => ({...prevState, postalcode: event.target.value}))}
                       }
+                      required
+                      error={regionValue === ""}
                     />
                     <Space py={8} />
                     <Center>
                       <Button 
                         color="red" 
                         style={{width:200}}
+                        disabled={
+                          otherAddressInfo.recipient === "" || otherAddressInfo.nickname === "" ||
+                          regionValue === "" || provinceValue === "" || cityValue === "" || 
+                          otherAddressInfo.addressline === "" || otherAddressInfo.postalcode === ""
+                        }
                         onClick={() => {
                           addAddress({
                             uid: uuidgen(),
@@ -213,6 +276,7 @@ export default function OrderModalForm() {
                         <CirclePlus/>
                       </Button>
                     </Center>
+                  </form>
                     <Space py={3}/>
                     
                   <Space py={6}/>
@@ -225,6 +289,7 @@ export default function OrderModalForm() {
                       maxDate={dayjs(dateValue).add(2, 'days').toDate()}
                       value={dateValue}
                       onChange={setDateValue}
+                      required
                     />
                 <TimeInput
                   label="Delivery time"
@@ -234,6 +299,7 @@ export default function OrderModalForm() {
                   format="12"
                   onChange={setTimeValue}
                   error={(dayjs(timeValue).hour() - 8) < 0 || (dayjs(timeValue).hour() + 4) > 23}
+                  required
                 />
                 <div>
                   {(dayjs(timeValue).hour() - 8) < 0 && (dayjs(timeValue).hour() + 4) > 23}
@@ -269,13 +335,12 @@ export default function OrderModalForm() {
         {(active >= 2) &&<Button variant="default" onClick={prevStep}>Back</Button> }
         {(active == 2) && 
               <Button 
-                onClick={() => {
-                  console.log(selectedId)
-                  const thisAddressObject = getAddress(JSON.parse(selectedId));
-                  console.log(thisAddressObject)
-                  setOrderFormDetail(thisAddressObject,dateValue,timeValue,notesValue);
-                  nextStep;
+                disabled = {
+                    !isJSON(selectedId) ||
+                    (dayjs(timeValue).hour() - 8) < 0 || (dayjs(timeValue).hour() + 4) > 23
                 }
+                onClick={
+                  nextStep
                 } 
                 color="red"
                 >
