@@ -40,7 +40,9 @@ export default function Orders() {
                 isShipped: false,
                 isReceived: false,
                 isCancelled: false,
-            }
+            },
+            DeliDate: "test",
+            Notes: "test"
 		}
     };
     return (
