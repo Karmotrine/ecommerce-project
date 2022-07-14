@@ -42,13 +42,23 @@ export default function OrderModalForm() {
     const deliDateTime = dateValue
     deliDateTime.setHours(timeValue.getHours())
     deliDateTime.setMinutes(timeValue.getMinutes())
-    setDetails({
-      savedAddress:thisAddressObject,
-      savedDeliDateTime: deliDateTime,
-      savedNotes:notesValue,
-      savedOrderType: orderType,
-      savedBranch: branchCode,
-    });
+    if (orderType === "2") {
+      setDetails({
+        savedAddress:thisAddressObject,
+        savedDeliDateTime: deliDateTime,
+        savedNotes:notesValue,
+        savedOrderType: orderType,
+        savedBranch: branchCode,
+      });
+    } else {
+      setDetails({
+        savedAddress:null,
+        savedDeliDateTime: deliDateTime,
+        savedNotes:notesValue,
+        savedOrderType: orderType,
+        savedBranch: branchCode,
+      });
+    }
 
     setActive((current) => (current < 3 ? current + 1 : current));
   };
@@ -132,7 +142,7 @@ export default function OrderModalForm() {
               </Stack>
             </Button>
             <Button 
-              onClick={() => {setBranchCode("STAMESA"); setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setBranchCode("sta-mesa"); setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
               color="red"
               size={"xl"}
             >
@@ -327,9 +337,35 @@ export default function OrderModalForm() {
               <Select
                   label="Pick-up Location"
                   placeholder="Select Branch to pick-up"
-                  data={[{value:"STAMESA", label:"Sta. Mesa Branch"}]}
+                  data={[{value:"sta-mesa", label:"Sta. Mesa Branch"}]}
                   value={branchCode}
                   onChange={setBranchCode}
+              />
+              <DatePicker
+                placeholder="Pickup date"
+                label="Pickup date"
+                minDate={dayjs(dateValue).toDate()}
+                maxDate={dayjs(dateValue).add(2, 'days').toDate()}
+                value={dateValue}
+                onChange={setDateValue}
+                required
+              />
+              <TimeInput
+                label="Pickup time"
+                placeholder="Pickup time"
+                icon={<Clock size={16} />}
+                defaultValue={timeValue}
+                format="12"
+                onChange={setTimeValue}
+                error={(dayjs(timeValue).hour() - 8) < 0 || (dayjs(timeValue).hour() + 4) > 23}
+                required
+              />
+              <TextInput
+                label="Extra notes to staff"
+                value={notesValue}
+                onChange={(event) => {
+                  const { target } = event
+                  setNotesValue(target.value)}}
               />
             </Box>
             </>

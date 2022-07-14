@@ -48,7 +48,7 @@ export default function OrderSummary() {
     const [timeValue, setTimeValue] = useState(new Date())
     const [orderType, setOrderType] = useState("0")
     const [notesValue, setNotesValue] = useState("")
-    const [branchCode, setBranchCode] = useState("STAMESA")
+    const [branchCode, setBranchCode] = useState("")
     
     useEffect(() => {
         setSelectedId(details.savedAddress === null ? "" : JSON.stringify(details.savedAddress))
@@ -115,7 +115,7 @@ export default function OrderSummary() {
                     <Select
                         label="Pick-up Location"
                         placeholder="Select Branch to pick-up"
-                        data={[{label:"Sta. Mesa Branch", value:"STAMESA"}]}
+                        data={[{label:"Sta. Mesa Branch", value:"sta-mesa"}]}
                         value={branchCode}
                         onChange={setBranchCode}
                     />
