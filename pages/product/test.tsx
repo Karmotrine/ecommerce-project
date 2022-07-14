@@ -8,7 +8,6 @@ export default function Test() {
     return(
         <>
             {/*{[savedAddress, savedDeliDate, savedDeliTime, savedNotes].map((x,i) => <p key={i}>{x}</p>)}*/}
-            <Text>`${testFindAddress?.uid}</Text>
         </>
     )
 }

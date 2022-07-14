@@ -50,8 +50,8 @@ export function useAddresses() : UseAddresses {
         clearAddressList() {
             mutate([])
         },
-        getAddress(addressId:string) {
-            return addressItems.find(toFindAddress => toFindAddress.uid === addressId)
+        getAddress(toFindAddressId:string) {
+            return addressItems.find(item => toFindAddressId === item.uid)
         }
     }
 } // export function useAddresses()
