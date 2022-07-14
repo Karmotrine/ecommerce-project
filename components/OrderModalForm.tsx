@@ -104,7 +104,7 @@ export default function OrderModalForm() {
                     label="Delivery Location"
                     placeholder="Choose address"
                     data={!!addresses ? addresses.map((item:Address) => 
-                                      ({value: item.uid,
+                                      ({value: JSON.stringify(item),
                                       label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
                           ) : [{label: "", value: ""}]
                         }   //load useAddress()
@@ -270,7 +270,7 @@ export default function OrderModalForm() {
         {(active == 2) && 
               <Button 
                 onClick={() => {
-                  const thisAddressObject = getAddress(selectedId);
+                  const thisAddressObject = getAddress(JSON.parse(selectedId));
                   setOrderFormDetail(thisAddressObject,dateValue,timeValue,notesValue);
                   nextStep;
                 }

@@ -18,7 +18,7 @@ type UseAddresses = {
     addAddress: (address:Address) => void
     removeAddress: (address:Address) => void
     clearAddressList: () => void
-    getAddress: (address:string) => Address | undefined
+    getAddress: (address:Address) => Address | undefined
 }
 
 export function useAddresses() : UseAddresses {
@@ -50,8 +50,8 @@ export function useAddresses() : UseAddresses {
         clearAddressList() {
             mutate([])
         },
-        getAddress(toFindAddressId:string) {
-            return addressItems.find(item => toFindAddressId === item.uid)
+        getAddress(toFindAddressId:Address) {
+            return addressItems.find(item => toFindAddressId.uid === item.uid)
         }
     }
 } // export function useAddresses()
