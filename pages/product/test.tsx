@@ -1,5 +1,6 @@
 import { useOrderFormDetail } from "../../components/hooks/useOrderFormDetail";
 import { useAddresses } from "../../lib/hooks/useAdresses";
+import { Text } from "@mantine/core";
 export default function Test() {
     const { savedAddress, savedDeliDate, savedDeliTime, savedNotes } = useOrderFormDetail()
     const {getAddress} = useAddresses()
@@ -7,7 +8,7 @@ export default function Test() {
     return(
         <>
             {/*{[savedAddress, savedDeliDate, savedDeliTime, savedNotes].map((x,i) => <p key={i}>{x}</p>)}*/}
-            <p>{testFindAddress?.nameId}</p>
+            <Text>`${testFindAddress?.uid}</Text>
         </>
     )
 }
