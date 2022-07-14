@@ -41,7 +41,8 @@ export default function OrderModalForm() {
     const thisAddressObject = getAddress(JSON.parse(selectedId));
     const parsedDate = dayjs(dateValue).format("MMMM D, YYYY")
     const parsedTime = dayjs(timeValue).format("h:mm A")
-    const deliDateTime = dayjs(`${parsedDate} ${parsedTime}`)
+    const deliDateTime = dayjs(`${parsedDate} ${parsedTime}`, "MMMM D, YYYY h:mm A")
+    setBranchCode("STAMESA")
     setDetails({
       savedAddress:thisAddressObject,
       savedDeliDateTime: deliDateTime,

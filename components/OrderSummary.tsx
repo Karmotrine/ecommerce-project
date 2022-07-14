@@ -1,5 +1,5 @@
-import { Box, Button, Center, Divider, Grid, Group, Modal, Select, Space, Stack, Stepper, Text } from "@mantine/core";
-import React from "react";
+import { Box, Button, Center, Divider, Grid, Group, Modal, Select, Space, Stack, Stepper, Text, TextInput } from "@mantine/core";
+import React, { useEffect } from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { PayPalScriptOptions } from "@paypal/paypal-js/types/script-options";
 import { PayPalButtonsComponentProps } from "@paypal/react-paypal-js"
@@ -16,10 +16,10 @@ import { Clock } from "tabler-icons-react";
 
 export default function OrderSummary() {
     const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
-    const [active, setActive] = useState(1);
+    const [active, setActive] = useState(0);
     const nextStep = () => setActive((current) => (current < 2 ? current + 1 : current));
     const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
-    const [confirmModal, setConfirmModal] = useState(true);
+    const [confirmModal, setConfirmModal] = useState(false);
     
     const { cart, total } = useCart()
 
@@ -43,10 +43,22 @@ export default function OrderSummary() {
             } : superjson.parse(str)),
         }
     )
-    const [selectedId, setSelectedId] = useState<string>(details.savedAddress === null ? "" : details.savedAddress.uid);
-    const [dateValue, setDateValue] = useState<Date | null>(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
-    const [timeValue, setTimeValue] = useState<Date | null>(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
+    const [selectedId, setSelectedId] = useState<string>("");
+    const [dateValue, setDateValue] = useState<Date | null>(new Date())
+    const [timeValue, setTimeValue] = useState<Date | null>(new Date())
+    const [orderType, setOrderType] = useState("0")
+    const [notesValue, setNotesValue] = useState("")
     const [branchCode, setBranchCode] = useState("")
+    
+    useEffect(() => {
+        setSelectedId(details.savedAddress === null ? "" : details.savedAddress.uid)
+        setDateValue(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
+        setTimeValue(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
+        setBranchCode(details.savedBranch === null ? "" : details.savedOrderType)
+        setNotesValue(details.savedNotes === null ? "" : details.savedNotes)
+        setOrderType(details.savedOrderType === null ? "0" : details.savedOrderType)
+    }, [])
+
     return (
         <>
         <Modal
@@ -95,8 +107,8 @@ export default function OrderSummary() {
                         label="Delivery Method"
                         placeholder="Select method"
                         data={[{value:"1", label:"Pick-up"}, {value:"2",label:"Delivery"}]}
-                        value={branchCode}
-                        onChange={setBranchCode}
+                        value={orderType}
+                        onChange={setOrderType}
                     />
                     <Select
                         label="Pick-up Location"
@@ -105,20 +117,29 @@ export default function OrderSummary() {
                         value={branchCode}
                         onChange={setBranchCode}
                     />
+                    <TextInput
+                    label="Special notes to staff/driver"
+                    value={notesValue}
+                    onChange={(event) => {
+                        const { target } = event
+                        setNotesValue(target.value)}}
+                    />
                     </Box>
                 </Stepper.Step>
                 <Stepper.Step label="Payment" description="Select payment method">
                     <Center>
-                        <Button
-                            sx={(theme) => ({color: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[5]})}
-                            radius="xl"
-                            size="md"
-                        >
-                            Cash-On-Delivery (COD)
-                        </Button>
-                        <PayPalScriptProvider options={paypalScriptOptions}>
-                            <PaypalButtons Total={total} />
-                        </PayPalScriptProvider>
+                        <Stack>
+                            <Button
+                                color="black"
+                                radius="xl"
+                                size="md"
+                            >
+                                Cash-On-Delivery (COD)
+                            </Button>
+                            <PayPalScriptProvider options={paypalScriptOptions}>
+                                <PaypalButtons Total={total} />
+                            </PayPalScriptProvider>
+                        </Stack>
                     </Center>
                 </Stepper.Step>
                 <Stepper.Completed>
