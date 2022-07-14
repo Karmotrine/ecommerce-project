@@ -108,14 +108,14 @@ export default function OrderSummary() {
                     <Select
                         label="Delivery Method"
                         placeholder="Select method"
-                        data={[{label:"Pick-up", value:"1", }, {label:"Delivery", value:"2"}]}
+                        data={[{label:"Pick-up", value:"1"}, {label:"Delivery", value:"2"}]}
                         value={orderType}
                         onChange={setOrderType}
                     />
                     <Select
                         label="Pick-up Location"
                         placeholder="Select Branch to pick-up"
-                        data={[{value:"STAMESA", label:"Sta. Mesa Branch"}]}
+                        data={[{label:"Sta. Mesa Branch", value:"STAMESA"}]}
                         value={branchCode}
                         onChange={setBranchCode}
                     />
