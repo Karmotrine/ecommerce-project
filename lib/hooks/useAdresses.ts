@@ -41,7 +41,7 @@ export function useAddresses() : UseAddresses {
     }
     return {
         status: addresses.status,
-        isEmpty: (addressItems.length == 0 || addressItems === undefined),
+        isEmpty: (addressItems?.length == 0 || addressItems === undefined),
         addresses: addressItems,
         addAddress: (address:Address) => {
             mutate(!!addressItems ? [...addressItems, address] : [address])
