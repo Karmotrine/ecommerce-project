@@ -49,7 +49,7 @@ export function useAddresses() : UseAddresses {
             mutate([])
         },
         getAddress(addressId:string) {
-            return addressItems.find((toFindAddress:Address) => toFindAddress.nameId === addressId)
+            return addressItems.find((toFindAddress:Address) => toFindAddress.uid === addressId)
         }
     }
 } // export function useAddresses()

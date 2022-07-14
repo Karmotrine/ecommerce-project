@@ -103,6 +103,7 @@ export default function OrderModalForm() {
                 <Select
                   label="Delivery Location"
                   placeholder="Choose address"
+                  disabled={!!addresses}
                   data={!!addresses ? addresses.map((item:Address) => 
                                     ({value: item.uid,
                                     label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
