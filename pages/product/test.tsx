@@ -6,8 +6,8 @@ export default function Test() {
     const testFindAddress = getAddress("663fcaf5-6304-4d31-bf95-d927f2754419")
     return(
         <>
-            {[savedAddress, savedDeliDate, savedDeliTime, savedNotes].map((x,i) => <p key={i}>{x}</p>)}
-            <p>{testFindAddress.nameId}</p>
+            {/*{[savedAddress, savedDeliDate, savedDeliTime, savedNotes].map((x,i) => <p key={i}>{x}</p>)}*/}
+            <p>{testFindAddress?.nameId}</p>
         </>
     )
 }
