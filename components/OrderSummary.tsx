@@ -48,7 +48,7 @@ export default function OrderSummary() {
     const [timeValue, setTimeValue] = useState(new Date())
     const [orderType, setOrderType] = useState("0")
     const [notesValue, setNotesValue] = useState("")
-    const [branchCode, setBranchCode] = useState("")
+    const [branchCode, setBranchCode] = useState("STAMESA")
     
     useEffect(() => {
         setSelectedId(details.savedAddress === null ? "" : JSON.stringify(details.savedAddress))
