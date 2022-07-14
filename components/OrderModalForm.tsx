@@ -28,7 +28,7 @@ export default function OrderModalForm() {
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   const [orderType, setOrderType] = useState(0);
-  const { addAddress, addresses, getAddress, status, isEmpty } = useAddresses()
+  const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
   const [addAddressForm, setAddressForm] = useState(false)
   const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
   const [ regionValue, setRegionValue ] = useState("")

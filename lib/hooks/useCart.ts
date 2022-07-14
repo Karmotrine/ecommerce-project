@@ -23,7 +23,7 @@ export function useCart(): UseCart {
     const user = useUser()
     const ref = doc(collections.cart, user.data?.uid ?? '-');
 
-    const cart = useFirestoreDocumentData('cart', ref)
+    const cart = useFirestoreDocumentData('cart', ref, {subscribe:true}, {enabled: user.isSuccess && !!user.data})
 
     const cartItems = (!user ? [] : cart.data?.items ?? []) as CartItem[]
 

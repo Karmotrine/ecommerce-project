@@ -13,7 +13,6 @@ import { useUser } from "./useUser"
  *  useDeleteAddress - Deletes an 'address' document from user's collection of addresses
  */
 type UseAddresses = {
-    status: "idle" | "error" | "loading" | "success"
     isEmpty: boolean
     addresses : Address[]
     addAddress: (address:Address) => void
@@ -26,7 +25,7 @@ export function useAddresses() : UseAddresses {
     const client = useQueryClient()
     const user = useUser()
     const ref = doc(collections.addresses, user.data?.uid ?? '-');
-    const addresses = useFirestoreDocumentData('addresses', ref)
+    const addresses = useFirestoreDocumentData('addresses', ref, {subscribe:true}, {enabled: user.isSuccess && !!user.data})
     const addressItems = (!user ? [] : addresses.data?.addresses) as Address[]
     const mutation = useFirestoreDocumentMutation(
         ref, {merge: true}, {
@@ -40,7 +39,6 @@ export function useAddresses() : UseAddresses {
         return mutation.mutate({addresses})
     }
     return {
-        status: addresses.status,
         isEmpty: (addressItems?.length == 0 || addressItems === undefined),
         addresses: addressItems,
         addAddress: (address:Address) => {
