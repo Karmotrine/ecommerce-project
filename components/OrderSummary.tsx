@@ -44,8 +44,8 @@ export default function OrderSummary() {
         }
     )
     const [selectedId, setSelectedId] = useState<string>("");
-    const [dateValue, setDateValue] = useState<Date | null>(new Date())
-    const [timeValue, setTimeValue] = useState<Date | null>(new Date())
+    const [dateValue, setDateValue] = useState(new Date())
+    const [timeValue, setTimeValue] = useState(new Date())
     const [orderType, setOrderType] = useState("0")
     const [notesValue, setNotesValue] = useState("")
     const [branchCode, setBranchCode] = useState("")
@@ -79,6 +79,7 @@ export default function OrderSummary() {
                             ) : [{label: "", value: ""}]
                             }
                         disabled={isEmpty}
+                        defaultValue={selectedId}
                         value={selectedId}
                         onChange={setSelectedId}
                         required
@@ -89,6 +90,7 @@ export default function OrderSummary() {
                       label="Delivery date"
                       minDate={dayjs(dateValue).toDate()}
                       maxDate={dayjs(dateValue).add(2, 'days').toDate()}
+                      defaultValue={dateValue}
                       value={dateValue}
                       onChange={setDateValue}
                       required
@@ -107,6 +109,7 @@ export default function OrderSummary() {
                         label="Delivery Method"
                         placeholder="Select method"
                         data={[{value:"1", label:"Pick-up"}, {value:"2",label:"Delivery"}]}
+                        defaultValue={orderType}
                         value={orderType}
                         onChange={setOrderType}
                     />
@@ -114,11 +117,13 @@ export default function OrderSummary() {
                         label="Pick-up Location"
                         placeholder="Select Branch to pick-up"
                         data={[{value:"STAMESA", label:"Sta. Mesa Branch"}]}
+                        defaultValue={branchCode}
                         value={branchCode}
                         onChange={setBranchCode}
                     />
                     <TextInput
                     label="Special notes to staff/driver"
+                    defaultValue={notesValue}
                     value={notesValue}
                     onChange={(event) => {
                         const { target } = event
