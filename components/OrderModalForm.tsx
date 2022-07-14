@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Stepper, Button, Group , Box,
-         TextInput, Select, Center, Text, Stack, Anchor, Collapse, Divider, Space } from '@mantine/core';
+         TextInput, Select, Center, Text, Stack, Anchor, Collapse, Divider, Space, LoadingOverlay } from '@mantine/core';
 import { TimeInput, DatePicker } from '@mantine/dates';
 import dayjs from 'dayjs';
 import { Clock, BuildingStore, Motorbike, CirclePlus } from 'tabler-icons-react';
@@ -28,7 +28,7 @@ export default function OrderModalForm() {
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   const [orderType, setOrderType] = useState(0);
-  const { addAddress, addresses, getAddress } = useAddresses()
+  const { addAddress, addresses, getAddress, status, isEmpty } = useAddresses()
   const [addAddressForm, setAddressForm] = useState(false)
   const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
   const [ regionValue, setRegionValue ] = useState("")
@@ -100,18 +100,20 @@ export default function OrderModalForm() {
             <>
             <Box>
               <form>
-                <Select
-                  label="Delivery Location"
-                  placeholder="Choose address"
-                  disabled={!!!addresses}
-                  data={!!addresses ? addresses.map((item:Address) => 
-                                    ({value: item.uid,
-                                    label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
-                        ) : [{label: "", value: ""}]
-                      }   //load useAddress()
-                  value={selectedId}
-                  onChange={setSelectedId}
-                />
+                <LoadingOverlay visible={status === "loading"}>
+                  <Select
+                    label="Delivery Location"
+                    placeholder="Choose address"
+                    data={!!addresses ? addresses.map((item:Address) => 
+                                      ({value: item.uid,
+                                      label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
+                          ) : [{label: "", value: ""}]
+                        }   //load useAddress()
+                    disabled={isEmpty}
+                    value={selectedId}
+                    onChange={setSelectedId}
+                  />
+                </LoadingOverlay>
                 <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
                   <Text size="xs" style={{color: "red",  display:"flex", justifyContent: "flex-end"}}>
                     Add address
