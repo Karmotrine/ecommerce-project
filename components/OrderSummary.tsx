@@ -51,10 +51,10 @@ export default function OrderSummary() {
     const [branchCode, setBranchCode] = useState("")
     
     useEffect(() => {
-        setSelectedId(details.savedAddress === null ? "" : details.savedAddress.uid)
+        setSelectedId(details.savedAddress === null ? "" : JSON.stringify(details.savedAddress))
         setDateValue(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
         setTimeValue(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
-        setBranchCode(details.savedBranch === null ? "" : details.savedOrderType)
+        setBranchCode(details.savedBranch === null ? "" : details.branchCode)
         setNotesValue(details.savedNotes === null ? "" : details.savedNotes)
         setOrderType(details.savedOrderType === null ? "0" : details.savedOrderType)
     }, [])
@@ -116,8 +116,7 @@ export default function OrderSummary() {
                     <Select
                         label="Pick-up Location"
                         placeholder="Select Branch to pick-up"
-                        data={[{value:"STAMESA", label:"Sta. Mesa Branch"}]}
-                        defaultValue={branchCode}
+                        data={[{label:"Sta. Mesa Branch", value:"STAMESA"}]}
                         value={branchCode}
                         onChange={setBranchCode}
                     />
