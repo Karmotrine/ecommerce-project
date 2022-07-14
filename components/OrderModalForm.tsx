@@ -4,11 +4,9 @@ import { Stepper, Button, Group , Box,
 import { TimeInput, DatePicker } from '@mantine/dates';
 import dayjs from 'dayjs';
 import { Clock, BuildingStore, Motorbike, CirclePlus } from 'tabler-icons-react';
-import LoginView from './auth/LoginView';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { auth } from '../lib/firebaseClient';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import next from 'next';
 import { useRouter } from 'next/router'
 var isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(isBetween)
@@ -18,19 +16,19 @@ import { useAddresses } from '../lib/hooks/useAdresses';
 import { regions, provinces, 
          citiesMunicipalities, usePHAddressForms } from '../lib/usePHAddressForms';
 import { Address } from '../lib/types';
+import { useOrderFormDetail } from "./hooks/useOrderFormDetail"
+import {v4 as uuidgen} from "uuid"
 
 export default function OrderModalForm() {
   const user = useUser();
-  const now = new Date();
+  const router = useRouter()
   const { isActive, setOrderActive } = useOrderModal((state) => state);
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
-  const [orderType, setOrderType] = useState(0);
-  const [timeValue, setTimeValue] = useState(new Date())
-  const router = useRouter()
 
-  const { addAddress, addresses } = useAddresses()
+  const [orderType, setOrderType] = useState(0);
+  const { addAddress, addresses, getAddress } = useAddresses()
   const [addAddressForm, setAddressForm] = useState(false)
   const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
   const [ regionValue, setRegionValue ] = useState("")
@@ -40,8 +38,13 @@ export default function OrderModalForm() {
     nickname:"",
     recipient:"",
     addressline:"",
-    postalcode:""
+    postalcode:"",
   })
+  const [dateValue, setDateValue] = useState<Date | null>(new Date())
+  const [timeValue, setTimeValue] = useState(new Date())
+  const [notesValue, setNotesValue] = useState("")
+  const [selectedId, setSelectedId] = useState("")
+  const { setOrderFormDetail } = useOrderFormDetail()
   
   useEffect(() => {
     setActive(user.data ? 1 : 0)
@@ -101,10 +104,12 @@ export default function OrderModalForm() {
                   label="Delivery Location"
                   placeholder="Choose address"
                   data={!!addresses ? addresses.map((item:Address) => 
-                                    ({value: `${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode}`, 
+                                    ({value: item.uid,
                                     label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
                         ) : [{label: "", value: ""}]
                       }   //load useAddress()
+                  value={selectedId}
+                  onChange={setSelectedId}
                 />
                 <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
                   <Text size="xs" style={{color: "red",  display:"flex", justifyContent: "flex-end"}}>
@@ -167,6 +172,7 @@ export default function OrderModalForm() {
                     <Select
                       label="City/Municipality"
                       placeholder="City/Municipality"
+                      searchable
                       disabled={provinceValue === ""}
                       data={provinceValue === "" ? [""] :
                             getCityMunByProvince(provinceValue).map((city) => city.name)}
@@ -189,7 +195,7 @@ export default function OrderModalForm() {
                         style={{width:200}}
                         onClick={() => {
                           addAddress({
-                            uid: user.data.uid,
+                            uid: uuidgen(),
                             recipientName: otherAddressInfo.recipient,
                             nameId: otherAddressInfo.nickname,
                             metadata: {
@@ -214,8 +220,10 @@ export default function OrderModalForm() {
                     <DatePicker
                       placeholder="Delivery date"
                       label="Delivery date"
-                      minDate={dayjs(now).toDate()}
-                      maxDate={dayjs(now).add(2, 'days').toDate()}
+                      minDate={dayjs(dateValue).toDate()}
+                      maxDate={dayjs(dateValue).add(2, 'days').toDate()}
+                      value={dateValue}
+                      onChange={setDateValue}
                     />
                 <TimeInput
                   label="Delivery time"
@@ -231,6 +239,10 @@ export default function OrderModalForm() {
                 </div>
                 <TextInput
                   label="Special notes to staff/driver"
+                  value={notesValue}
+                  onChange={(event) => {
+                    const { target } = event
+                    setNotesValue(target.value)}}
                 />
               </form>
             </Box>
@@ -254,7 +266,18 @@ export default function OrderModalForm() {
 
       <Group position="center" mt="xl">
         {(active >= 2) &&<Button variant="default" onClick={prevStep}>Back</Button> }
-        {(active == 2) && <Button onClick={nextStep} color="red">Next step</Button>}
+        {(active == 2) && 
+              <Button 
+                onClick={() => {
+                  setOrderFormDetail(getAddress(selectedId),dateValue,timeValue,notesValue)
+                  nextStep;
+                }
+                } 
+                color="red"
+                >
+                  Next step
+                </Button>
+          }
         {active == 3 && 
         <Button 
           onClick={() => {router.push("/menu"); setOrderActive(isActive); setActive(0);}}

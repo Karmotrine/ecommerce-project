@@ -27,9 +27,9 @@ export default function OrderSummary() {
                                 ₱{item.quantity * parseInt(item.metadata.price)}
                             </Text> :
                             <Text size="sm" weight={400}>
-                                ₱{item.quantity*
+                                ₱{(item.quantity*
                                     (parseFloat(item.metadata.price) - 
-                                        (parseFloat(item.metadata.price) * (parseInt(item.metadata.discount)/100)))
+                                        (parseFloat(item.metadata.price) * (parseInt(item.metadata.discount)/100)))).toFixed(2)
                                  }
                             </Text>
                             }
