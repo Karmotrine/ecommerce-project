@@ -100,7 +100,6 @@ export default function OrderModalForm() {
             <>
             <Box>
               <form>
-                <LoadingOverlay visible={status === "loading"}>
                   <Select
                     label="Delivery Location"
                     placeholder="Choose address"
@@ -113,7 +112,6 @@ export default function OrderModalForm() {
                     value={selectedId}
                     onChange={setSelectedId}
                   />
-                </LoadingOverlay>
                 <Anchor style={{color:"inherit"}} onClick={() => setAddressForm((state) => !state)}>
                   <Text size="xs" style={{color: "red",  display:"flex", justifyContent: "flex-end"}}>
                     Add address
