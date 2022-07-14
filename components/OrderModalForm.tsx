@@ -42,7 +42,6 @@ export default function OrderModalForm() {
     const deliDateTime = dateValue
     deliDateTime.setHours(timeValue.getHours())
     deliDateTime.setMinutes(timeValue.getMinutes())
-    setBranchCode("STAMESA")
     setDetails({
       savedAddress:thisAddressObject,
       savedDeliDateTime: deliDateTime,
@@ -133,7 +132,7 @@ export default function OrderModalForm() {
               </Stack>
             </Button>
             <Button 
-              onClick={() => {setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setBranchCode("STAMESA"); setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
               color="red"
               size={"xl"}
             >
