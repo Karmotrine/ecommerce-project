@@ -102,7 +102,7 @@ export default function OrderModalForm() {
                   placeholder="Choose address"
                   data={addresses.map((item:Address) => 
                                     ({value: `${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode}`, 
-                                    label: item.nameId})
+                                    label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
                         )
                       }   //load useAddress()
                 />
