@@ -230,7 +230,7 @@ export default function OrderSummary() {
                 <Stepper.Completed>
                     <Center>
                         <Text>
-                            Order has been placed. Orders can be also tracked upon "My Orders" of your Account.
+                            Order has been placed. Orders can be also tracked upon &quot;My Orders&quot; of your Account.
                         </Text>
                     </Center>
                 </Stepper.Completed>
