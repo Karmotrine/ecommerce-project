@@ -49,10 +49,6 @@ export default function OrderSummary() {
     const [orderType, setOrderType] = useState("0")
     const [notesValue, setNotesValue] = useState("")
     const [branchCode, setBranchCode] = useState("0")
-    
-    useEffect(() => {
-        setDetails((prevState) => ({...prevState, savedAddress: getAddress(superjson.parse(selectedId))}))
-    }, [selectedId])
 
     useEffect(() => {
         setSelectedId(details.savedAddress === null ? "" : JSON.stringify(details.savedAddress))
@@ -63,6 +59,9 @@ export default function OrderSummary() {
         setOrderType(details.savedOrderType === null ? "0" : details.savedOrderType)
     }, [])
 
+    useEffect(() => {
+        setDetails((prevState) => ({...prevState, savedAddress: getAddress(superjson.parse(selectedId))}))
+    }, [selectedId])
 
     
     useEffect(() => {
