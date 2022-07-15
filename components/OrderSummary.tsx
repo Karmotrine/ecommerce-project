@@ -26,7 +26,7 @@ export default function OrderSummary() {
     const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
     const [confirmModal, setConfirmModal] = useState(false);
     
-    const { cart, total } = useCart()
+    const { cart, total, clearCart } = useCart()
 
     const [details, setDetails] =  useLocalStorage({
         key: "orderExDetails",
@@ -114,7 +114,7 @@ export default function OrderSummary() {
             title="Checkout"
         >
             <>
-            <Stepper active={active} onStepClick={setActive} breakpoint="sm" color="red">
+            <Stepper active={active} breakpoint="sm" color="red">
                 <Stepper.Step label="Order Details" description="Confirm details">
                     <Box>
                     {(orderType === "2") &&
@@ -241,7 +241,13 @@ export default function OrderSummary() {
                 {active == 0 && <Button onClick={nextStep} color="red">Next</Button>}
                 {active == 2 &&
                 <>
-                        <Button onClick={() => router.push(`/order/${transDocId}`)} color="green">
+                        <Button onClick={() => {
+                                localStorage.clear()
+                                clearCart()
+                                router.push(`/order/${transDocId}`)
+                            }} 
+                            color="green"
+                        >
                             View order
                         </Button>
                 </>
