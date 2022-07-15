@@ -1,7 +1,8 @@
 import React from 'react';
-import { createStyles, Overlay, Container, Title, Button, Text } from "@mantine/core"
+import { createStyles, Overlay, Container, Title, Button, Text, Group, Center } from "@mantine/core"
 import { app } from '../lib/firebaseClient';
 import useOrderModal from '../components/hooks/useOrderModal';
+import { FeaturesComponent, FeaturesComponet } from '../components/FeaturesComponent';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
@@ -70,7 +71,39 @@ const useStyles = createStyles((theme) => ({
     marginLeft:20,
     marginRight:20,
   },
-  
+
+  featuresWrapper: {
+    paddingTop: theme.spacing.xl * 2,
+    paddingBottom: theme.spacing.xl * 2,
+  },
+  featuresDescription: {
+    textAlign: 'center',
+    [theme.fn.smallerThan('sm')]: {
+      textAlign: 'left',
+    },
+  },
+  featuresTitle: {
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    fontWeight: 900,
+    marginBottom: theme.spacing.md,
+    textAlign: 'center',
+
+    [theme.fn.smallerThan('sm')]: {
+      fontSize: 28,
+      textAlign: 'left',
+    },
+  },
+  featuresSubtitle: {
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    fontWeight: 300,
+    fontSize: 24,
+    marginBottom: theme.spacing.md,
+
+    [theme.fn.smallerThan('sm')]: {
+      fontSize: 18,
+      textAlign: 'left',
+    },
+  },
 }));
 
 export default function Home() {
@@ -92,9 +125,8 @@ export default function Home() {
             </Text>
           </Title>
           <Text className={classes.description} size="xl" mt="xl">
-            Imbento is a Japanese fast food restaurant chain in the Philippines.
-            These restaurants are specialized in serving beef
-            bowl dishes.
+          Imbento proudly provides a great variety of Japanese meals such as
+          Bento and Ramen kits at your convenience.
           </Text>
 
           <Button 
@@ -108,9 +140,19 @@ export default function Home() {
         
       </div>
       <div className={classes.wrapper}>
-        <Container>
-          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus dictum porttitor. Donec sagittis neque dui, maximus consectetur arcu tincidunt id. Nam auctor sollicitudin dignissim. Phasellus condimentum odio id ex mattis facilisis. In fringilla et nisl ut dignissim. Cras quis dui elementum elit fermentum tempor. Vivamus rutrum sit amet ex et lacinia. Cras sit amet massa placerat turpis rhoncus condimentum sit amet nec arcu. Sed vehicula sapien sit amet lectus tincidunt, ac accumsan quam interdum.</Text>
-          {app ? <Text>Firebase is enabled</Text> : <Text>Firebase is disabled</Text>}
+        <Container className={classes.featuresWrapper}>
+          <Center>
+            <Group>
+              <Title className={classes.featuresTitle}>いただきます！</Title>
+              <Text className={classes.featuresSubtitle} color="dimmed">{"(Let's Eat!)"}</Text>
+            </Group>
+          </Center>
+          <Container size={560} p={0}>
+            <Text size="sm" className={classes.featuresDescription}>
+            Our bento and ramen kits is a complete meal solution for every hectic household. Carefully curated, balanced, and nutritional options will reduce the burden on the home cook without sacrificing its quality and taste.
+            </Text>
+          </Container>
+          <FeaturesComponent />
         </Container>
       </div>
     </div>
