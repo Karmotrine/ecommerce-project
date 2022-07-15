@@ -209,7 +209,7 @@ export default function OrderSummary() {
                                             isPaid: false
                                         },
                                         metadata: {
-                                            address: {...details.savedAddress} as Address,
+                                            address: parsed as Address,
                                             paymentMethod: 'cod',
                                             currentStatus: {
                                                 isPlaced: true,
