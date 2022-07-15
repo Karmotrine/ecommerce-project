@@ -230,7 +230,7 @@ export default function OrderSummary() {
                 <Stepper.Completed>
                     <Center>
                         <Text>
-                            Order has been placed. Orders can be also tracked upon `&quot;`My Orders`&quot;` of your Account.
+                            Order has been placed. Orders can be also tracked upon "My Orders" of your Account.
                         </Text>
                     </Center>
                 </Stepper.Completed>
@@ -241,11 +241,11 @@ export default function OrderSummary() {
                 {active == 0 && <Button onClick={nextStep} color="red">Next</Button>}
                 {active == 2 &&
                 <>
+                        <LoadingOverlay visible={transDocId === ""}>
                         <Button onClick={() => router.push(`/order/${transDocId}`)} color="green">
-                            <LoadingOverlay visible={transDocId === ""}>
-                                View order
-                            </LoadingOverlay>
+                            View order
                         </Button>
+                        </LoadingOverlay>
                 </>
                 }
             </Group>
