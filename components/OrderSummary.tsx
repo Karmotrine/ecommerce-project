@@ -214,9 +214,9 @@ export default function OrderSummary() {
                                             Notes: details.savedNotes
                                         }
                                     };
-                                    const newDocId = await addTransaction(transactionObj)
-                                    setTransDocId(newDocId)
-                                    nextStep;
+                                    const newDocId = await addTransaction(transactionObj);
+                                    setTransDocId(newDocId);
+                                    setActive((current) => (current < 2 ? current + 1 : current));
                                 }}
                             >
                                 Cash-On-Delivery (COD)
