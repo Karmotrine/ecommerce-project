@@ -2,7 +2,7 @@ import React from 'react';
 import { createStyles, Overlay, Container, Title, Button, Text, Group, Center } from "@mantine/core"
 import { app } from '../lib/firebaseClient';
 import useOrderModal from '../components/hooks/useOrderModal';
-import { FeaturesComponent, FeaturesComponet } from '../components/FeaturesComponent';
+import { FeaturesComponent } from '../components/FeaturesComponent';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
