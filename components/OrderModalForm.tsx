@@ -81,7 +81,7 @@ export default function OrderModalForm() {
   const [timeValue, setTimeValue] = useState(new Date())
   const [notesValue, setNotesValue] = useState("")
   const [selectedId, setSelectedId] = useState<string>("")
-  const [branchCode, setBranchCode] = useState("")
+  const [branchCode, setBranchCode] = useState("0")
 
   
   useEffect(() => {

@@ -185,22 +185,12 @@ export default function OrderSummary() {
                                 radius="xl"
                                 size="md"
                                 onClick={async () => {
-                                    console.log("raw")
-                                    console.log(details.savedAddress)
-                                    console.log(typeof(details.savedAddress))
-                                    const parsed = JSON.parse(details.savedAddress)
-                                    console.log("parsed")
-                                    console.log(parsed)
-                                    console.log(typeof(parsed))
                                     const parsed2 = superjson.parse(details.savedAddress)
-                                    console.log("parsed2")
-                                    console.log(parsed2)
-                                    console.log(typeof(parsed2))
                                     const transactionObj:Transaction = {
                                         cart: cart,
                                         paymentDetails: {
                                             orderId: "",
-                                            orderType: 'pick-up',
+                                            orderType: orderType === "1" ? "pick-up" : "delivery",
                                             branch: branchCode,
                                                 payerId: "",
                                                 paymentId: "",
