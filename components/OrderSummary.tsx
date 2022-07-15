@@ -59,6 +59,10 @@ export default function OrderSummary() {
         setOrderType(details.savedOrderType === null ? "0" : details.savedOrderType)
     }, [])
 
+    useEffect(() => {
+        setDetails((prevState) => ({...prevState, savedAddress: JSON.stringify(selectedId)}))
+    }, [selectedId])
+
     return (
         <>
         <Modal
@@ -112,7 +116,7 @@ export default function OrderSummary() {
                         placeholder="Select method"
                         data={[{label:"Pick-up", value:"1"}, {label:"Delivery", value:"2"}]}
                         value={orderType}
-                        onChange={() => {setOrderType; setDetails((prevState) => ({...prevState, savedOrderType: orderType}))}}
+                        onChange={setOrderType}
                     />
                     <Select
                         label={(orderType === "2") ? "Branch Location" : "Pick-up Location"}
@@ -120,7 +124,7 @@ export default function OrderSummary() {
                         data={[{label:"Sta. Mesa Branch", value:"0"}]}
                         defaultValue="0"
                         value={branchCode}
-                        onChange={() => {setBranchCode; setDetails((prevState) => ({...prevState, savedBranch:branchCode}))}}
+                        onChange={setBranchCode}
                     />
                     <TextInput
                     label="Special notes to staff/driver"
