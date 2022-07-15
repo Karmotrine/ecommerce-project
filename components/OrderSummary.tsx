@@ -7,7 +7,7 @@ import { useCart } from "../lib/hooks/useCart";
 import { paypalScriptOptions, PaypalButtons } from "./PaypalContainer";
 import { useState } from "react"
 import superjson from "superjson"
-import { useLocalStorage } from "@mantine/hooks";
+import { useLocalStorage, useSetState } from "@mantine/hooks";
 import { useAddresses } from "../lib/hooks/useAdresses";
 import { Address, Transaction } from "../lib/types";
 import { DatePicker, TimeInput } from "@mantine/dates";
@@ -104,38 +104,6 @@ export default function OrderSummary() {
 
     const { addTransaction } = useTransactionMutation()
     const [transDocId, setTransDocId] = useState("")
-    async function submitTransactionCash() {
-        const transactionObj:Transaction = {
-            cart: cart,
-            paymentDetails: {
-                orderId: "",
-                orderType: 'pick-up',
-                branch: details.savedBranch ,
-                    payerId: "",
-                    paymentId: "",
-                    billingToken: "",
-                    facilitatorAccesstoken: "",
-                isPaid: false
-            },
-            metadata: {
-                address: superjson.parse(selectedId) as Address,
-                paymentMethod: 'cod',
-                currentStatus: {
-                    isPlaced: true,
-                    isShipped: false,
-                    isReceived: false,
-                    isCancelled: false,
-                },
-                DeliDate: details.savedDeliDateTime,
-                Notes: details.savedNotes
-            }
-        };
-        const docId = await addTransaction(transactionObj)
-        setTransDocId(docId);
-        nextStep();
-    }
-
-
     return (
         <>
         <Modal
@@ -216,7 +184,36 @@ export default function OrderSummary() {
                                 color="black"
                                 radius="xl"
                                 size="md"
-                                onClick={async () => await submitTransactionCash()}
+                                onClick={async () => {
+                                    const transactionObj:Transaction = {
+                                        cart: cart,
+                                        paymentDetails: {
+                                            orderId: "",
+                                            orderType: 'pick-up',
+                                            branch: details.savedBranch ,
+                                                payerId: "",
+                                                paymentId: "",
+                                                billingToken: "",
+                                                facilitatorAccesstoken: "",
+                                            isPaid: false
+                                        },
+                                        metadata: {
+                                            address: superjson.parse(selectedId) as Address,
+                                            paymentMethod: 'cod',
+                                            currentStatus: {
+                                                isPlaced: true,
+                                                isShipped: false,
+                                                isReceived: false,
+                                                isCancelled: false,
+                                            },
+                                            DeliDate: details.savedDeliDateTime,
+                                            Notes: details.savedNotes
+                                        }
+                                    };
+                                    const newDocId = await addTransaction(transactionObj)
+                                    setTransDocId(newDocId)
+                                    nextStep;
+                                }}
                             >
                                 Cash-On-Delivery (COD)
                             </Button>
