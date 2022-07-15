@@ -84,7 +84,7 @@ export default function OrderSummary() {
     useEffect(() => {
         setDetails((prevState) => ({...prevState, savedOrderType: orderType}))
         if (orderType === "1")
-            setDetails((prevState) => ({...prevState, savedAddress: {
+            setSelectedId(superjson.stringify({
                 uid: "",
                 recipientName: "",
                 nameId: "",
@@ -95,7 +95,7 @@ export default function OrderSummary() {
                     addressLine: "",
                     postalCode: "",
                 }
-            }}))
+            }))
     },[orderType])
 
     return (
