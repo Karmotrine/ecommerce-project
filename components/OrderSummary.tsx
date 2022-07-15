@@ -60,8 +60,27 @@ export default function OrderSummary() {
     }, [])
 
     useEffect(() => {
-        setDetails((prevState) => ({...prevState, savedAddress: selectedId}))
+        setDetails((prevState) => ({...prevState, savedAddress: JSON.parse(selectedId)}))
     }, [selectedId])
+    
+    useEffect(() => {
+        const deliDateTime = dateValue
+        deliDateTime.setHours(timeValue.getHours())
+        deliDateTime.setMinutes(timeValue.getMinutes())
+        setDetails((prevState) => ({...prevState, savedDeliDateTime: deliDateTime}))
+    }, [dateValue, timeValue])
+
+    useEffect(() => {
+        setDetails((prevState) => ({...prevState, savedBranch: branchCode}))
+    }, [branchCode])
+
+    useEffect(() => {
+        setDetails((prevState) => ({...prevState, savedNotes: notesValue}))
+    }, [notesValue])
+
+    useEffect(() => {
+        setDetails((prevState) => ({...prevState, savedOrderType: orderType}))
+    },[orderType])
 
     return (
         <>
