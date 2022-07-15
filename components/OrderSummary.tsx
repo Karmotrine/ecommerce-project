@@ -131,7 +131,8 @@ export default function OrderSummary() {
             }
         };
         const docId = await addTransaction(transactionObj)
-        setTransDocId(docId)
+        setTransDocId(docId);
+        nextStep();
     }
 
 
