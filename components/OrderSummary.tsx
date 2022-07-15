@@ -216,7 +216,7 @@ export default function OrderSummary() {
                                 color="black"
                                 radius="xl"
                                 size="md"
-                                onClick={submitTransactionCash}
+                                onClick={async () => await submitTransactionCash()}
                             >
                                 Cash-On-Delivery (COD)
                             </Button>
