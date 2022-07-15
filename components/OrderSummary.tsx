@@ -118,6 +118,7 @@ export default function OrderSummary() {
                         label="Pick-up Location"
                         placeholder="Select Branch to pick-up"
                         data={[{label:"Sta. Mesa Branch", value:"0"}]}
+                        defaultValue="0"
                         value={branchCode}
                         onChange={setBranchCode}
                     />
