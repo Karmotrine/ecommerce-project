@@ -83,6 +83,19 @@ export default function OrderSummary() {
 
     useEffect(() => {
         setDetails((prevState) => ({...prevState, savedOrderType: orderType}))
+        if (orderType === "1")
+            setDetails((prevState) => ({...prevState, savedAddress: {
+                uid: "",
+                recipientName: "",
+                nameId: "",
+                metadata: {
+                    region: "",
+                    province: "",
+                    cityMun: "",
+                    addressLine: "",
+                    postalCode: "",
+                }
+            }}))
     },[orderType])
 
     return (
