@@ -187,7 +187,7 @@ export default function OrderSummary() {
                                 onClick={async () => {
                                     console.log("raw")
                                     console.log(details.savedAddress)
-                                    console.log("parsed")
+                                    console.log(typeof(details.savedAddress))
                                     const transactionObj:Transaction = {
                                         cart: cart,
                                         paymentDetails: {
@@ -201,7 +201,7 @@ export default function OrderSummary() {
                                             isPaid: false
                                         },
                                         metadata: {
-                                            address: details.savedAddress as Address,
+                                            address: {...details.savedAddress} as Address,
                                             paymentMethod: 'cod',
                                             currentStatus: {
                                                 isPlaced: true,
