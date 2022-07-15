@@ -241,11 +241,9 @@ export default function OrderSummary() {
                 {active == 0 && <Button onClick={nextStep} color="red">Next</Button>}
                 {active == 2 &&
                 <>
-                        <LoadingOverlay visible={transDocId === ""}>
                         <Button onClick={() => router.push(`/order/${transDocId}`)} color="green">
                             View order
                         </Button>
-                        </LoadingOverlay>
                 </>
                 }
             </Group>
