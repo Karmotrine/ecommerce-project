@@ -118,7 +118,7 @@ export default function OrderSummary() {
                 isPaid: false
             },
             metadata: {
-                address: superjson.parse(selectedId),
+                address: superjson.parse(selectedId) as Address,
                 paymentMethod: 'cod',
                 currentStatus: {
                     isPlaced: true,
