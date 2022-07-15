@@ -120,7 +120,7 @@ export default function OrderSummary() {
                         data={[{label:"Sta. Mesa Branch", value:"0"}]}
                         defaultValue="0"
                         value={branchCode}
-                        onChange={setBranchCode}
+                        onChange={() => {setBranchCode; setDetails((prevState) => ({...prevState, branchCode:branchCode}))}}
                     />
                     <TextInput
                     label="Special notes to staff/driver"
