@@ -188,7 +188,6 @@ export default function OrderSummary() {
                                     console.log("raw")
                                     console.log(details.savedAddress)
                                     console.log("parsed")
-                                    console.log(superjson.parse(details.savedAddress))
                                     const transactionObj:Transaction = {
                                         cart: cart,
                                         paymentDetails: {
@@ -202,7 +201,7 @@ export default function OrderSummary() {
                                             isPaid: false
                                         },
                                         metadata: {
-                                            address: superjson.parse(details.savedAddress) as Address,
+                                            address: details.savedAddress as Address,
                                             paymentMethod: 'cod',
                                             currentStatus: {
                                                 isPlaced: true,
