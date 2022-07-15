@@ -62,7 +62,7 @@ export default function OrderSummary() {
     useEffect(() => {
         if (selectedId !== null && selectedId !== "")
             console.log(selectedId)
-            setDetails((prevState) => ({...prevState, savedAddress: getAddress(superjson.parse(selectedId))}))
+            setDetails((prevState) => ({...prevState, savedAddress: selectedId}))
     }, [selectedId])
 
     
