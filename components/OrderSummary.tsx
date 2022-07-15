@@ -60,7 +60,8 @@ export default function OrderSummary() {
     }, [])
 
     useEffect(() => {
-        setDetails((prevState) => ({...prevState, savedAddress: getAddress(JSON.parse(selectedId))}))
+        const parsed = JSON.parse(selectedId)
+        setDetails((prevState) => ({...prevState, savedAddress: getAddress(parsed)}))
     }, [selectedId])
     
     useEffect(() => {
