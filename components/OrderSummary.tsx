@@ -185,6 +185,10 @@ export default function OrderSummary() {
                                 radius="xl"
                                 size="md"
                                 onClick={async () => {
+                                    console.log("raw")
+                                    console.log(details.savedAddress)
+                                    console.log("parsed")
+                                    console.log(superjson.parse(details.savedAddress))
                                     const transactionObj:Transaction = {
                                         cart: cart,
                                         paymentDetails: {
