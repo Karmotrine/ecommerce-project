@@ -193,7 +193,7 @@ export default function OrderSummary() {
                                         paymentDetails: {
                                             orderId: "",
                                             orderType: orderType === "1" ? "pick-up" : "delivery",
-                                            branch: branchCode,
+                                            branch: "0",
                                                 payerId: "",
                                                 paymentId: "",
                                                 billingToken: "",
