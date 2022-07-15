@@ -9,13 +9,16 @@ import { useState } from "react"
 import superjson from "superjson"
 import { useLocalStorage } from "@mantine/hooks";
 import { useAddresses } from "../lib/hooks/useAdresses";
-import { Address } from "../lib/types";
+import { Address, Transaction } from "../lib/types";
 import { DatePicker, TimeInput } from "@mantine/dates";
 import dayjs from "dayjs";
-import { Clock } from "tabler-icons-react";
+import { Clock, Router } from "tabler-icons-react";
+import useTransactionMutation from "../lib/hooks/useTransactionMutation";
+import { useRouter } from 'next/router';
 
 export default function OrderSummary() {
     const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
+    const router = useRouter()
     const [active, setActive] = useState(0);
     const nextStep = () => setActive((current) => (current < 2 ? current + 1 : current));
     const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
@@ -98,6 +101,41 @@ export default function OrderSummary() {
             }))
     },[orderType])
 
+
+    const { addTransaction } = useTransactionMutation()
+    const [transDocId, setTransDocId] = useState("")
+    function submitTransactionCash() {
+        const transactionObj:Transaction = {
+            cart: cart,
+            paymentDetails: {
+                orderId: "",
+                orderType: 'pick-up',
+                branch: details.savedBranch ,
+                    payerId: "",
+                    paymentId: "",
+                    billingToken: "",
+                    facilitatorAccesstoken: "",
+                isPaid: false
+            },
+            metadata: {
+                address: superjson.parse(selectedId),
+                paymentMethod: 'cod',
+                currentStatus: {
+                    isPlaced: true,
+                    isShipped: false,
+                    isReceived: false,
+                    isCancelled: false,
+                },
+                DeliDate: details.savedDeliDateTime,
+                Notes: details.savedNotes
+            }
+        };
+        addTransaction(transactionObj).then(
+                (value) => {setTransDocId(value)},
+        )
+    }
+
+
     return (
         <>
         <Modal
@@ -106,7 +144,7 @@ export default function OrderSummary() {
             title="Checkout"
         >
             <>
-            <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+            <Stepper active={active} onStepClick={setActive} breakpoint="sm" color="red">
                 <Stepper.Step label="Order Details" description="Confirm details">
                     <Box>
                     {(orderType === "2") &&
@@ -171,13 +209,14 @@ export default function OrderSummary() {
                     />
                     </Box>
                 </Stepper.Step>
-                <Stepper.Step label="Payment" description="Select payment method">
+                <Stepper.Step label="Payment" description="Select method">
                     <Center>
                         <Stack>
                             <Button
                                 color="black"
                                 radius="xl"
                                 size="md"
+                                onClick={submitTransactionCash}
                             >
                                 Cash-On-Delivery (COD)
                             </Button>
@@ -188,13 +227,18 @@ export default function OrderSummary() {
                     </Center>
                 </Stepper.Step>
                 <Stepper.Completed>
-                Order has been placed. Orders can be tracked upon `&quot;`My Orders`&quot;` of your Account.
+                    <Center>
+                        <Text>
+                            Order has been placed. Orders can be also tracked upon `&quot;`My Orders`&quot;` of your Account.
+                        </Text>
+                    </Center>
                 </Stepper.Completed>
             </Stepper>
 
             <Group position="center" mt="xl">
-                <Button variant="default" onClick={prevStep}>Back</Button>
-                <Button onClick={nextStep} color="red">Next step</Button>
+                {active == 1 && <Button variant="default" onClick={prevStep}>Back</Button> }
+                {active <  2 && <Button onClick={nextStep} color="red">Next</Button>}
+                {active == 2 && <Button onClick={() => router.push(`/order/${transDocId}`)} color="green">View order</Button>}
             </Group>
             </>
         </Modal>

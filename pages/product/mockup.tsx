@@ -48,7 +48,7 @@ export default function Orders() {
     return (
         <>
             <Button onClick={async () => {
-                const newDocId = await addTransaction(transSampleTest)
+                const newDocId = await addTransaction(transSampleTest).then()
                 setState(newDocId)
                 }
             }

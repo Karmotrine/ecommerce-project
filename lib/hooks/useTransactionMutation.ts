@@ -8,9 +8,12 @@ export default function useTransactionMutation() {
     return {
         mutationInstance : mutation,
         addTransaction: async (thisTransaction:Transaction) => {
-            const newDoc = await mutation.mutateAsync(thisTransaction)
-            if (!mutation.isError)
+            try{
+                const newDoc = await mutation.mutateAsync(thisTransaction)
                 return newDoc.id
+            } catch(err) {
+                throw err
+            }
         }
     }
 }
