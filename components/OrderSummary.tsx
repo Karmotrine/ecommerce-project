@@ -190,7 +190,7 @@ export default function OrderSummary() {
                                         paymentDetails: {
                                             orderId: "",
                                             orderType: 'pick-up',
-                                            branch: details.savedBranch ,
+                                            branch: "0",
                                                 payerId: "",
                                                 paymentId: "",
                                                 billingToken: "",
