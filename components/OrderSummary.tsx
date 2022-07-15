@@ -48,7 +48,7 @@ export default function OrderSummary() {
     const [timeValue, setTimeValue] = useState(new Date())
     const [orderType, setOrderType] = useState("0")
     const [notesValue, setNotesValue] = useState("")
-    const [branchCode, setBranchCode] = useState("")
+    const [branchCode, setBranchCode] = useState("0")
     
     useEffect(() => {
         setSelectedId(details.savedAddress === null ? "" : JSON.stringify(details.savedAddress))
@@ -70,21 +70,23 @@ export default function OrderSummary() {
             <Stepper active={active} onStepClick={setActive} breakpoint="sm">
                 <Stepper.Step label="Order Details" description="Confirm details">
                     <Box>
-                    <Select
-                        label="Delivery Location"
-                        placeholder="Choose address"
-                        data={!!addresses ? addresses.map((item:Address) => 
-                                        ({value: JSON.stringify(item),
-                                        label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
-                            ) : [{label: "", value: ""}]
-                            }
-                        disabled={isEmpty}
-                        defaultValue={selectedId}
-                        value={selectedId}
-                        onChange={setSelectedId}
-                        required
-                        error={selectedId === ""}
-                    />
+                    {(details.orderType === "2") &&
+                        <Select
+                            label="Delivery Location"
+                            placeholder="Choose address"
+                            data={!!addresses ? addresses.map((item:Address) => 
+                                            ({value: JSON.stringify(item),
+                                            label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
+                                ) : [{label: "", value: ""}]
+                                }
+                            disabled={isEmpty}
+                            defaultValue={selectedId}
+                            value={selectedId}
+                            onChange={setSelectedId}
+                            required
+                            error={selectedId === ""}
+                        />
+                    }
                     <DatePicker
                       placeholder="Delivery date"
                       label="Delivery date"
@@ -115,7 +117,7 @@ export default function OrderSummary() {
                     <Select
                         label="Pick-up Location"
                         placeholder="Select Branch to pick-up"
-                        data={[{label:"Sta. Mesa Branch", value:"sta-mesa"}]}
+                        data={[{label:"Sta. Mesa Branch", value:"0"}]}
                         value={branchCode}
                         onChange={setBranchCode}
                     />

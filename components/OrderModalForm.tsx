@@ -142,7 +142,7 @@ export default function OrderModalForm() {
               </Stack>
             </Button>
             <Button 
-              onClick={() => {setBranchCode("sta-mesa"); setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setBranchCode("0"); setOrderType("2"); setActive((current) => (current < 3 ? current + 1 : current))}}
               color="red"
               size={"xl"}
             >
@@ -337,7 +337,7 @@ export default function OrderModalForm() {
               <Select
                   label="Pick-up Location"
                   placeholder="Select Branch to pick-up"
-                  data={[{value:"sta-mesa", label:"Sta. Mesa Branch"}]}
+                  data={[{value:"0", label:"Sta. Mesa Branch"}]}
                   value={branchCode}
                   onChange={setBranchCode}
               />
