@@ -70,7 +70,7 @@ export default function OrderSummary() {
             <Stepper active={active} onStepClick={setActive} breakpoint="sm">
                 <Stepper.Step label="Order Details" description="Confirm details">
                     <Box>
-                    {(details.orderType === "2") &&
+                    {(orderType === "2") &&
                         <Select
                             label="Delivery Location"
                             placeholder="Choose address"
@@ -88,8 +88,8 @@ export default function OrderSummary() {
                         />
                     }
                     <DatePicker
-                      placeholder="Delivery date"
-                      label="Delivery date"
+                      placeholder={(orderType === "2") ? "Delivery date" : "Pick-up date"}
+                      label={(orderType === "2") ? "Delivery date" : "Pick-up date"}
                       minDate={dayjs(dateValue).toDate()}
                       maxDate={dayjs(dateValue).add(2, 'days').toDate()}
                       defaultValue={dateValue}
@@ -98,8 +98,8 @@ export default function OrderSummary() {
                       required
                     />
                     <TimeInput
-                    label="Delivery time"
-                    placeholder="Delivery time"
+                    label={(orderType === "2") ? "Delivery time" : "Pick-up time"}
+                    placeholder={(orderType === "2") ? "Delivery time" : "Pick-up time"}
                     icon={<Clock size={16} />}
                     defaultValue={timeValue}
                     format="12"
@@ -115,7 +115,7 @@ export default function OrderSummary() {
                         onChange={setOrderType}
                     />
                     <Select
-                        label="Pick-up Location"
+                        label={(orderType === "2") ? "Branch Location" : "Pick-up Location"}
                         placeholder="Select Branch to pick-up"
                         data={[{label:"Sta. Mesa Branch", value:"0"}]}
                         defaultValue="0"
