@@ -120,7 +120,7 @@ export default function OrderSummary() {
                             label="Delivery Location"
                             placeholder="Choose address"
                             data={!!addresses ? addresses.map((item:Address) => 
-                                            ({value: JSON.stringify(item),
+                                            ({value: superjson.stringify(item),
                                             label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
                                 ) : [{label: "", value: ""}]
                                 }
@@ -188,6 +188,14 @@ export default function OrderSummary() {
                                     console.log("raw")
                                     console.log(details.savedAddress)
                                     console.log(typeof(details.savedAddress))
+                                    const parsed = JSON.parse(details.savedAddress)
+                                    console.log("parsed")
+                                    console.log(parsed)
+                                    console.log(typeof(parsed))
+                                    const parsed2 = superjson.parse(details.savedAddress)
+                                    console.log("parsed2")
+                                    console.log(parsed2)
+                                    console.log(typeof(parsed2))
                                     const transactionObj:Transaction = {
                                         cart: cart,
                                         paymentDetails: {
