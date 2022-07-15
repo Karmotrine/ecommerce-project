@@ -104,6 +104,7 @@ export interface Transaction {
 	}
     cart: CartItem[]
     metadata: {
+        userid: string
         address: Address
         paymentMethod: 'cod' | 'cc' | 'paypal'  /*paymentSource on paypalbuttons*/
         currentStatus: orderStatus

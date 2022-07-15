@@ -15,8 +15,10 @@ import dayjs from "dayjs";
 import { Clock, Router } from "tabler-icons-react";
 import useTransactionMutation from "../lib/hooks/useTransactionMutation";
 import { useRouter } from 'next/router';
+import { useUser } from "../lib/hooks/useUser";
 
 export default function OrderSummary() {
+    const user = useUser()
     const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
     const router = useRouter()
     const [active, setActive] = useState(0);
@@ -199,6 +201,7 @@ export default function OrderSummary() {
                                             isPaid: false
                                         },
                                         metadata: {
+                                            userid: user.data.uid,
                                             address: parsed2 as Address,
                                             paymentMethod: 'cod',
                                             currentStatus: {

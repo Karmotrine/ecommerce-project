@@ -146,11 +146,12 @@ export const transactionConverter: FirestoreDataConverter<Transaction> = {
             },
             cart: data.cart,
             metadata: {
-                address: data.address,
-                paymentMethod: data.paymentMethod,
-                currentStatus: data.currentStatus,
-                DeliDate: data.DeliDate,
-                Notes: data.Notes
+                userid: data.metadata.user.id,
+                address: data.metadata.address,
+                paymentMethod: data.metadata.paymentMethod,
+                currentStatus: data.metadata.currentStatus,
+                DeliDate: data.metadata.DeliDate,
+                Notes: data.metadata.Notes
             }
         }
     },
@@ -170,6 +171,7 @@ export const transactionConverter: FirestoreDataConverter<Transaction> = {
             },
             cart: transaction.cart,
             metadata: {
+                userid: transaction.metadata.userid,
                 address: transaction.metadata.address,
                 paymentMethod: transaction.metadata.paymentMethod,
                 currentStatus: transaction.metadata.currentStatus,
