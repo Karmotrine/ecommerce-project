@@ -38,7 +38,7 @@ export default function OrderModalForm() {
   const { isActive, setOrderActive } = useOrderModal((state) => state);
   const [active, setActive] = useState(0);
   const nextStep = () => {
-    const thisAddressObject = getAddress(JSON.parse(selectedId));
+    const thisAddressObject = getAddress(superjson.parse(selectedId));
     const deliDateTime = dateValue
     deliDateTime.setHours(timeValue.getHours())
     deliDateTime.setMinutes(timeValue.getMinutes())
@@ -162,7 +162,7 @@ export default function OrderModalForm() {
                     label="Delivery Location"
                     placeholder="Choose address"
                     data={!!addresses ? addresses.map((item:Address) => 
-                                      ({value: JSON.stringify(item),
+                                      ({value: superjson.stringify(item),
                                       label: `${item.nameId} (${item.metadata.addressLine}, ${item.metadata.cityMun}, ${item.metadata.province}, ${item.metadata.region}, ${item.metadata.postalCode})`})
                           ) : [{label: "", value: ""}]
                         }   //load useAddress()

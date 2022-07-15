@@ -51,6 +51,10 @@ export default function OrderSummary() {
     const [branchCode, setBranchCode] = useState("0")
     
     useEffect(() => {
+        setDetails((prevState) => ({...prevState, savedAddress: getAddress(superjson.parse(selectedId))}))
+    }, [selectedId])
+
+    useEffect(() => {
         setSelectedId(details.savedAddress === null ? "" : JSON.stringify(details.savedAddress))
         setDateValue(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
         setTimeValue(details.savedDeliDateTime === null ? new Date() : details.savedDeliDateTime)
@@ -59,10 +63,7 @@ export default function OrderSummary() {
         setOrderType(details.savedOrderType === null ? "0" : details.savedOrderType)
     }, [])
 
-    useEffect(() => {
-        const parsed = JSON.parse(selectedId)
-        setDetails((prevState) => ({...prevState, savedAddress: getAddress(parsed)}))
-    }, [selectedId])
+
     
     useEffect(() => {
         const deliDateTime = dateValue
