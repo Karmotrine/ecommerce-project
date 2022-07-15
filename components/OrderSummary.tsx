@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Grid, Group, Modal, Select, Space, Stack, Stepper, Text, TextInput } from "@mantine/core";
+import { Box, Button, Center, Divider, Grid, Group, LoadingOverlay, Modal, Select, Space, Stack, Stepper, Text, TextInput } from "@mantine/core";
 import React, { useEffect } from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { PayPalScriptOptions } from "@paypal/paypal-js/types/script-options";
@@ -104,7 +104,7 @@ export default function OrderSummary() {
 
     const { addTransaction } = useTransactionMutation()
     const [transDocId, setTransDocId] = useState("")
-    function submitTransactionCash() {
+    async function submitTransactionCash() {
         const transactionObj:Transaction = {
             cart: cart,
             paymentDetails: {
@@ -130,9 +130,8 @@ export default function OrderSummary() {
                 Notes: details.savedNotes
             }
         };
-        addTransaction(transactionObj).then(
-                (value) => {setTransDocId(value)},
-        )
+        const docId = await addTransaction(transactionObj)
+        setTransDocId(docId)
     }
 
 
@@ -237,8 +236,16 @@ export default function OrderSummary() {
 
             <Group position="center" mt="xl">
                 {active == 1 && <Button variant="default" onClick={prevStep}>Back</Button> }
-                {active <  2 && <Button onClick={nextStep} color="red">Next</Button>}
-                {active == 2 && <Button onClick={() => router.push(`/order/${transDocId}`)} color="green">View order</Button>}
+                {active == 0 && <Button onClick={nextStep} color="red">Next</Button>}
+                {active == 2 &&
+                <>
+                        <Button onClick={() => router.push(`/order/${transDocId}`)} color="green">
+                            <LoadingOverlay visible={transDocId === ""}>
+                                View order
+                            </LoadingOverlay>
+                        </Button>
+                </>
+                }
             </Group>
             </>
         </Modal>
