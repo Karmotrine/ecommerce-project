@@ -190,7 +190,7 @@ export default function OrderSummary() {
                                         paymentDetails: {
                                             orderId: "",
                                             orderType: 'pick-up',
-                                            branch: "0",
+                                            branch: branchCode,
                                                 payerId: "",
                                                 paymentId: "",
                                                 billingToken: "",
@@ -198,7 +198,7 @@ export default function OrderSummary() {
                                             isPaid: false
                                         },
                                         metadata: {
-                                            address: superjson.parse(selectedId) as Address,
+                                            address: superjson.parse(details.savedAddress) as Address,
                                             paymentMethod: 'cod',
                                             currentStatus: {
                                                 isPlaced: true,
