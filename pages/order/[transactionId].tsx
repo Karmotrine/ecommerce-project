@@ -201,7 +201,7 @@ export default function OrderDetailPage() {
                             color="orange"
                             radius="lg"
                             size="lg"
-                            disabled={status.isShipped}
+                            disabled={status.isReceived}
                         >
                             Order Received
                         </Button>
