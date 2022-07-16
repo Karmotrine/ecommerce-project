@@ -18,10 +18,10 @@
 
 
 <p align="center">
-  <img width="250" height="250" src="https://www.gstatic.com/devrel-devsite/prod/vc901a5242fa1f51622c87b6b540eca04c81baea0c307ecf1bb2dd2ea202bf099/firebase/images/touchicon-180.png"/>
-  <img width="250" height="250" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"/>
-  <img width="250" height="250" src="https://ivazz.com/wp-content/uploads/2021/05/react.png"/>
-  <img width="50%" height="50%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png"/>
+  <img width="30%" height="30%" src="https://www.gstatic.com/devrel-devsite/prod/vc901a5242fa1f51622c87b6b540eca04c81baea0c307ecf1bb2dd2ea202bf099/firebase/images/touchicon-180.png"/>
+  <img width="30%" height="30%" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"/>
+  <img width="30%" height="30%" src="https://ivazz.com/wp-content/uploads/2021/05/react.png"/>
+  <img width="30%" height="30%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png"/>
 </p>
 - HTML, CSS (Mantine), JS (React and Next.js)
 
