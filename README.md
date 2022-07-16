@@ -14,6 +14,10 @@
 ## WEBSITE:
 - URL : https://imbento.vercel.app/
 
+- Admin Account:
+Imbento.2122@gmail.com
+DLxIe71uAEq
+
 #### Technologies Used:
 
 
