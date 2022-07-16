@@ -108,7 +108,7 @@ export interface Transaction {
         address: Address
         paymentMethod: 'cod' | 'cc' | 'paypal'  /*paymentSource on paypalbuttons*/
         currentStatus: orderStatus
-        DeliDate: string
+        DeliDate: Date | Timestamp
         Notes: string
     }
 }

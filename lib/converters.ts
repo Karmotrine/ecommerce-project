@@ -134,19 +134,19 @@ export const transactionConverter: FirestoreDataConverter<Transaction> = {
         return {
             paymentDetails: {
                 /* is the document id on 'transactions' collection*/
-                orderId: data.orderId,
-                orderType: data.orderType,
-                branch: data.branch,
+                orderId: data.paymentDetails.orderId,
+                orderType: data.paymentDetails.orderType,
+                branch: data.paymentDetails.branch,
                 /*if ('paypal/cc')*/
-                    payerId: data.payerId,
-                    paymentId: data.paymentId,
-                    billingToken: data.paymentId,
+                    payerId: data.paymentDetails.payerId,
+                    paymentId: data.paymentDetails.paymentId,
+                    billingToken: data.paymentDetails.paymentId,
                     facilitatorAccesstoken: data.facilitatorAccesstoken,
-                isPaid: data.isPaid
+                isPaid: data.paymentDetails.isPaid
             },
             cart: data.cart,
             metadata: {
-                userid: data.metadata.user.id,
+                userid: data.metadata.userid,
                 address: data.metadata.address,
                 paymentMethod: data.metadata.paymentMethod,
                 currentStatus: data.metadata.currentStatus,
