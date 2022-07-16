@@ -15,11 +15,16 @@
 - URL : https://imbento.vercel.app/
 
 #### Technologies Used:
-![alt text](https://www.gstatic.com/devrel-devsite/prod/vc901a5242fa1f51622c87b6b540eca04c81baea0c307ecf1bb2dd2ea202bf099/firebase/images/touchicon-180.png)
-![alt text](https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png)
-![alt text](https://ivazz.com/wp-content/uploads/2021/05/react.png)
-![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png)
+
+
+<p align="center">
+![alt text](https://www.gstatic.com/devrel-devsite/prod/vc901a5242fa1f51622c87b6b540eca04c81baea0c307ecf1bb2dd2ea202bf099/firebase/images/touchicon-180.png =250x250)
+![alt text](https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png =250x250)
+![alt text](https://ivazz.com/wp-content/uploads/2021/05/react.png =250x250)
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png =250x250)
+</p>
 - HTML, CSS (Mantine), JS (React and Next.js)
+
 
 ## Local Hosting
 
