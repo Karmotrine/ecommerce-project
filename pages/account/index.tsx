@@ -45,7 +45,7 @@ export default function Account(){
                         <Button 
                             color="red" 
                             fullWidth
-                            onClick={() => {}}
+                            onClick={() => signOut.mutate()}
                         >
                             Log-out
                         </Button>
