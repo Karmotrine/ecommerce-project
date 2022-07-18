@@ -381,9 +381,8 @@ export default function OrderModalForm() {
         {(active == 2) && 
               <Button 
                 disabled = {
-                    !isJSON(selectedId) ||
+                    (orderType === "2" && !isJSON(selectedId)) ||
                     (dayjs(timeValue).hour() - 8) < 0 || (dayjs(timeValue).hour() + 4) > 23 ||
-                    orderType === "1"
                 }
                 onClick={
                   nextStep
