@@ -13,7 +13,7 @@ import { Address, Transaction } from "../lib/types";
 import { DatePicker, TimeInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import { Clock, Router } from "tabler-icons-react";
-import useTransactionMutation from "../lib/hooks/useTransactionMutation";
+import { useTransactionMutation } from "../lib/hooks/useTransactionMutation";
 import { useRouter } from 'next/router';
 import { useUser } from "../lib/hooks/useUser";
 

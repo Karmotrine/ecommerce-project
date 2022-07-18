@@ -1,13 +1,14 @@
-import { Card, Center, Container, Divider, Group, Stepper, Text, Title, Image, Stack, Space, Badge, Collapse, Box, Button, Accordion } from "@mantine/core"
+import { Card, Center, Container, Divider, Group, Stepper, Text, Title, Image, Stack, Space, Badge, Collapse, Box, Button, Accordion, SimpleGrid } from "@mantine/core"
 import { useRouter } from "next/router"
 import { useTransaction } from "../../lib/hooks/useTransaction"
 import { orderStatus, Transaction } from "../../lib/types"
 import NotFoundTitle from "../404"
 import { useEffect, useState } from "react"
-import { BrandPaypal, Checklist, ChevronDown, ChevronUp, CircleCheck, PaperBag, TruckDelivery, UserCheck, Wallet } from "tabler-icons-react"
+import { BrandPaypal, Checklist, CircleCheck, PaperBag, TruckDelivery, UserCheck, Wallet } from "tabler-icons-react"
 import { CartItem } from "../../lib/hooks/useCart"
 import dayjs from "dayjs"
 import { Timestamp } from "firebase/firestore"
+import { useTransactionDocMutation } from "../../lib/hooks/useTransactionMutation"
 
 function OrderStatusStepper(thisTrans:Transaction) {
     const [active, setActive] = useState(0)
@@ -71,6 +72,11 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
     const cart = Object.values(thisTrans.cart)
     const address = thisTrans.metadata.address
     const timestamp = (thisTrans.metadata.DeliDate) as Timestamp
+    //
+    const total = cart.reduce<number>((prev,item) => {
+            const itemTotal = (parseFloat(item.metadata.price) - (parseFloat(item.metadata.price) * (parseInt(item.metadata.discount)/100)))*item.quantity;
+            return prev + itemTotal
+            }, 0)
     return(
         <>
         <Accordion initialItem={1} iconPosition="right" multiple>
@@ -99,7 +105,8 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
                 </Container>
             </Accordion.Item>
             <Accordion.Item label="Cart Items">
-            {cart.map((item) => (
+            {cart.map((item) => {
+                return (
                     <Container key={item.id}>
                     <Group>
                         <Image 
@@ -148,8 +155,15 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
                     <Space py={10} />
                     <Divider />
                 </Container>
-            ))
+            )
+            })
             }
+            <Container>
+                <Group style={{justifyContent: "space-between", flexDirection:"row"}}>
+                    <Text size="xl" weight={600}>Total:</Text>
+                    <Text size="xl" weight={600}>₱{total}</Text>
+                </Group>
+            </Container>
             </Accordion.Item>
         </Accordion>
         </>
@@ -160,6 +174,7 @@ export default function OrderDetailPage() {
     const router = useRouter();
     const slugId = router.query.transactionId as string
     const transactionQuery = useTransaction(slugId!)
+    const { fulfillTransaction, confirmShipping, cancelTransaction } = useTransactionDocMutation(slugId)
     if (transactionQuery.isLoading) {
         return (
             <>
@@ -175,7 +190,6 @@ export default function OrderDetailPage() {
         )
     }
     if (transactionQuery.data == undefined) {
-        console.log(slugId)
         return (<NotFoundTitle />)
     }
     const transactionObj = transactionQuery.data as Transaction
@@ -186,26 +200,31 @@ export default function OrderDetailPage() {
         <>
             <Container size={600} py={50}>
                 <Card radius="md" shadow="xs">
-                    <Title>Order Details</Title>
-                    <Text px={0} color="dimmed" size="sm" weight={300}>Transaction code: {slugId}</Text>
+                    <SimpleGrid cols={2} spacing={73}>
+                    <Stack spacing={0}>
+                        <Title>Order Details</Title>
+                        <Text px={0} color="dimmed" size="xs" weight={300}>Transaction code: {slugId}</Text>
+                    </Stack>
+                        <Center inline={false}>
+                        <Button 
+                            color="green"
+                            radius="lg"
+                            size="xl"
+                            disabled={status.isReceived}
+                            onClick={() => fulfillTransaction()}
+                        >
+                            {status.isReceived ? "Order Received" : "Receive Order"}
+                        </Button>
+                    </Center>
+                    </SimpleGrid>
                     <Space py={5} />
                     <Divider />
                     <Center py={15}>
                         <OrderStatusStepper {...transactionObj}/>
                     </Center>
                     <Divider py={0}/>
-                    < OrderStatusCartDisplay {...transactionObj} />
+                        <OrderStatusCartDisplay {...transactionObj} />
                     <Space py={10} />
-                    <Center>
-                        <Button 
-                            color="orange"
-                            radius="lg"
-                            size="lg"
-                            disabled={status.isReceived}
-                        >
-                            Order Received
-                        </Button>
-                    </Center>
                 </Card>
             </Container>
         </>
