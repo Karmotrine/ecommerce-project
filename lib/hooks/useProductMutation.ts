@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid"
 import { useMutation, useQueryClient, UseMutationResult } from "react-query"
-import { doc, setDoc, Timestamp } from "firebase/firestore"
+import { deleteDoc, doc, setDoc, Timestamp, updateDoc } from "firebase/firestore"
 import { ref, uploadBytes, uploadString } from "firebase/storage"
 
 import { collections, storage } from "../firebaseClient"
@@ -54,4 +54,25 @@ export function useProductMutation(
                 }
             }
         )
+}
+
+export function useProductDocMutation() {
+    return {
+        adjustDiscount: (newDiscount: string, prodId: string) => {
+            const docRef = doc(collections.products, prodId)
+            updateDoc(docRef,{
+                "metadata.discount": newDiscount,
+            })
+        },
+        adjustStatus: (prevStatus: boolean ,prodId: string) => {
+            const docRef = doc(collections.products, prodId)
+            updateDoc(docRef,{
+                "active": !prevStatus,
+            })
+        },
+        deleteProduct: (prodId: string) => {
+            const docRef = doc(collections.products, prodId)
+            deleteDoc(docRef)
+        }
+    }
 }

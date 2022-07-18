@@ -67,14 +67,14 @@ export function OrderDataGrid(data: Transaction[]) {
       <td>
         <Group spacing="sm">
           <div>
-            <Anchor component="a" style={{color:"inherit"}}>
-              <Text size="sm" weight={500} onClick={() => router.push(`/order/${item._id}`)}>
+            <Anchor component="a" style={{color:"inherit"}} onClick={() => router.push(`/order/${item._id}`)}>
+              <Text size="sm" weight={500}>
                 {item._id}
               </Text>
-            </Anchor>
             <Text color="dimmed" size="xs">
               UID: {item.metadata.userid}
             </Text>
+            </Anchor>
           </div>
         </Group>
       </td>

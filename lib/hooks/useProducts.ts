@@ -11,7 +11,7 @@ function isQueryConstraints(value: unknown): value is QueryConstraint[] {
 export function useProducts(
     key: QueryKey,
     constraintsOrNamedQuery?: QueryConstraint[] | string,
-): UseQueryResult<Product[]> {
+): UseQueryResult {
     const collection = collections.products;
     let ref: Query<Product> | NamedQuery<Product>
 
@@ -25,10 +25,11 @@ export function useProducts(
         ref = query(collection);
     }
 
-    return useFirestoreQueryData<Product>(
+    return useFirestoreQueryData(
         key,
         ref,
         {
+            idField:"id",
             subscribe: true
         }
     );
