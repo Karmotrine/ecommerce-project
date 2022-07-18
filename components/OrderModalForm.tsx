@@ -37,12 +37,32 @@ export default function OrderModalForm() {
   const router = useRouter()
   const { isActive, setOrderActive } = useOrderModal((state) => state);
   const [active, setActive] = useState(0);
+
+  const [orderType, setOrderType] = useState("0"); // 1 - pick-up, 2 - delivery
+  const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
+  const [addAddressForm, setAddressForm] = useState(false)
+  const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
+  const [ regionValue, setRegionValue ] = useState("")
+  const [ provinceValue, setProvinceValue ] = useState("")
+  const [ cityValue, setCityValue ] = useState("")
+  const [ otherAddressInfo, setOtherAddressInfo ] = useState({
+    nickname:"",
+    recipient:"",
+    addressline:"",
+    postalcode:"",
+  })
+  const [dateValue, setDateValue] = useState<Date | null>(new Date())
+  const [timeValue, setTimeValue] = useState(new Date())
+  const [notesValue, setNotesValue] = useState("")
+  const [selectedId, setSelectedId] = useState<string>("")
+  const [branchCode, setBranchCode] = useState("0")
+
   const nextStep = () => {
-    const thisAddressObject = getAddress(superjson.parse(selectedId));
     const deliDateTime = dateValue
     deliDateTime.setHours(timeValue.getHours())
     deliDateTime.setMinutes(timeValue.getMinutes())
     if (orderType === "2") {
+      const thisAddressObject = getAddress(superjson.parse(selectedId));
       setDetails({
         savedAddress:thisAddressObject,
         savedDeliDateTime: deliDateTime,
@@ -64,28 +84,9 @@ export default function OrderModalForm() {
   };
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-  const [orderType, setOrderType] = useState("0"); // 1 - pick-up, 2 - delivery
-  const { addAddress, addresses, getAddress, isEmpty } = useAddresses()
-  const [addAddressForm, setAddressForm] = useState(false)
-  const { getProvincesByRegion, getCityMunByProvince, sort } = usePHAddressForms()
-  const [ regionValue, setRegionValue ] = useState("")
-  const [ provinceValue, setProvinceValue ] = useState("")
-  const [ cityValue, setCityValue ] = useState("")
-  const [ otherAddressInfo, setOtherAddressInfo ] = useState({
-    nickname:"",
-    recipient:"",
-    addressline:"",
-    postalcode:"",
-  })
-  const [dateValue, setDateValue] = useState<Date | null>(new Date())
-  const [timeValue, setTimeValue] = useState(new Date())
-  const [notesValue, setNotesValue] = useState("")
-  const [selectedId, setSelectedId] = useState<string>("")
-  const [branchCode, setBranchCode] = useState("0")
-
   
   useEffect(() => {
-    setActive(user.data ? 1 : 0)
+    setActive(user.data ? 1 : 1)
   }, [user.data, isActive]);
 
   const uiConfig = {
@@ -132,7 +133,7 @@ export default function OrderModalForm() {
             spacing={"md"}
           >
             <Button
-              onClick={() => {setOrderType("1"); setActive((current) => (current < 3 ? current + 1 : current))}}
+              onClick={() => {setBranchCode("0"); setOrderType("1"); setActive((current) => (current < 3 ? current + 1 : current))}}
               size={"xl"}
               color="red"
             >
