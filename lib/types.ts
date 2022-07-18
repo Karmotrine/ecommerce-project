@@ -89,6 +89,7 @@ export interface Content {
 }
 
 export interface Transaction {
+    _id?: string
 	paymentDetails: {
         /* is the document id on 'transactions' collection*/
 		orderId: string 

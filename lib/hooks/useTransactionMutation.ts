@@ -1,5 +1,5 @@
-import { doc, updateDoc } from "firebase/firestore";
-import { useFirestoreCollectionMutation, useFirestoreDocumentMutation, useFirestoreTransaction } from "@react-query-firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { useFirestoreCollectionMutation, useFirestoreDocumentDeletion, useFirestoreDocumentMutation, useFirestoreTransaction } from "@react-query-firebase/firestore";
 import { collections } from "../firebaseClient";
 import { Transaction } from "../types";
 
@@ -19,31 +19,40 @@ export function useTransactionMutation(transId?: string) {
     }
 }
 
-export function useTransactionDocMutation(transId: string) {
-    const docRef = doc(collections.transactions, transId)
+export function useTransactionDocMutation() {
+/*    
     const docMutation = useFirestoreDocumentMutation(docRef, {
         merge: true,
-    })
+    }) 
+*/
     return {
-        fulfillTransaction: () => {
+        fulfillTransaction: (transId: string) => {
+            const docRef = doc(collections.transactions, transId)
             updateDoc(docRef,{
                 "metadata.currentStatus.isReceived": true,
             })
         },
-        confirmPayment: () => {
+        confirmPayment: (transId: string) => {
+            const docRef = doc(collections.transactions, transId)
             updateDoc(docRef,{
                 "paymentDetails.isPaid": true,
             })
         },
-        confirmShipping: () => {
+        confirmShipping: (transId: string) => {
+            const docRef = doc(collections.transactions, transId)
             updateDoc(docRef,{
                 "metadata.currentStatus.isShipped": true,
             })
         },
-        cancelTransaction: () => {
+        cancelTransaction: (transId: string) => {
+            const docRef = doc(collections.transactions, transId)
             updateDoc(docRef,{
                 "metadata.currentStatus.isCancelled": true,
             })
+        },
+        deleteTransaction: (transId: string) => {
+            const docRef = doc(collections.transactions, transId)
+            deleteDoc(docRef)
         }
     }
 }

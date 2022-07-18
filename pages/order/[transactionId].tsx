@@ -5,7 +5,6 @@ import { orderStatus, Transaction } from "../../lib/types"
 import NotFoundTitle from "../404"
 import { useEffect, useState } from "react"
 import { BrandPaypal, Checklist, CircleCheck, PaperBag, TruckDelivery, UserCheck, Wallet } from "tabler-icons-react"
-import { CartItem } from "../../lib/hooks/useCart"
 import dayjs from "dayjs"
 import { Timestamp } from "firebase/firestore"
 import { useTransactionDocMutation } from "../../lib/hooks/useTransactionMutation"
@@ -174,7 +173,7 @@ export default function OrderDetailPage() {
     const router = useRouter();
     const slugId = router.query.transactionId as string
     const transactionQuery = useTransaction(slugId!)
-    const { fulfillTransaction, confirmShipping, cancelTransaction } = useTransactionDocMutation(slugId)
+    const { fulfillTransaction, cancelTransaction } = useTransactionDocMutation()
     if (transactionQuery.isLoading) {
         return (
             <>
@@ -211,7 +210,7 @@ export default function OrderDetailPage() {
                             radius="lg"
                             size="xl"
                             disabled={status.isReceived}
-                            onClick={() => fulfillTransaction()}
+                            onClick={() => fulfillTransaction(slugId)}
                         >
                             {status.isReceived ? "Order Received" : "Receive Order"}
                         </Button>
