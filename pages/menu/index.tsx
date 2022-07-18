@@ -2,6 +2,7 @@ import { Container, Text, Divider,
          createStyles, Center,
          SimpleGrid, Paper, Space } from "@mantine/core";
 import { where } from "firebase/firestore";
+import LoaderComp from "../../components/LoaderComp";
 import ProductCard from "../../components/ProductCard";
 import { useProducts } from "../../lib/hooks/useProducts";
 import { ProductType } from "../../lib/types";
@@ -53,6 +54,13 @@ function ProductTypeSubsection({title, type}:PTypeSubsectionProps) {
             where('active', '==', true)
         ]
     );
+    if (products.isLoading) {
+        return(
+            <>
+                <LoaderComp />
+            </>
+        )
+    }
     return (
         <>
         <Paper shadow="xs" p="md">

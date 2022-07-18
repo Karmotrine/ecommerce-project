@@ -4,10 +4,12 @@ import { useTransaction } from "../../lib/hooks/useTransaction"
 import { orderStatus, Transaction } from "../../lib/types"
 import NotFoundTitle from "../404"
 import { useEffect, useState } from "react"
-import { BrandPaypal, Checklist, CircleCheck, PaperBag, TruckDelivery, UserCheck, Wallet } from "tabler-icons-react"
+import { BrandPaypal, Checklist, CircleCheck, PaperBag, TruckDelivery, User, UserCheck, Wallet } from "tabler-icons-react"
 import dayjs from "dayjs"
 import { Timestamp } from "firebase/firestore"
 import { useTransactionDocMutation } from "../../lib/hooks/useTransactionMutation"
+import { useUser } from "../../lib/hooks/useUser"
+import LoaderComp from "../../components/LoaderComp"
 
 function OrderStatusStepper(thisTrans:Transaction) {
     const [active, setActive] = useState(0)
@@ -170,6 +172,7 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
 }
 
 export default function OrderDetailPage() {
+    const user = useUser()
     const router = useRouter();
     const slugId = router.query.transactionId as string
     const transactionQuery = useTransaction(slugId!)
@@ -177,7 +180,7 @@ export default function OrderDetailPage() {
     if (transactionQuery.isLoading) {
         return (
             <>
-                Loading
+                <LoaderComp />
             </>
         )
     }
@@ -205,7 +208,7 @@ export default function OrderDetailPage() {
                         <Text px={0} color="dimmed" size="xs" weight={300}>Transaction code: {slugId}</Text>
                     </Stack>
                         <Center inline={false}>
-                        <Button 
+                        {user.data?.uid === transactionObj.metadata.userid && <Button
                             color="green"
                             radius="lg"
                             size="xl"
@@ -213,7 +216,7 @@ export default function OrderDetailPage() {
                             onClick={() => fulfillTransaction(slugId)}
                         >
                             {status.isReceived ? "Order Received" : "Receive Order"}
-                        </Button>
+                        </Button>}
                     </Center>
                     </SimpleGrid>
                     <Space py={5} />

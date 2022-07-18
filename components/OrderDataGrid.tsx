@@ -8,22 +8,15 @@ import { Timestamp } from "firebase/firestore";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 
-const CONFIRM_SHIP_NOTIF = (transId:string) => {
+const CONFIRM_FULFILL_NOTIF = (transId:string) => {
   return ({
-    title: 'Shipment Confirmed.',
-    message: `Shipment confirmed for Order ID: ${transId}`,
+    title: 'Order Received',
+    message: `Order ID: ${transId} has been received.`,
     color: 'green',
     icon: <Check size="sm" />,
   })
 }
-const CONFIRM_PAY_NOTIF = (transId:string) => {
-  return ({
-    title: 'Payment Confirmed.',
-    message: `Payment confirmed for Order ID: ${transId}`,
-    color: 'green',
-    icon: <Check size="sm" />,
-  })
-}
+
 const CONFIRM_CANCEL_NOTIF = (transId:string) => {
   return ({
     title: 'Transaction Cancelled',
@@ -33,14 +26,6 @@ const CONFIRM_CANCEL_NOTIF = (transId:string) => {
   })
 }
 
-const CONFIRM_DELETE_NOTIF = (transId:string) => {
-  return ({
-    title: 'Transaction Record Deleted',
-    message: `Order ID: ${transId}'s record has been deleted`,
-    color: 'green',
-    icon: <Check size="sm" />,
-  })
-}
 
 
 function BadgeSelector(item: Transaction) {
@@ -66,9 +51,9 @@ function BadgeSelector(item: Transaction) {
   }
 }
 
-export function OrderAdminDataGrid(data: Transaction[]) {
+export function OrderDataGrid(data: Transaction[]) {
   const router = useRouter()
-  const {confirmPayment, confirmShipping, cancelTransaction, deleteTransaction } = useTransactionDocMutation()
+  const { fulfillTransaction, cancelTransaction } = useTransactionDocMutation()
   const rows = data.map((item) => {
     const cart = Object.values(item.cart)
     const status = item.metadata.currentStatus
@@ -113,29 +98,15 @@ export function OrderAdminDataGrid(data: Transaction[]) {
             <Menu.Item 
               icon={<Note size={16} />}
               disabled={item.paymentDetails.isPaid}
-              onClick={() => {confirmPayment(item._id); showNotification(CONFIRM_PAY_NOTIF(item._id))}}
+              onClick={() => {fulfillTransaction(item._id); showNotification(CONFIRM_FULFILL_NOTIF(item._id))}}
             >
-              Confirm payment</Menu.Item>
-            <Menu.Item 
-              icon={<Note size={16} />}
-              disabled={status.isShipped}
-              onClick={() =>{confirmShipping(item._id); showNotification(CONFIRM_SHIP_NOTIF(item._id))}}
-            >
-              Mark as shipped/picked-up
-            </Menu.Item>
+              Fulfill order</Menu.Item>
             <Menu.Item 
               icon={<ReportAnalytics size={16} />} 
               color="red"
               onClick={() => {cancelTransaction(item._id); showNotification(CONFIRM_CANCEL_NOTIF(item._id))}}
               >
                 Cancel Order
-            </Menu.Item>
-            <Menu.Item 
-              icon={<Trash size={16} />}
-              color="red"
-              onClick={() => {deleteTransaction(item._id); showNotification(CONFIRM_DELETE_NOTIF(item._id))}}
-            >
-              Delete Record
             </Menu.Item>
           </Menu>
         </Group>
@@ -153,7 +124,6 @@ export function OrderAdminDataGrid(data: Transaction[]) {
                 <th>Total Price</th>
                 <th style={{paddingLeft:20}}>Status</th>
                 <th></th>
-
             </tr>
         </thead>
         <tbody>{rows}</tbody>
