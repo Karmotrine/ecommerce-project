@@ -1,6 +1,40 @@
+# CS FREE ELECTIVE 2: E-COMMERCE
+
+## MEMBERS:
+- Nava, Elora 
+- Ureña, Yuan Ragile
+
+## COURSE:
+- Course Code: COSC-FE2
+- Course Name: CS Free Elective 2
+- Course Project: E-Commerce Website
+- Category: Japanese Food
+- Product: Bento and Ramen kits
+
+## WEBSITE:
+- URL : https://imbento.vercel.app/
+
+Admin Account:
+Imbento.2122@gmail.com
+DLxIe71uAEq
+
+#### Technologies Used:
+
+
+<p align="center">
+  <img width="30%" height="30%" src="https://www.gstatic.com/devrel-devsite/prod/vc901a5242fa1f51622c87b6b540eca04c81baea0c307ecf1bb2dd2ea202bf099/firebase/images/touchicon-180.png"/>
+  <img width="30%" height="30%" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"/>
+  <img width="30%" height="30%" src="https://ivazz.com/wp-content/uploads/2021/05/react.png"/>
+  <img width="30%" height="30%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png"/>
+</p>
+- HTML, CSS (Mantine), JS (React and Next.js)
+
+
+## Local Hosting
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+### Getting Started
 
 First, run the development server:
 
@@ -12,23 +46,3 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
