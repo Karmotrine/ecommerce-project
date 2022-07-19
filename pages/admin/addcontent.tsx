@@ -1,6 +1,7 @@
 import { Container, Text, Divider, Paper, createStyles, Space, TextInput, Button, Center, Select, Anchor } from "@mantine/core"
 import { showNotification } from "@mantine/notifications"
 import { Timestamp } from "firebase/firestore"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { AlertCircle, Check } from "tabler-icons-react"
@@ -77,12 +78,14 @@ export default function AddArticle() {
     return(
         <>
             <Container py={48} style={{paddingBottom:80}}>
-                <Text className={classes.headerFont}>Update Content</Text>
+                <Text className={classes.headerFont}>Add Content</Text>
                 <Divider />
                 <Space py={4}/>
-                <Anchor component="a" style={{color:"inherit"}} onClick={() => router.push(`/admin/articles`)}>
-                    <Text color="gray" size="xs">{"< Back to Content panel"}</Text>
-                </Anchor>
+                <Link passHref href={"/admin/articles"}>
+                    <Anchor component="a" style={{color:"inherit"}}>
+                        <Text color="gray" size="xs">{"< Back to Content panel"}</Text>
+                    </Anchor>
+                </Link>
                 <Space py={8}/>
                 <Container size={500}>
                     <Paper  shadow="xs" p="md">
@@ -126,7 +129,7 @@ export default function AddArticle() {
                             onClick={() => onSubmit()}
                             disabled={titleValue === "" || heroValue === "" || excerptValue === "" || contentValue === ""}
                         >
-                            Update Content
+                            Add Content
                         </Button>
                     </Center>
                     </Paper>
