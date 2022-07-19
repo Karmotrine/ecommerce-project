@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
     },
 }))
 
-export default function Location() {
+export default function Products() {
     const { classes } = useStyles()
     const products = useProducts(['product', 'all'])
     const data = products.data as Product[]

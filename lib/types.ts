@@ -7,7 +7,7 @@ import { CartItem } from "./hooks/useCart"
 export type ProductType = 'ramen' | 'bento' | 'extra' | 'beverage'
 
 type ProductRecord = {
-    id: string
+    id?: string
     name: string
     active: boolean
     description: string

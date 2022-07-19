@@ -105,6 +105,7 @@ export function OrderDataGrid(data: Transaction[]) {
               icon={<ReportAnalytics size={16} />} 
               color="red"
               onClick={() => {cancelTransaction(item._id); showNotification(CONFIRM_CANCEL_NOTIF(item._id))}}
+              disabled={item.metadata.currentStatus.isReceived || item.metadata.currentStatus.isCancelled}
               >
                 Cancel Order
             </Menu.Item>

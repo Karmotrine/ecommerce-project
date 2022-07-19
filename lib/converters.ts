@@ -21,7 +21,7 @@ export const productConverter: FirestoreDataConverter<Product> = {
     },
     toFirestore(product: Product) {
        return {
-            id: product.id,
+            id: product?.id,
             name: product.name,
             active: product.active,
             description: product.description || '',
