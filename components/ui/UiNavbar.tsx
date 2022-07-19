@@ -46,6 +46,7 @@ export default function UiNavbar() {
         onSuccess(){
             localStorage.clear()
             router.push("/")
+            router.reload()
             showNotification(LOGOUT_NOTIFICATION)
         },
     })
