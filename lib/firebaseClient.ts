@@ -59,6 +59,7 @@ export const collections = {
     transactionFilter: collection(firestore, 'transaction').withConverter(transactionConverter),
     productReviews: (productId: string ): CollectionReference<Review> =>
         collection(firestore, 'products', productId, 'reviews').withConverter(reviewConverter),
-    content: collection(firestore, 'content').withConverter(contentConverter),
+    content: collection(firestore,'content'),
+    contentFilter: collection(firestore, 'content').withConverter(contentConverter),
     addresses: collection(firestore, 'addresses'),
 }

@@ -86,7 +86,7 @@ export default function OrderModalForm() {
 
   
   useEffect(() => {
-    setActive(user.data ? 1 : 1)
+    setActive(user.data ? 1 : 0)
   }, [user.data, isActive]);
 
   const uiConfig = {

@@ -4,7 +4,9 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { AlertCircle, Check } from "tabler-icons-react"
 import { useProductMutation } from "../../lib/hooks/useProductMutation"
+import { useUser } from "../../lib/hooks/useUser"
 import { Product, ProductType } from "../../lib/types"
+import NotFoundTitle from "../404"
 
 const useStyles = createStyles((theme) => ({
     headerFont: {
@@ -71,6 +73,12 @@ export default function AddProduct() {
         }
     }
     const { classes } = useStyles()
+    const user = useUser()
+    if (user?.data?.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
+        return (
+            <NotFoundTitle />
+        )
+    }
     return(
         <>
             <Container py={48} style={{paddingBottom:80}}>

@@ -6,6 +6,7 @@ import { AlertCircle, Check } from "tabler-icons-react"
 import LoaderComp from "../../../components/LoaderComp"
 import { useProduct } from "../../../lib/hooks/useProduct"
 import { useProductDocMutation } from "../../../lib/hooks/useProductMutation"
+import { useUser } from "../../../lib/hooks/useUser"
 import { ProductType, Product } from "../../../lib/types"
 import NotFoundTitle from "../../404"
 
@@ -48,7 +49,12 @@ export default function AddProduct() {
         setStockValue(String(data?.metadata.stockLeft))
     },[product.data])
 
-    
+    const user = useUser()
+    if (user?.data?.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
+        return (
+            <NotFoundTitle />
+        )
+    }
     if (product.isLoading) {
         return (
             <>

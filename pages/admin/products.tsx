@@ -4,7 +4,9 @@ import { Package, Percentage, ReportMoney } from "tabler-icons-react";
 import { ProductDataGrid }from "../../components/ProductDataGrid";
 import { useProductDocMutation } from "../../lib/hooks/useProductMutation";
 import { useProducts } from "../../lib/hooks/useProducts";
+import { useUser } from "../../lib/hooks/useUser";
 import { Product } from "../../lib/types";
+import NotFoundTitle from "../404";
 const useStyles = createStyles((theme) => ({
     headerFont: {
         fontSize: 60,
@@ -33,7 +35,12 @@ export default function Products() {
     const { adjustStocks } = useProductDocMutation()
     const [currentStocks, setCurrentStocks] = useState("")
 
-
+    const user = useUser()
+    if (user?.data?.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
+        return (
+            <NotFoundTitle />
+        )
+    }
 
     return(
         <>
