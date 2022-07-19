@@ -73,7 +73,7 @@ export const contentConverter: FirestoreDataConverter<Content> = {
 
         return {
             id: data.id,
-            title: data.id,
+            title: data.title,
             hero: data.hero,
             excerpt: data.excerpt,
             created_at: data.created_at,
