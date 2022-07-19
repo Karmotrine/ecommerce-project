@@ -3,6 +3,7 @@ import { createStyles, Overlay, Container, Title, Button, Text, Group, Center } 
 import { app } from '../lib/firebaseClient';
 import useOrderModal from '../components/hooks/useOrderModal';
 import { FeaturesComponent } from '../components/FeaturesComponent';
+import { useCart } from '../lib/hooks/useCart';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
@@ -109,6 +110,7 @@ const useStyles = createStyles((theme) => ({
 export default function Home() {
   const { classes } = useStyles();
   const { isActive, setOrderActive } = useOrderModal((state) => state);
+  const { cart } = useCart()
   return (
     <div>
       <div className={classes.hero}>
