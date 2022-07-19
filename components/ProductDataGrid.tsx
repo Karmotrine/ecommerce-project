@@ -7,8 +7,12 @@ import { useProductDocMutation } from "../lib/hooks/useProductMutation";
 
 function useRowBuilder(
     data : Product[],
-    setOpened: Dispatch<SetStateAction<boolean>>, 
-    setTargetAdjustDisc: Dispatch<SetStateAction<string>>
+    setAdjustDiscOpened: Dispatch<SetStateAction<boolean>>, 
+    setTargetAdjustDisc: Dispatch<SetStateAction<string>>,
+    setAdjustPriceOpened:Dispatch<SetStateAction<boolean>>,
+    setTargetAdjustPrice:Dispatch<SetStateAction<string>>,
+    setAdjustStocksOpened:Dispatch<SetStateAction<boolean>>, 
+    setTargetAdjustStocks:Dispatch<SetStateAction<string>>
   ) {
   const router = useRouter()
   const { adjustDiscount, adjustStatus, deleteProduct } = useProductDocMutation()
@@ -58,13 +62,29 @@ function useRowBuilder(
           <Menu transition="pop" withArrow placement="end">
             <Menu.Item 
               icon={<Note size={16} />}
-              onClick={() => {setTargetAdjustDisc(item.id); setOpened(true);}}
+              onClick={() => {setTargetAdjustPrice(item.id); setAdjustPriceOpened(true);}}
+            >
+              Adjust Price
+            </Menu.Item>
+            <Menu.Item 
+              icon={<Note size={16} />}
+              onClick={() => {setTargetAdjustDisc(item.id); setAdjustDiscOpened(true);}}
             >
               Adjust Discount
             </Menu.Item>
+            <Menu.Item 
+              icon={<Note size={16} />}
+              onClick={() => {setTargetAdjustStocks(item.id); setAdjustStocksOpened(true);}}
+            >
+              Adjust Stock
+            </Menu.Item>
             {item.active ? 
-            <Menu.Item icon={<ReportAnalytics size={16} />} onClick={() => adjustStatus(item.active, item.id)}>Deactivate Listing</Menu.Item>
-            : <Menu.Item icon={<ReportAnalytics size={16} />} onClick={() => adjustStatus(item.active, item.id)}>Activate Listing</Menu.Item>
+            <Menu.Item icon={<ReportAnalytics size={16} />} onClick={() => adjustStatus(item.active, item.id)}>
+              Deactivate Listing
+            </Menu.Item>
+            : <Menu.Item icon={<ReportAnalytics size={16} />} onClick={() => adjustStatus(item.active, item.id)}>
+              Activate Listing
+              </Menu.Item>
             }
             <Menu.Item icon={<Trash size={16} />} color="red" onClick={() => deleteProduct(item.id)}>
               Delete Product
@@ -78,10 +98,21 @@ function useRowBuilder(
 }
 
 export function ProductDataGrid(data : Product[], 
-  setOpened: Dispatch<SetStateAction<boolean>>, 
-  setTargetAdjustDisc: Dispatch<SetStateAction<string>>) {
+  setAdjustDiscOpened: Dispatch<SetStateAction<boolean>>, 
+  setTargetAdjustDisc: Dispatch<SetStateAction<string>>,
+  setAdjustPriceOpened:Dispatch<SetStateAction<boolean>>,
+  setTargetAdjustPrice:Dispatch<SetStateAction<string>>,
+  setAdjustStocksOpened:Dispatch<SetStateAction<boolean>>, 
+  setTargetAdjustStocks:Dispatch<SetStateAction<string>>
+  ) {
   const router = useRouter()
-  const rows = useRowBuilder(data, setOpened, setTargetAdjustDisc)
+  const rows = useRowBuilder(data, 
+    setAdjustDiscOpened, 
+    setTargetAdjustDisc, 
+    setAdjustPriceOpened, 
+    setTargetAdjustPrice, 
+    setAdjustStocksOpened, 
+    setTargetAdjustStocks)
   return (
     <ScrollArea>
       <Table sx={{ minWidth: 800 }} verticalSpacing="sm">

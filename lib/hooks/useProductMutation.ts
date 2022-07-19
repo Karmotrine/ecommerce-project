@@ -70,6 +70,18 @@ export function useProductDocMutation() {
                 "active": !prevStatus,
             })
         },
+        adjustStocks: (newStockNo: number, prodId: string) => {
+            const docRef = doc(collections.products, prodId)
+            updateDoc(docRef, {
+                "metadata.stockLeft" : newStockNo,
+            })
+        },
+        adjustPrice: (newPrice: string, prodId: string) => {
+            const docRef = doc(collections.products, prodId)
+            updateDoc(docRef, {
+                "metadata.price" : newPrice,
+            })
+        },
         deleteProduct: (prodId: string) => {
             const docRef = doc(collections.products, prodId)
             deleteDoc(docRef)
