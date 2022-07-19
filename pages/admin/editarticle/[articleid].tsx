@@ -1,5 +1,6 @@
 import { Container, Text, Divider, Paper, createStyles, Space, TextInput, Button, Center, Select, Anchor } from "@mantine/core"
 import { showNotification } from "@mantine/notifications"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { AlertCircle, Check } from "tabler-icons-react"
@@ -85,9 +86,11 @@ export default function AddArticle() {
                 <Text className={classes.headerFont}>Update Content</Text>
                 <Divider />
                 <Space py={4}/>
-                <Anchor component="a" style={{color:"inherit"}} onClick={() => router.push(`/admin/articles`)}>
+                <Link passHref href={`/admin/articles`}>
+                <Anchor component="a" style={{color:"inherit"}}>
                     <Text color="gray" size="xs">{"< Back to Content panel"}</Text>
                 </Anchor>
+                </Link>
                 <Space py={8}/>
                 <Container size={500}>
                     <Paper  shadow="xs" p="md">
