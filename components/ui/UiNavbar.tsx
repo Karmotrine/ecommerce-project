@@ -25,10 +25,6 @@ const NAVLINKS = [
         href: '/menu'
     },
     {
-        name: 'location',
-        href: '/location'
-    },
-    {
         name: 'news',
         href: '/news'
     }

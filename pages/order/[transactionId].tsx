@@ -82,10 +82,6 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
             }, 0)
     return(
         <>
-        <Head>
-            <title>{thisTrans._id} | Imbento</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
         <Accordion initialItem={1} iconPosition="right" multiple>
             <Accordion.Item label="Details">
                 {/*If delivery or pickup */}
@@ -209,6 +205,10 @@ export default function OrderDetailPage() {
 
     return (
         <>
+            <Head>
+                <title> Transaction {transactionObj._id} | Imbento</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Container size={600} py={50}>
                 <Card radius="md" shadow="xs">
                     <SimpleGrid cols={2} spacing={73}>
@@ -250,16 +250,18 @@ export default function OrderDetailPage() {
                     {user.data?.uid === transactionObj.metadata.userid && (
                     status.isCancelled ? <></>
                     :
-                    <Button
-                            variant="outline"
-                            color="red"
-                            radius="lg"
-                            size="xl"
-                            disabled={status.isCancelled}
-                            onClick={() => cancelTransaction(transactionObj._id)}
-                        >
-                            Cancel Order
-                    </Button>
+                    <Center>
+                        <Button
+                                variant="outline"
+                                color="red"
+                                radius="lg"
+                                size="xl"
+                                disabled={status.isCancelled}
+                                onClick={() => cancelTransaction(transactionObj._id)}
+                            >
+                                Cancel Order
+                        </Button>
+                    </Center>
                     )}
                 </Card>
             </Container>
