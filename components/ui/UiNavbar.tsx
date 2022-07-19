@@ -44,7 +44,7 @@ export default function UiNavbar() {
     const signOut = useAuthSignOut(auth, {
         onSuccess(){
             localStorage.clear()
-            router.push("/")
+            router.replace("/")
             showNotification(LOGOUT_NOTIFICATION)
         },
     })
