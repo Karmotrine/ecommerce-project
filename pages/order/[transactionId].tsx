@@ -11,6 +11,7 @@ import { useTransactionDocMutation } from "../../lib/hooks/useTransactionMutatio
 import { useUser } from "../../lib/hooks/useUser"
 import LoaderComp from "../../components/LoaderComp"
 import Link from "next/link"
+import Head from "next/head"
 
 function OrderStatusStepper(thisTrans:Transaction) {
     const [active, setActive] = useState(0)
@@ -81,6 +82,10 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
             }, 0)
     return(
         <>
+        <Head>
+            <title>{thisTrans._id} | Imbento</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <Accordion initialItem={1} iconPosition="right" multiple>
             <Accordion.Item label="Details">
                 {/*If delivery or pickup */}
@@ -122,7 +127,7 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
                             <Space py={5}/>
                             <Group >
                                 <Link href={`/product/${item.id}`} passHref>
-                                    <Anchor component="a" style={{color="inherit"}}>
+                                    <Anchor component="a" style={{color:"inherit"}}>
                                         <Text size="lg" weight={600}>{item.quantity}x {item.name}</Text>
                                     </Anchor>
                                 </Link>
@@ -217,7 +222,7 @@ export default function OrderDetailPage() {
                             color="green"
                             radius="lg"
                             size="xl"
-                            disabled={status.isReceived}
+                            disabled={status.isReceived || !transactionObj.paymentDetails.isPaid}
                             onClick={() => fulfillTransaction(slugId)}
                         >
                             {status.isReceived ? "Order Received" : "Receive Order"}
@@ -242,6 +247,20 @@ export default function OrderDetailPage() {
                     <Divider py={0}/>
                         <OrderStatusCartDisplay {...transactionObj} />
                     <Space py={10} />
+                    {user.data?.uid === transactionObj.metadata.userid && (
+                    status.isCancelled ? <></>
+                    :
+                    <Button
+                            variant="outline"
+                            color="red"
+                            radius="lg"
+                            size="xl"
+                            disabled={status.isCancelled}
+                            onClick={() => cancelTransaction(transactionObj._id)}
+                        >
+                            Cancel Order
+                    </Button>
+                    )}
                 </Card>
             </Container>
         </>

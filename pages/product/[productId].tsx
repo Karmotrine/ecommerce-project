@@ -1,4 +1,4 @@
-import { Container, Grid, Image, Stack, Text, Center, Loader, Group, Badge, LoadingOverlay} from "@mantine/core";
+import { Container, Grid, Image, Stack, Text, Center, Loader, Group, Badge, LoadingOverlay, Title} from "@mantine/core";
 import QuantityIncrementer from "../../components/QuantityIncrementer";
 import ReviewContainer from "../../components/ReviewContainer";
 import { useRouter } from "next/router"
@@ -10,6 +10,7 @@ import { useUser } from "../../lib/hooks/useUser";
 import { useProductReviews } from "../../lib/hooks/useReviews";
 import ReviewCard from "../../components/ReviewCard";
 import ReviewSkeleton from "../../components/ReviewSkeleton";
+import Head from "next/head";
 
 
 export default function Orders() {
@@ -50,6 +51,11 @@ export default function Orders() {
     const discountFactor = parseInt(product.data.metadata.discount) / 100
     const discountedPrice = price - (price * discountFactor)
     return(
+    <>
+        <Head>
+        <title>{product.data.name} | Imbento</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <Container py={48}>
             <Grid columns={35}>
                 <Grid.Col span={20}>
@@ -61,8 +67,8 @@ export default function Orders() {
                 </Grid.Col>
                 <Grid.Col span={15}>
                     <Stack justify="flex-start">
-                        <Text>{product.data.name}</Text>
-                        <Text size="xs">{product.data.metadata.type}</Text>
+                        <Title>{product.data.name}</Title>
+                        <Badge color="red" size="xs">{product.data.metadata.type}</Badge>
                         <Text size="xs">{product.data.metadata.stockLeft.toString()} Stocks Left</Text>
                             {product.data.metadata.discount == "0" ?
                             <Text size="lg">
@@ -122,7 +128,8 @@ export default function Orders() {
                     {(reviews.data.map((review) => <ReviewCard key={review.id} {...review}/>))}
                 </>
             }
-            
+        
         </Container>
+        </>
     )
 }
