@@ -1,38 +1,17 @@
-import { limit, orderBy, where, QueryConstraint } from "@firebase/firestore"
-import { useFirestoreQueryData } from "@react-query-firebase/firestore"
-import { query } from "firebase/firestore"
+import { useFirestoreDocumentData } from "@react-query-firebase/firestore";
+import { doc, DocumentData, orderBy, query, QueryConstraint } from "firebase/firestore"
 import { UseQueryResult } from "react-query"
 import { collections } from "../firebaseClient";
 import { Content } from "../types";
+import { useUser } from "./useUser"
 
-export function useContent(key: string, limitTo?: number): UseQueryResult<Content[]> {
-    const collection = collections.content
-    const constraints: QueryConstraint[] = []
 
-    constraints.push(orderBy('created_at', 'desc'))
-    if (limitTo) {
-        constraints.push(limit(limitTo))
-    }
+export function useTransaction(contentId : string): UseQueryResult<DocumentData> {
+    const user = useUser()
+    const collection = collections.contentFilter
+    const ref = doc(collection, contentId)
 
-    return useFirestoreQueryData<Content>([key, 'content'], query(collection, ...constraints));
-} // export function useContent(key: string, limitTo?: number): UseQueryResult<Content[]>
-
-export function useContentItem(id: string): UseQueryResult<Content | null> {
-    const collection = collections.content;
-    const constraints: QueryConstraint[] = []
-
-    constraints.push(where('id', '==', id))
-    constraints.push(limit(1))
-
-    return useFirestoreQueryData<Content, Content | null>(
-        ['content', id],
-        query(collection, ...constraints),
-        undefined,
-        {
-            select(data) {
-                if (data.length === 0) return null;
-                return data[0];
-            }
-        }
-    )
-} // export function useContentItem(id: string): UseQueryResult<Content | null>
+    return useFirestoreDocumentData<Content>(['transaction', contentId],ref,
+        {subscribe: true},
+        /*{enabled: user.isSuccess && !!user.data}*/)
+} // export function useOrders(): UseQueryResult<DocumentData>

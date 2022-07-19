@@ -80,7 +80,7 @@ export type Review = {
 }
 
 export interface Content {
-    id: string
+    id?: string
     title: string
     hero: string
     excerpt: string

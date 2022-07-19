@@ -1,17 +1,9 @@
-import { v4 as uuid } from "uuid"
-import { useMutation, useQueryClient, UseMutationResult } from "react-query"
 import { deleteDoc, doc, setDoc, Timestamp, updateDoc } from "firebase/firestore"
-import { ref, uploadBytes, uploadString } from "firebase/storage"
 
 import { collections, storage } from "../firebaseClient"
-import { useUser } from "./useUser"
 import { Review, ProductType, Product } from "../types"
 import { useFirestoreCollectionMutation } from "@react-query-firebase/firestore"
 //import { productConverter } from "../converters"
-
-//ProductMutation?
-
-// fix productType -> != any
 export function useProductMutation() {
     const collectionRef = collections.products
     const collectionMutation = useFirestoreCollectionMutation(collectionRef, {
