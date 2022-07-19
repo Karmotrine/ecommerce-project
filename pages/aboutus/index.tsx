@@ -14,7 +14,7 @@ export default function AboutUs() {
             <Container py={48}>
                 <Text className={classes.headerFont}>About us</Text>
                 <Divider />
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras bibendum facilisis sodales. Maecenas eu luctus nulla. Nunc id purus ac tellus gravida semper at ut mauris. Curabitur non lacus mattis, dapibus ex blandit, pulvinar lacus. Duis tempor nisl luctus nisi lobortis lobortis. Cras blandit feugiat tellus, et luctus lectus pharetra vel. Ut dui eros, tincidunt at massa ac, feugiat convallis ipsum. Proin interdum arcu nibh, sit amet gravida ipsum viverra in. Nunc elementum rutrum sem, a interdum lacus aliquet quis. Curabitur nibh enim, pharetra ac urna ut, auctor tincidunt orci. Donec a aliquam ligula.</Text>
+                <Text>Ramen is the ultimate comfort food, and it&apos;s best when enjoyed hot, fresh, and in good company. Imbento is our way of bringing the experience of ramen into your home. Perfect for noodle enthusiasts, busy professionals, a fun date-night in or quality time in the kitchen with the family, our ramen kits are ready in 15 minutes and feature high-quality, locally sourced ingredients.</Text>
             </Container> 
         </>
     )

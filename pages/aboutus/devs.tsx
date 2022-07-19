@@ -14,7 +14,15 @@ export default function Developers() {
             <Container py={48}>
                 <Text className={classes.headerFont}>Developers</Text>
                 <Divider />
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras bibendum facilisis sodales. Maecenas eu luctus nulla. Nunc id purus ac tellus gravida semper at ut mauris. Curabitur non lacus mattis, dapibus ex blandit, pulvinar lacus. Duis tempor nisl luctus nisi lobortis lobortis. Cras blandit feugiat tellus, et luctus lectus pharetra vel. Ut dui eros, tincidunt at massa ac, feugiat convallis ipsum. Proin interdum arcu nibh, sit amet gravida ipsum viverra in. Nunc elementum rutrum sem, a interdum lacus aliquet quis. Curabitur nibh enim, pharetra ac urna ut, auctor tincidunt orci. Donec a aliquam ligula.</Text>
+                <Text>
+                    Elora C. Nava
+                </Text>
+                <Text>
+                    Yuan Ragile C. Ureña
+                </Text>
+                <Text>
+                    BSCS 2-3 (2021-2022)
+                </Text>
             </Container> 
         </>
     )

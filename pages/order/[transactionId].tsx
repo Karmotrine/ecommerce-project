@@ -1,4 +1,4 @@
-import { Card, Center, Container, Divider, Group, Stepper, Text, Title, Image, Stack, Space, Badge, Collapse, Box, Button, Accordion, SimpleGrid } from "@mantine/core"
+import { Card, Center, Container, Divider, Group, Stepper, Text, Title, Image, Stack, Space, Badge, Collapse, Box, Button, Accordion, SimpleGrid, Anchor } from "@mantine/core"
 import { useRouter } from "next/router"
 import { useTransaction } from "../../lib/hooks/useTransaction"
 import { orderStatus, Transaction } from "../../lib/types"
@@ -10,6 +10,7 @@ import { Timestamp } from "firebase/firestore"
 import { useTransactionDocMutation } from "../../lib/hooks/useTransactionMutation"
 import { useUser } from "../../lib/hooks/useUser"
 import LoaderComp from "../../components/LoaderComp"
+import Link from "next/link"
 
 function OrderStatusStepper(thisTrans:Transaction) {
     const [active, setActive] = useState(0)
@@ -120,7 +121,11 @@ function OrderStatusCartDisplay(thisTrans:Transaction) {
                         <Stack spacing={0} align="flex-start">
                             <Space py={5}/>
                             <Group >
-                                <Text size="lg" weight={600}>{item.quantity}x {item.name}</Text>
+                                <Link href={`/product/${item.id}`} passHref>
+                                    <Anchor component="a" style={{color="inherit"}}>
+                                        <Text size="lg" weight={600}>{item.quantity}x {item.name}</Text>
+                                    </Anchor>
+                                </Link>
                             </Group>
                             {parseInt(item.metadata.discount) == 0 ?
                             <Text size="sm" weight={400}>₱{item.metadata.price}</Text> :
@@ -207,7 +212,8 @@ export default function OrderDetailPage() {
                         <Text px={0} color="dimmed" size="xs" weight={300}>Transaction code: {slugId}</Text>
                     </Stack>
                         <Center inline={false}>
-                        {user.data?.uid === transactionObj.metadata.userid && <Button
+                        {user.data?.uid === transactionObj.metadata.userid  && !status.isCancelled && 
+                        <Button
                             color="green"
                             radius="lg"
                             size="xl"
@@ -216,6 +222,16 @@ export default function OrderDetailPage() {
                         >
                             {status.isReceived ? "Order Received" : "Receive Order"}
                         </Button>}
+                        {status.isCancelled && 
+                        <Button
+                            color="red"
+                            radius="lg"
+                            size="xl"
+                            disabled={status.isCancelled}
+                        >
+                            Order Cancelled
+                        </Button>
+                        }
                     </Center>
                     </SimpleGrid>
                     <Space py={5} />
