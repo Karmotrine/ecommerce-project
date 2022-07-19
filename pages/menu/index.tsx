@@ -1,7 +1,7 @@
 import { Container, Text, Divider, 
          createStyles, Center,
          SimpleGrid, Paper, Space } from "@mantine/core";
-import { where } from "firebase/firestore";
+import { limit, orderBy, where } from "firebase/firestore";
 import LoaderComp from "../../components/LoaderComp";
 import ProductCard from "../../components/ProductCard";
 import { useProducts } from "../../lib/hooks/useProducts";
@@ -46,7 +46,7 @@ export default function Menu() {
     )
 }
 
-function ProductTypeSubsection({title, type}:PTypeSubsectionProps) {
+export function ProductTypeSubsection({title, type}:PTypeSubsectionProps) {
     const products = useProducts(
         ['product', type], 
         [
@@ -66,6 +66,47 @@ function ProductTypeSubsection({title, type}:PTypeSubsectionProps) {
         <>
         <Paper shadow="xs" p="md">
             <Divider label={title} size="xl" />
+            <Space h="md" />
+            <SimpleGrid 
+                cols={3}
+                breakpoints={[
+                    { maxWidth: 980, cols: 3, spacing: 'md' },
+                    { maxWidth: 755, cols: 2, spacing: 'sm' },
+                    { maxWidth: 600, cols: 1, spacing: 'sm' },
+                ]}
+            >
+                {products.isSuccess && data.map((product) => {
+                    return (
+                        <ProductCard key={`${product.name}.ProductCard`} {...product}/>
+                    )}
+                )}
+            </SimpleGrid>
+        </Paper>
+    </>
+    )
+}
+
+export function ProductSaleSubsection() {
+    const products = useProducts(
+        ['product',"sale"], 
+        [
+            where('metadata.discount', '!=', "0"),
+            orderBy('metadata.discount', 'desc'),
+            limit(3)
+        ]
+    );
+    if (products.isLoading) {
+        return(
+            <>
+                <LoaderComp />
+            </>
+        )
+    }
+    const data = products.data as Product[]
+    return (
+        <>
+        <Paper shadow="md" p="md">
+            <Divider label="On Sale" size="xl" />
             <Space h="md" />
             <SimpleGrid 
                 cols={3}

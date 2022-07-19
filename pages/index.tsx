@@ -1,9 +1,10 @@
 import React from 'react';
-import { createStyles, Overlay, Container, Title, Button, Text, Group, Center } from "@mantine/core"
+import { createStyles, Overlay, Container, Title, Button, Text, Group, Center, Space, Stack } from "@mantine/core"
 import { app } from '../lib/firebaseClient';
 import useOrderModal from '../components/hooks/useOrderModal';
 import { FeaturesComponent } from '../components/FeaturesComponent';
 import { useCart } from '../lib/hooks/useCart';
+import { ProductSaleSubsection } from './menu';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
@@ -155,6 +156,18 @@ export default function Home() {
             </Text>
           </Container>
           <FeaturesComponent />
+          <Space py={2} />
+          <Center>
+            <Stack spacing="lg">
+            <Container size={560} p={0}>
+              <Title className={classes.featuresTitle}>On Sale</Title>
+              <Text size="sm" className={classes.featuresDescription}>
+                Try out some of our flavors at a discounted price!
+              </Text>
+            </Container>
+            <ProductSaleSubsection />
+            </Stack>
+          </Center>
         </Container>
       </div>
     </div>

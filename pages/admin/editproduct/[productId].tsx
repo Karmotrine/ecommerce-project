@@ -23,13 +23,6 @@ const SUCCESS_NOTIFICATION = (prodId: string) => ({
     icon: <Check size="md" />,
 })
 
-const FAIL_NOTIFICATION = {
-    title: 'Failed',
-    message: 'Failed updating product.',
-    color: "orange",
-    icon: <AlertCircle />
-}
-
 export default function AddProduct() {
     const { classes } = useStyles()
     const router = useRouter()
