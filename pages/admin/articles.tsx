@@ -17,11 +17,11 @@ export default function Location() {
     const contents = useContents(['contents', 'all'])
     const data = contents.data as Content[]
     const user = useUser()
-/*     if (user?.data?.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
+    if (user?.data?.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
         return (
             <NotFoundTitle />
         )
-    } */
+    }
     return(
         <>
             <Container py={48} style={{paddingBottom:400}}>

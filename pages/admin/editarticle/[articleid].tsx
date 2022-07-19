@@ -45,11 +45,11 @@ export default function AddArticle() {
     },[content.data])
 
     const user = useUser()
-/*     if (user?.data?.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
+    if (user?.data?.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID) {
         return (
             <NotFoundTitle />
         )
-    } */
+    }
     if (content.isLoading) {
         return (
             <>
