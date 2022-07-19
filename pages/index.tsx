@@ -5,6 +5,7 @@ import useOrderModal from '../components/hooks/useOrderModal';
 import { FeaturesComponent } from '../components/FeaturesComponent';
 import { useCart } from '../lib/hooks/useCart';
 import { ProductSaleSubsection } from './menu';
+import { ArticleContext } from './news';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
@@ -166,6 +167,15 @@ export default function Home() {
               </Text>
             </Container>
             <ProductSaleSubsection />
+            <Space />
+            <Container size={560} py={0}>
+              <Title className={classes.featuresTitle}>News</Title>
+              <Text size="sm" className={classes.featuresDescription}>
+                What&apos;s happening at Imbento?
+              </Text>
+              <Space />
+            </Container>
+            <ArticleContext />
             </Stack>
           </Center>
         </Container>

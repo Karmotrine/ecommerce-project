@@ -28,6 +28,10 @@ const NAVLINKS = [
         name: 'location',
         href: '/location'
     },
+    {
+        name: 'news',
+        href: '/news'
+    }
 ]
 
 const LOGOUT_NOTIFICATION = {
