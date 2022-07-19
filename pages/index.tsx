@@ -6,6 +6,7 @@ import { FeaturesComponent } from '../components/FeaturesComponent';
 import { useCart } from '../lib/hooks/useCart';
 import { ProductSaleSubsection } from './menu';
 import { ArticleContext } from './news';
+import Head from 'next/head';
 const useStyles = createStyles((theme) => ({
   hero: {
     position: 'relative',
@@ -115,6 +116,10 @@ export default function Home() {
   const { cart } = useCart()
   return (
     <div>
+        <Head>
+            <title>Home | Imbento</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
       <div className={classes.hero}>
         <Overlay
           gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"

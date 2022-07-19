@@ -32,6 +32,10 @@ export default function Menu() {
     
     return(
         <>
+            <Head>
+                <title>Menu | Imbento</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Container py={48}>
                 <Center>
                     <Text className={classes.headerFont}>Menu</Text>
@@ -106,10 +110,6 @@ export function ProductSaleSubsection() {
     const data = products.data as Product[]
     return (
         <>
-        <Head>
-            <title>Menu | Imbento</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
         <Paper shadow="md" p="md">
             <Divider label="On Sale" size="xl" />
             <Space h="md" />
