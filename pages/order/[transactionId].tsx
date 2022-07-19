@@ -256,7 +256,7 @@ export default function OrderDetailPage() {
                                 color="red"
                                 radius="lg"
                                 size="xl"
-                                disabled={status.isCancelled}
+                                disabled={status.isCancelled || status.isReceived}
                                 onClick={() => cancelTransaction(transactionObj._id)}
                             >
                                 Cancel Order
