@@ -2,6 +2,7 @@ import { Container, Text, Divider,
     createStyles, Center,
     SimpleGrid, Paper, Space } from "@mantine/core";
 import { limit, orderBy, where } from "firebase/firestore";
+import Head from "next/head";
 import { ArticleCard } from "../../components/ArticleCard";
 import LoaderComp from "../../components/LoaderComp";
 import ProductCard from "../../components/ProductCard";
@@ -80,6 +81,10 @@ export default function Articles() {
     const data = contents.data as Content[]
     return(
     <>
+        <Head>
+        <title>News | Imbento</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <Container py={48}>
             <Center>
                 <Text className={classes.headerFont}>News</Text>

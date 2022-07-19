@@ -1,5 +1,6 @@
 import { Container, Center, Divider, Text, 
          createStyles, Grid, Box, Loader, LoadingOverlay } from "@mantine/core"
+import Head from "next/head"
 import CartContainer from "../../components/CartContainer"
 import OrderSummary from "../../components/OrderSummary"
 import { useCart } from "../../lib/hooks/useCart"
@@ -17,6 +18,10 @@ export default function Checkout() {
 
     return (
         <>
+        <Head>
+        <title> Checkout | Imbento</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
             <Container py={48}>
                 <Text className={classes.headerFont}>Cart</Text>
                 <Divider py={5}/>

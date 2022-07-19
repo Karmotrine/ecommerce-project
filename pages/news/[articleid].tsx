@@ -1,5 +1,6 @@
 import { Container, createStyles, Text, Center, Stack, Image, Paper, Title } from "@mantine/core";
 import dayjs from "dayjs";
+import Head from "next/head";
 import router, { useRouter } from "next/router"
 import LoaderComp from "../../components/LoaderComp"
 import { useContent } from "../../lib/hooks/useContent"
@@ -28,6 +29,10 @@ export default function ArticlePage() {
     }
     return (
         <>
+            <Head>
+            <title>{data.title} | Imbento</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Container py={48} sx={{paddingBottom:80}}>
                 <Center>
                     <Stack>

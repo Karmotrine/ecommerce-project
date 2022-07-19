@@ -2,6 +2,7 @@ import { Container, Text, Divider,
          createStyles, Center,
          SimpleGrid, Paper, Space } from "@mantine/core";
 import { limit, orderBy, where } from "firebase/firestore";
+import Head from "next/head";
 import LoaderComp from "../../components/LoaderComp";
 import ProductCard from "../../components/ProductCard";
 import { useProducts } from "../../lib/hooks/useProducts";
@@ -105,6 +106,10 @@ export function ProductSaleSubsection() {
     const data = products.data as Product[]
     return (
         <>
+        <Head>
+            <title>Menu | Imbento</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <Paper shadow="md" p="md">
             <Divider label="On Sale" size="xl" />
             <Space h="md" />
