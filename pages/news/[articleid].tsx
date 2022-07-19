@@ -44,7 +44,9 @@ export default function ArticlePage() {
                                 </Center>
                             </Stack>
                         </Center>
-                        <Image src={data.hero} alt={data.title} width={749} height={556}/>
+                        <Center>
+                            <Image src={data.hero} alt={data.title} width={749} height={556}/>
+                        </Center>
                         <Paper
                         shadow="xs"
                         p="md"
