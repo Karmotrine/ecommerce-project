@@ -17,7 +17,6 @@ import Image from "next/image"
 import { useState } from "react"
 import OrderModalForm from "../OrderModalForm"
 import useOrderModal from "../hooks/useOrderModal"
-import { NextResponse } from 'next/server'
 
 const NAVLINKS = [
     {
@@ -45,7 +44,7 @@ export default function UiNavbar() {
     const signOut = useAuthSignOut(auth, {
         onSuccess(){
             localStorage.clear()
-            NextResponse.redirect('/')
+            router.push("/")
             showNotification(LOGOUT_NOTIFICATION)
         },
     })
