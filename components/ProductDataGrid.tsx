@@ -55,8 +55,8 @@ function useRowBuilder(
       <td>
         <Group spacing={0} position="right">
           <ActionIcon>
-          <Anchor size="xs" component="a" style={{color:"inherit"}} onClick={() => router.push(`/product/${item.id}/edit`)} inline>
-            <Pencil size={16} onClick={() => router.push(`/admin/editproduct/${item.id}`)}/>
+          <Anchor size="xs" component="a" style={{color:"inherit"}} onClick={() => router.push(`/admin/editproduct/${item.id}`)} inline>
+            <Pencil size={16}/>
           </Anchor>
           </ActionIcon>
           <Menu transition="pop" withArrow placement="end">
