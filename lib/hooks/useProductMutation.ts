@@ -64,6 +64,10 @@ export function useProductDocMutation() {
         deleteProduct: (prodId: string) => {
             const docRef = doc(collections.products, prodId)
             deleteDoc(docRef)
+        },
+        updateProduct: (prodId: string, productPayload: Product) => {
+            const docRef = doc(collections.products, prodId)
+            updateDoc(docRef, productPayload)
         }
     }
 }

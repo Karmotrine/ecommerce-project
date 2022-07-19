@@ -196,8 +196,7 @@ export default function OrderDetailPage() {
     }
     const transactionObj = transactionQuery.data as Transaction
     const status = transactionObj.metadata.currentStatus
-    console.log(transactionObj)
-    
+
     return (
         <>
             <Container size={600} py={50}>

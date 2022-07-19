@@ -4,7 +4,7 @@ import { CartItem } from "./hooks/useCart"
  *  Think of what products do we have?
  *  (Dish, Add-ons)?
  */
-export type ProductType = 'ramen' | 'bento' | 'extra' | 'beverage'
+export type ProductType = 'ramen' | 'bento' | 'extra' | 'beverage' 
 
 type ProductRecord = {
     id?: string
