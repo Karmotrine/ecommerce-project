@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Image, Text, Group, Badge, createStyles, Center, Button, Modal, LoadingOverlay, Space } from '@mantine/core';
+import { Card, Image, Text, Group, Badge, createStyles, Center, Button, Modal, LoadingOverlay, Space, Anchor } from '@mantine/core';
 import { X } from 'tabler-icons-react';
 import { Product } from '../lib/types';
 import { useUser } from '../lib/hooks/useUser';
@@ -78,7 +78,11 @@ export default function ProductCard(item:Product) {
     </Modal>
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image height={300}src={item.img[0]} alt={item.name} />
+        <Anchor component="a">
+        <Link href={`/product/${item.id}`} passHref>
+          <Image height={300}src={item.img[0]} alt={item.name} />
+        </Link>
+        </Anchor>
       </Card.Section>
 
       <Group position="apart" mt="md" mb="md" grow={true}>

@@ -125,7 +125,7 @@ export function ProductDataGrid(data : Product[],
                 <th>Status</th>
                 <th>
                   <Center>
-                    <Anchor size="xs" component="a" style={{color:"inherit"}} onClick={() => router.push("/admin/products/add")} inline>
+                    <Anchor size="xs" component="a" style={{color:"inherit"}} onClick={() => router.push("/admin/addproduct")} inline>
                       <CirclePlus/>
                     </Anchor>
                   </Center>

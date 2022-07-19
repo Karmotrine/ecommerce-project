@@ -5,7 +5,7 @@ import { where } from "firebase/firestore";
 import LoaderComp from "../../components/LoaderComp";
 import ProductCard from "../../components/ProductCard";
 import { useProducts } from "../../lib/hooks/useProducts";
-import { ProductType } from "../../lib/types";
+import { Product, ProductType } from "../../lib/types";
 
 
 type PTypeSubsectionProps = {
@@ -61,6 +61,7 @@ function ProductTypeSubsection({title, type}:PTypeSubsectionProps) {
             </>
         )
     }
+    const data = products.data as Product[]
     return (
         <>
         <Paper shadow="xs" p="md">
@@ -74,7 +75,7 @@ function ProductTypeSubsection({title, type}:PTypeSubsectionProps) {
                     { maxWidth: 600, cols: 1, spacing: 'sm' },
                 ]}
             >
-                {products.isSuccess && products.data.map((product) => {
+                {products.isSuccess && data.map((product) => {
                     return (
                         <ProductCard key={`${product.name}.ProductCard`} {...product}/>
                     )}
